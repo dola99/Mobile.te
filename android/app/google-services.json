@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "545032174058",
+    "firebase_url": "https://mobile-63038.firebaseio.com",
+    "project_id": "mobile-63038",
+    "storage_bucket": "mobile-63038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545032174058:android:d7c4264851088ed7e35a93",
+        "android_client_info": {
+          "package_name": "com.example.mobility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545032174058-vjakn5cq3pu9gtrb39pnh7rajbsgbbg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq-3EIluNeflC9JqNZ7mRh-k-ZUQ6_9vI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545032174058-vjakn5cq3pu9gtrb39pnh7rajbsgbbg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
