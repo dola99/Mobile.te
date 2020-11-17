@@ -562,8 +562,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             height: height * .060,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/Item_xl_73309576_7b789b56608071.png'),
+                                  image: AssetImage('assets/images/watch.png'),
                                   fit: BoxFit.fitWidth),
                             ),
                           ),
@@ -600,8 +599,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             height: height * .060,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/N37536330a_11.png'),
+                                  image: AssetImage('assets/images/tablet.png'),
                                   fit: BoxFit.fitWidth),
                             ),
                           ),
@@ -615,8 +613,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                           height: height * 0.0680,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/Item_xl_122967549_63b2c0b797af81.png'),
+                                image: AssetImage('assets/images/mobil.png'),
                                 fit: BoxFit.fitWidth),
                           ),
                         ),

@@ -253,8 +253,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Positioned(
-                        top: ScreenUtil.instance.setHeight(37),
-                        left: ScreenUtil.instance.setWidth(137),
+                        top: ScreenUtil.instance.setHeight(36),
+                        left: ScreenUtil.instance.setWidth(136),
                         child: GestureDetector(
                           onTap: () {
                             Provider.of<OpenApps>(context, listen: false)

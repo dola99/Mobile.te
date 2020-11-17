@@ -4,6 +4,8 @@ import '../providers/products.dart';
 import 'package:provider/provider.dart';
 
 class DialogSearch extends StatefulWidget {
+  static int intt;
+  static int intt2;
   @override
   _DialogSearchState createState() => _DialogSearchState();
 }
@@ -12,7 +14,9 @@ class _DialogSearchState extends State<DialogSearch> {
   final TextEditingController _controller = TextEditingController();
   List searchresult = [];
   bool isSeraching = true;
+
   List<Product> listproduct = [];
+  List<Product> listproductchoosen = [];
   int id;
   List listid = [];
   var _isInit = true;
@@ -85,13 +89,16 @@ class _DialogSearchState extends State<DialogSearch> {
                           ),
                           onTap: () {
                             setState(() {
-                              Provider.of<Products>(context, listen: false)
-                                  .findbyId(listid[id]);
-                              print(listid[id]);
-                              print(searchresult.indexOf(listDate));
-                              print(listDate);
-                              print(searchresult);
-                              print(listid);
+                              for (int i = 0; i < phoness.length; i++) {
+                                if (phoness[i].id == listid[id]) {
+                                  if (DialogSearch.intt == null) {
+                                    DialogSearch.intt = i;
+                                  } else {
+                                    DialogSearch.intt2 = i;
+                                  }
+                                  Navigator.of(context).pop();
+                                }
+                              }
                             });
                           },
                         );
@@ -104,6 +111,20 @@ class _DialogSearchState extends State<DialogSearch> {
                         String listDate = phoness[index].name;
                         return ListTile(
                           title: Text(listDate),
+                          onTap: () {
+                            setState(() {
+                              for (int i = 0; i < phoness.length; i++) {
+                                if (phoness[i].id == phoness[index].id) {
+                                  if (DialogSearch.intt == null) {
+                                    DialogSearch.intt = i;
+                                  } else {
+                                    DialogSearch.intt2 = i;
+                                  }
+                                  Navigator.of(context).pop();
+                                }
+                              }
+                            });
+                          },
                         );
                       },
                     ),

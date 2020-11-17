@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../models/http_exception.dart';
-import './tobbanner.dart';
+
+import 'tobbanner.dart';
 
 class Topbanners with ChangeNotifier {
   List<TopBanner> _itemsss = [];
@@ -34,4 +34,5 @@ class Topbanners with ChangeNotifier {
       throw (error);
     }
   }
+
 }

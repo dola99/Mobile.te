@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class Product with ChangeNotifier{
+class Product with ChangeNotifier {
   final String name;
   final String id;
   final String cpu;
@@ -18,25 +18,40 @@ class Product with ChangeNotifier{
   final String category;
   final String images;
   final String mainImages;
-  final String price ; 
-  Product(
-      {@required this.price,
-      @required this.mainImages,
-      @required this.images,
-      @required this.name,
-      @required this.id,
-      @required this.category,
-      @required this.cpu,
-      @required this.gpu,
-      @required this.ram,
-      @required this.frontcamera,
-      @required this.rearcamera,
-      @required this.screen,
-      @required this.os,
-      @required this.capstiybattery,
-      @required this.size,
-      @required this.space,
-      @required this.topScreen,
-      @required this.speedofcharge
-      });
+  final String price;
+  final String noonbuy;
+  final String souqbuy;
+  final String jumiabuy;
+  final String fbspubg;
+  final String respubg;
+  final String fbscod;
+  final String rescod;
+
+  Product({
+    @required this.price,
+    @required this.mainImages,
+    @required this.images,
+    @required this.name,
+    @required this.id,
+    @required this.category,
+    @required this.cpu,
+    @required this.gpu,
+    @required this.ram,
+    @required this.frontcamera,
+    @required this.rearcamera,
+    @required this.screen,
+    @required this.os,
+    @required this.capstiybattery,
+    @required this.size,
+    @required this.space,
+    @required this.topScreen,
+    @required this.speedofcharge,
+    @required this.fbscod,
+    @required this.fbspubg,
+    @required this.rescod,
+    @required this.respubg,
+    @required this.jumiabuy,
+    @required this.noonbuy,
+    @required this.souqbuy,
+  });
 }

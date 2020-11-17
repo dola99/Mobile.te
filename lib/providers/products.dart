@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../models/http_exception.dart';
 import 'product.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +22,13 @@ class Products with ChangeNotifier {
       final List<Product> loadedProduct = [];
       extractedData.forEach((key, value) {
         loadedProduct.add(Product(
+          fbscod: value['fbscod'],
+          fbspubg: value['fbspubg'],
+          jumiabuy: value['jumiabuy'],
+          noonbuy: value['noonbuy'],
+          rescod: value['rescod'],
+          respubg: value['respubg'],
+          souqbuy: value['souqbuy'],
           capstiybattery: value['capacitybattery'],
           category: value["category"],
           cpu: value['cpu'],

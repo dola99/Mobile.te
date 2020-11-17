@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import './watch.dart';
-import '../models/http_exception.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
