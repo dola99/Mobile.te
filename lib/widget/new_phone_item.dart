@@ -4,7 +4,6 @@ import 'package:mobility/providers/categorys.dart';
 import 'package:mobility/providers/product.dart';
 import 'package:mobility/providers/products.dart';
 import 'package:mobility/screens/product_detail_screen.dart';
-import 'dart:math' as math;
 import '../providers/newphoness.dart';
 
 import 'package:provider/provider.dart';
