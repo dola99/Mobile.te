@@ -1,11 +1,15 @@
-import 'dart:ui';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../providers/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobility/providers/ThemeChanger.dart';
 import 'package:provider/provider.dart';
 import '../widget/open_apps.dart';
 
 class SettingScreen extends StatefulWidget {
+  static bool isswitch = true;
   static const routeName = "/setting_screen";
 
   @override
@@ -13,12 +17,13 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final bool isswitch = true;
-
+  var _darkTheme = false;
   @override
   Widget build(BuildContext context) {
-  //  final high = MediaQuery.of(context).size.height;
-  //  final wigh = MediaQuery.of(context).size.width;
+    final themeNotifier = Provider.of<ThemeChanger>(context);
+    _darkTheme = (themeNotifier.getTheme() == darkTheme);
+    //  final high = MediaQuery.of(context).size.height;
+    //  final wigh = MediaQuery.of(context).size.width;
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -44,7 +49,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         image: DecorationImage(
-                          image: AssetImage("assets/images/logo.png"),
+                          image: _darkTheme
+                              ? AssetImage("assets/images/logo.png")
+                              : AssetImage("assets/images/logo2.png"),
                         )),
                   ),
                 ),
@@ -68,7 +75,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             "Language:",
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                                color: Colors.grey,
+                                color: Theme.of(context).dividerColor,
                                 fontSize: ScreenUtil.instance.setSp(17.0),
                                 fontFamily: 'RobotoCondensed'),
                           ),
@@ -79,7 +86,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           child: Text(
                             "English(Us)",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Theme.of(context).dividerColor,
                                 fontSize: ScreenUtil.instance.setSp(17.0),
                                 fontFamily: 'RobotoCondensed'),
                           ),
@@ -104,7 +111,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             "Country:",
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                                color: Colors.grey,
+                                color: Theme.of(context).dividerColor,
                                 fontSize: ScreenUtil.instance.setSp(17.0),
                                 fontFamily: 'RobotoCondensed'),
                           ),
@@ -115,7 +122,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           child: Text(
                             "Egypt",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Theme.of(context).dividerColor,
                                 fontSize: ScreenUtil.instance.setSp(17.0),
                                 fontFamily: 'RobotoCondensed'),
                           ),
@@ -145,7 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             "Dark Mode:",
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                                color: Colors.grey,
+                                color: Theme.of(context).dividerColor,
                                 fontSize: ScreenUtil.instance.setSp(17.0),
                                 fontFamily: 'RobotoCondensed'),
                           ),
@@ -154,13 +161,14 @@ class _SettingScreenState extends State<SettingScreen> {
                           padding: EdgeInsets.only(
                               left: ScreenUtil.instance.setSp(110)),
                           child: Switch(
-                            value: isswitch,
+                            value: _darkTheme,
                             onChanged: (value) {
                               setState(() {
-                                // ignore: unnecessary_statements
-                                isswitch == value;
-                                print(isswitch);
+                                _darkTheme = value;
+
+                                //  }
                               });
+                              onThemeChanged(value, themeNotifier);
                             },
                             activeTrackColor: Colors.lightBlueAccent,
                             activeColor: Colors.blue,
@@ -179,7 +187,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   Text(
                     "Share",
-                    style: TextStyle(color: Colors.white, fontFamily: "Oswald"),
+                    style: TextStyle(
+                        color: Theme.of(context).dividerColor,
+                        fontFamily: "Oswald"),
                   ),
                   SizedBox(
                     height: 20,
@@ -281,11 +291,19 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Positioned(
-                        top: ScreenUtil.instance.setHeight(35),
-                        right: ScreenUtil.instance.setWidth(45),
-                        child: SvgPicture.asset(
-                          'assets/images/pin.svg',
-                          semanticsLabel: 'pin',
+                        top: ScreenUtil.instance.setHeight(37),
+                        right: ScreenUtil.instance.setWidth(40),
+                        child: GestureDetector(
+                          onTap: (){
+                            Provider.of<OpenApps>(context, listen: false)
+                                .launchSocial(
+                                    'https://www.youtube.com/channel/UC1uP9aUxEGRdDL1lwzuJQLg',
+                                    '');
+                          },
+                          child: SvgPicture.asset(
+                            'assets/images/youtube.svg',
+                            semanticsLabel: 'pin',
+                          ),
                         ),
                       ),
                     ],
@@ -297,5 +315,13 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       ),
     );
+  }
+
+  void onThemeChanged(bool value, ThemeChanger themeNotifier) async {
+    (value)
+        ? themeNotifier.setTheme(darkTheme)
+        : themeNotifier.setTheme(lightTheme);
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setBool('darkMode', value);
   }
 }

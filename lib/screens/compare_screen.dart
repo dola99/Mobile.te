@@ -17,6 +17,7 @@ class _CompareScreenState extends State<CompareScreen> {
   var isLoading = false;
 
   @override
+  // ignore: must_call_super
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
@@ -48,20 +49,20 @@ class _CompareScreenState extends State<CompareScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 10,
+                height: 2,
               ),
               SafeArea(
                 child: Text(
                   "Compare",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).dividerColor,
                       fontFamily: "RobotoCondensed",
                       fontSize: 20),
                 ),
               ),
               Divider(
                 indent: 100,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).backgroundColor,
                 endIndent: 100,
               ),
               TopBarCompareScreen(),
@@ -70,7 +71,7 @@ class _CompareScreenState extends State<CompareScreen> {
               ),
               Divider(
                 indent: 100,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).backgroundColor,
                 endIndent: 100,
               ),
               Container(

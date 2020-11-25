@@ -45,9 +45,16 @@ class _FlatButtonsState extends State<FlatButtons> {
                             width: wights * .450,
                             height: height * .090,
                             decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    offset: Offset(-1, 2))
+                              ],
                               gradient: LinearGradient(colors: [
                                 Color.fromRGBO(247, 12, 12, 1),
                                 Color.fromRGBO(247, 12, 12, 1).withOpacity(.9),
+                                Color.fromRGBO(247, 12, 12, 1).withOpacity(.8),
+                                Color.fromRGBO(247, 12, 12, 1).withOpacity(.7),
                               ]),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
@@ -73,6 +80,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                             width: wights * .450,
                             height: height * .090,
                             decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    offset: Offset(1, 2))
+                              ],
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(20),
@@ -80,8 +92,10 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomRight: Radius.circular(0),
                               ),
                               gradient: LinearGradient(colors: [
-                                Color.fromRGBO(255, 189, 89, 1),
+                                Color.fromRGBO(255, 189, 89, 1).withOpacity(.7),
+                                Color.fromRGBO(255, 189, 89, 1).withOpacity(.8),
                                 Color.fromRGBO(255, 189, 89, 1).withOpacity(.9),
+                                Color.fromRGBO(255, 189, 89, 1),
                               ]),
                             ),
                           ),
@@ -100,9 +114,16 @@ class _FlatButtonsState extends State<FlatButtons> {
                             width: wights * .450,
                             height: height * .090,
                             decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    offset: Offset(1, 2))
+                              ],
                               gradient: LinearGradient(colors: [
-                                Color.fromRGBO(252, 213, 5, 1),
+                                Color.fromRGBO(252, 213, 5, 1).withOpacity(.7),
+                                Color.fromRGBO(252, 213, 5, 1).withOpacity(.8),
                                 Color.fromRGBO(252, 213, 5, 1).withOpacity(.9),
+                                Color.fromRGBO(252, 213, 5, 1),
                               ]),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -128,9 +149,16 @@ class _FlatButtonsState extends State<FlatButtons> {
                             width: wights * .450,
                             height: height * .090,
                             decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    offset: Offset(-1, 2))
+                              ],
                               gradient: LinearGradient(colors: [
                                 Color.fromRGBO(17, 58, 71, 1),
                                 Color.fromRGBO(17, 58, 71, 1).withOpacity(.9),
+                                Color.fromRGBO(17, 58, 71, 1).withOpacity(.8),
+                                Color.fromRGBO(17, 58, 71, 1).withOpacity(.7),
                               ]),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -340,7 +368,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             'Gamer',
                             style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
-                                fontFamily: 'Oswald',
+                                fontFamily: 'RobotoCondensed',
                                 fontSize: 20,
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
@@ -393,7 +421,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'oswald',
+                                fontFamily: 'RobotoCondensed',
                                 fontSize: 18,
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
@@ -414,7 +442,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             'Watches',
                             style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
-                                fontFamily: 'Oswald',
+                                fontFamily: 'RobotoCondensed',
                                 fontSize: 18,
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
@@ -435,7 +463,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             'Tablets',
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Oswald',
+                                fontFamily: 'RobotoCondensed',
                                 fontSize: 18,
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,

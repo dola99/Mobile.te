@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobility/providers/Theme.dart';
+import 'package:mobility/providers/ThemeChanger.dart';
 import 'package:mobility/widget/open_apps.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './providers/Gamers.dart';
 import './providers/tablets.dart';
 import './providers/watches.dart';
 import './screens/tabs-screens.dart';
 import './providers/categorys.dart';
-import './providers/newphones.dart';
+import 'providers/newphoness.dart';
 import './providers/topbanners.dart';
 import './providers/products.dart';
 import './screens/Home_Screen.dart';
@@ -21,8 +24,17 @@ import './screens/Tablets_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) => runApp(MyApp()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  SharedPreferences.getInstance().then((prefs) {
+    var darkModeON = prefs.getBool('darkMode') ?? true;
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => ThemeChanger(darkModeON ? darkTheme : lightTheme),
+        child: MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -40,7 +52,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => Products(),
         ),
         ChangeNotifierProvider(
-          create: (context) => NewPhones(),
+          create: (context) => NewPhoness(),
         ),
         ChangeNotifierProvider(
           create: (context) => Topbanners(),
@@ -61,25 +73,29 @@ class _MyAppState extends State<MyApp> {
           create: (context) => OpenApps(),
         )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: const Color.fromRGBO(0, 4, 0, 1),
-          accentColor: const Color.fromRGBO(255, 189, 89, 1),
-        ),
-        routes: {
-          TabsScreens.roouteName: (ctx) => TabsScreens(),
-          // TabScrenn.roouteName: (ctx) => TabScrenn(),
-          HomePage.routeName: (ctx) => HomePage(),
-          CategoryScreen.routeName: (ctx) => CategoryScreen(),
-          SettingScreen.routeName: (ctx) => SettingScreen(),
-          CompareScreen.routeName: (ctx) => CompareScreen(),
-          MobileCategoryScreen.routeName: (ctx) => MobileCategoryScreen(),
-          GamerScreen.routename: (ctx) => GamerScreen(),
-          WatchesScreen.routeName: (ctx) => WatchesScreen(),
-          TabletsScreen.routeName: (ctx) => TabletsScreen(),
-        },
-      ),
+      child: MaterialAppWithTheme(),
+    );
+  }
+}
+
+class MaterialAppWithTheme extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeChanger>(context);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeNotifier.getTheme(),
+      routes: {
+        TabsScreens.roouteName: (ctx) => TabsScreens(),
+        HomePage.routeName: (ctx) => HomePage(),
+        CategoryScreen.routeName: (ctx) => CategoryScreen(),
+        SettingScreen.routeName: (ctx) => SettingScreen(),
+        CompareScreen.routeName: (ctx) => CompareScreen(),
+        MobileCategoryScreen.routeName: (ctx) => MobileCategoryScreen(),
+        GamerScreen.routename: (ctx) => GamerScreen(),
+        WatchesScreen.routeName: (ctx) => WatchesScreen(),
+        TabletsScreen.routeName: (ctx) => TabletsScreen(),
+      },
     );
   }
 }

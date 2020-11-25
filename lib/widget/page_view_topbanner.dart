@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobility/providers/categorys.dart';
+import 'package:mobility/screens/product_detail_screen.dart';
+import '../providers/categorey.dart';
+import 'package:mobility/providers/product.dart';
+import 'package:mobility/providers/products.dart';
 import '../providers/topbanners.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +14,8 @@ class PageviewBanner extends StatefulWidget {
 
 class _PageviewBannerState extends State<PageviewBanner> {
   int _currentPage = 0;
+  int index;
+  int indexcategory;
   var _isInit = true;
   var isLoading = false;
   PageController _pagecontroller;
@@ -34,6 +41,8 @@ class _PageviewBannerState extends State<PageviewBanner> {
       setState(() {
         isLoading = true;
       });
+      Provider.of<Products>(context).fetchandsetProducts();
+      Provider.of<Categorys>(context).fetchandsetProducts();
       Provider.of<Topbanners>(context).fetchAndSetProducts().then((_) {
         setState(() {
           isLoading = false;
@@ -52,56 +61,86 @@ class _PageviewBannerState extends State<PageviewBanner> {
 
   @override
   Widget build(BuildContext context) {
-    final loadedproducts = Provider.of<Topbanners>(context,listen: true);
+    final loadIdCategory = Provider.of<Categorys>(context);
+    final categrey = loadIdCategory.itemss;
+    final loadItem = Provider.of<Products>(context);
+    final item = loadItem.items;
+    final loadedproducts = Provider.of<Topbanners>(context, listen: true);
     final products = loadedproducts.itemsss;
     return isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : PageView.builder(
-      onPageChanged: _onchanged,
-      itemCount: products.length,
-      controller: _pagecontroller,
-      itemBuilder: (context, i) => ChangeNotifierProvider.value(
-        value: products[i],
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-              child: makepage(products[i].imageUrl),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15, right: 8, bottom: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: List<Widget>.generate(
-                      products.length,
-                      (int index) {
-                        return AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          height: 10,
-                          width: (index == _currentPage) ? 30 : 10,
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 30),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: (index == _currentPage)
-                                  ? Colors.grey
-                                  : Theme.of(context).accentColor),
-                        );
-                      },
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : PageView.builder(
+            onPageChanged: _onchanged,
+            itemCount: products.length,
+            controller: _pagecontroller,
+            itemBuilder: (context, i) => ChangeNotifierProvider.value(
+              value: products[i],
+              child: GestureDetector(
+                onTap: () {
+                  fetshItem(products[i].idproduct, categrey, item);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen(
+                                battery: item[index].capstiybattery,
+                                cpu: item[index].cpu,
+                                frontcamera: item[index].frontcamera,
+                                gpu: item[index].gpu,
+                                logo: categrey[indexcategory].logo,
+                                mainimage: item[index].mainImages,
+                                memory: item[index].space,
+                                nameProduct: item[index].name,
+                                namrcompany: categrey[indexcategory].name,
+                                os: item[index].os,
+                                price: item[index].price,
+                                ram: item[index].ram,
+                                rearcamera: item[index].rearcamera,
+                                screendetails: item[index].screen,
+                                topimges: item[index].topScreen,
+                                allimages: [item[index].images],
+                              )));
+                },
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                      child: makepage(products[i].imageUrl),
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 8, bottom: 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: List<Widget>.generate(
+                              products.length,
+                              (int index) {
+                                return AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  height: 10,
+                                  width: (index == _currentPage) ? 30 : 10,
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 30),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: (index == _currentPage)
+                                          ? Theme.of(context).accentColor
+                                          : Theme.of(context).buttonColor),
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   Widget makepage(String image) {
@@ -121,5 +160,23 @@ class _PageviewBannerState extends State<PageviewBanner> {
           ],
           image: DecorationImage(image: NetworkImage(image), fit: BoxFit.fill)),
     );
+  }
+
+  void fetshItem(String id, List<Category> list2, List<Product> list1) {
+    List<Product> n = [];
+    List<Category> a = [];
+    a = list2;
+    n = list1;
+
+    for (int k = 0; k < n.length; k++) {
+      if (n[k].id == id) {
+        index = k;
+      }
+    }
+    for (int t = 0; t < a.length; t++) {
+      if (n[index].category == a[t].name) {
+        indexcategory = t;
+      }
+    }
   }
 }

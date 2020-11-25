@@ -43,7 +43,7 @@ class _GridCategoryState extends State<GridCategory> {
               child: Stack(
                 children: [
                   Positioned(
-                    bottom: MediaQuery.of(context).size.height * .040,
+                    bottom: MediaQuery.of(context).size.height * .045,
                     left: 0,
                     right: 0,
                     top: 0,

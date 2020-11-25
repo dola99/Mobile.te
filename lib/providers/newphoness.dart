@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'newphone.dart';
 import 'dart:convert';
 
-class NewPhones with ChangeNotifier {
+class NewPhoness with ChangeNotifier {
   List<NewPhone> _items = [];
 
   List<NewPhone> get items {

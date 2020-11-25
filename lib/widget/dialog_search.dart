@@ -23,6 +23,7 @@ class _DialogSearchState extends State<DialogSearch> {
   var isLoading = false;
 
   @override
+  // ignore: must_call_super
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
@@ -149,6 +150,7 @@ class _DialogSearchState extends State<DialogSearch> {
     }
   }
 
+  // ignore: missing_return
   String searchList(List list) {
     List n = [];
     for (int i = 0; i <= list.length; i++) {

@@ -28,7 +28,7 @@ class _RowofCompareState extends State<RowofCompare> {
                   child: Center(
                     child: Text(
                       widget.firsttext,
-                      style: TextStyle(color: Colors.white, fontFamily: 'Oswald'),
+                      style: TextStyle(color: Theme.of(context).dividerColor, fontFamily: 'Oswald'),
                     ),
                   ))),
           VerticalDivider(
@@ -48,6 +48,7 @@ class _RowofCompareState extends State<RowofCompare> {
                           height: hig * .040,
                           child: SvgPicture.asset(
                             widget.icon,
+                            color: Theme.of(context).backgroundColor,
                             semanticsLabel: 'g',
                             fit: BoxFit.fitHeight,
                           ),
@@ -68,16 +69,16 @@ class _RowofCompareState extends State<RowofCompare> {
                 ),
               )),
           VerticalDivider(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).backgroundColor,
           ),
           Flexible(
               flex: 3,
               child: Container(
-                width: weig * .250,
+                width: weig * .370,
                 child: Center(
                   child: Text(
                     widget.secondText,
-                    style: TextStyle(color: Colors.white, fontFamily: 'Oswald'),
+                    style: TextStyle(color: Theme.of(context).dividerColor, fontFamily: 'Oswald'),
                   ),
                 ),
               )),

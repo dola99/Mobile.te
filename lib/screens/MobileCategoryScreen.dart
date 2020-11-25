@@ -46,7 +46,7 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
     }
     _isInit = false;
     final _availablePhones = Provider.of<Products>(context);
-    final _phoness = _availablePhones.items;
+    final _phoness = _availablePhones.items.reversed;
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     if (_loadedInitData == false) {
       categoryName = args.name;
@@ -68,7 +68,7 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
         title: Text(
           args.name,
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontFamily: 'RobotoCondensed'),
+              color: Theme.of(context).dividerColor, fontSize: 18, fontFamily: 'RobotoCondensed'),
         ),
         centerTitle: true,
         actions: [
@@ -89,9 +89,9 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: MediaQuery.of(context).size.height / 1800,
-            crossAxisSpacing: wight * .001,
-            mainAxisSpacing: hight * .003),
+            childAspectRatio: (wight / hight)*1.19,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 0),
         itemCount: displayedPhones.length,
         itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
           value: displayedPhones[index],
@@ -104,11 +104,19 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                     logo: args.imagesurl,
                     mainimage: displayedPhones[index].mainImages,
                     allimages: [displayedPhones[index].images],
+                    os: displayedPhones[index].os,
                     nameProduct: displayedPhones[index].name,
+                    ram: displayedPhones[index].ram,
+                    battery: displayedPhones[index].speedofcharge,
                     namrcompany: args.name,
                     screendetails: displayedPhones[index].screen,
                     price: displayedPhones[index].price,
                     cpu: displayedPhones[index].cpu,
+                    topimges: displayedPhones[index].topScreen,
+                    rearcamera: displayedPhones[index].rearcamera,
+                    frontcamera: displayedPhones[index].frontcamera,
+                    gpu: displayedPhones[index].gpu,
+                    memory: displayedPhones[index].space,
                   ),
                 ),
               );
@@ -120,16 +128,17 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                       child: CircularProgressIndicator(),
                     )
                   : Stack(
+                      fit: StackFit.loose,
                       children: [
                         Positioned(
-                          top: 2,
+                          top: hight * .0000001,
                           left: wight * .01,
                           right: wight * .01,
+                          bottom: hight * .1,
                           child: Container(
-                            height: hight * .260,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Theme.of(context).dividerColor,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 bottomLeft: Radius.circular(30),
@@ -140,96 +149,86 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                           ),
                         ),
                         Positioned(
-                          top: hight * .002,
+                          top: hight * .010,
                           left: wight * .01,
                           right: wight * .01,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: hight * .230,
-                              width: wight * .070,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(21),
-                                  bottomLeft: Radius.circular(21),
-                                  topRight: Radius.circular(21),
-                                  bottomRight: Radius.circular(21),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromRGBO(0, 0, 0, 0.025),
-                                      offset: Offset(0, 4),
-                                      blurRadius: 4)
-                                ],
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                      displayedPhones[index].mainImages,
-                                    ),
-                                    fit: BoxFit.cover),
+                          bottom: hight * .11,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(21),
+                                bottomLeft: Radius.circular(21),
+                                topRight: Radius.circular(21),
+                                bottomRight: Radius.circular(21),
                               ),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.025),
+                                    offset: Offset(0, 4),
+                                    blurRadius: 4)
+                              ],
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    displayedPhones[index].mainImages,
+                                  ),
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         ),
                         Positioned(
-                          bottom: hight * .165,
-                          left: wight * .01,
-                          right: wight * .01,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              args.name,
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                  fontFamily: 'RobotoCondensed'),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: hight * .0170,
-                          left: wight * .05,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8.0, left: 8.0),
-                            child: Container(
-                              height: hight * .20,
-                              child: Text(
-                                "____________",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: hight * .110,
-                          left: wight * .01,
-                          right: wight * .01,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 8.0, left: 5),
-                            child: Center(
-                              child: Text(
-                                displayedPhones[index].name,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontFamily: 'RobotoCondensed'),
-                              ),
-                            ),
+                          bottom: hight * .034,
+                          left: wight * .02,
+                          right: wight * .02,
+                          top: hight * .274,
+                          child: Text(
+                            args.name,
+                            style: TextStyle(
+                                color: Theme.of(context).textSelectionColor,
+                                fontSize: 15,
+                                fontFamily: 'RobotoCondensed'),
                           ),
                         ),
                         Positioned(
                           bottom: hight * .085,
-                          left: wight * .01,
-                          right: wight * .01,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5),
+                          left: wight * .077,
+                          right: wight * .065,
+                          top: hight * .252,
+                          child: Container(
                             child: Text(
-                              '${displayedPhones[index].price} L.e',
+                              "_____________",
+                              style:
+                                  TextStyle(color: Theme.of(context).focusColor, fontSize: 15),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: hight * .005,
+                          right: wight * .05,
+                          top: hight * .297,
+                          left: wight * .02,
+                          child: Container(
+                            width: wight * .55,
+                            height: hight * .050,
+                            child: Text(
+                              displayedPhones[index].name,
                               style: TextStyle(
-                                  color: Colors.grey,
+                                  color: Theme.of(context).dividerColor,
                                   fontSize: 15,
                                   fontFamily: 'RobotoCondensed'),
                             ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: hight * .000,
+                          left: wight * .02,
+                          right: wight * .090,
+                          top: hight * .342,
+                          child: Text(
+                            '${displayedPhones[index].price} E.G.P',
+                            style: TextStyle(
+                                color: Theme.of(context).bottomAppBarColor,
+                                fontSize: 15,
+                                fontFamily: 'RobotoCondensed'),
                           ),
                         ),
                       ],
