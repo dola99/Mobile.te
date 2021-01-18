@@ -1,4 +1,6 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../screens/category_screen.dart';
 import '../screens/gamer_models_screen.dart';
 import '../screens/watches_screen.dart';
@@ -10,8 +12,26 @@ class FlatButtons extends StatefulWidget {
 }
 
 class _FlatButtonsState extends State<FlatButtons> {
+  InterstitialAd getNewAd() {
+    return InterstitialAd(
+      adUnitId: 'ca-app-pub-4854420444519405/4780315122',
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event is $event");
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+        width: defaultScreenWidth,
+        height: defaultScreenHeight,
+        allowFontScaling: true)
+      ..init(context);
+    InterstitialAd newAd = getNewAd();
+    newAd.load();
     final height = MediaQuery.of(context).size.height;
     final wights = MediaQuery.of(context).size.width;
     return Center(
@@ -19,42 +39,43 @@ class _FlatButtonsState extends State<FlatButtons> {
         padding: const EdgeInsets.all(10),
         child: Container(
           width: double.infinity,
-          height: height * .200,
+          height: ScreenUtil.instance.setHeight(160),
           child: Stack(
             children: <Widget>[
               Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
+                top: ScreenUtil.instance.setHeight(0),
+                left: ScreenUtil.instance.setHeight(0),
+                right: ScreenUtil.instance.setHeight(0),
+                bottom: ScreenUtil.instance.setHeight(0),
                 child: Container(
-                  width: wights * 1,
-                  height: height * .170,
                   child: Stack(
                     children: <Widget>[
                       //red dialog
                       Positioned(
-                        top: 2,
-                        left: 2,
+                        top: ScreenUtil.instance.setHeight(2),
+                        left: ScreenUtil.instance.setWidth(2),
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(GamerScreen.routename);
                           },
                           child: Container(
-                            width: wights * .450,
-                            height: height * .090,
+                            width: ScreenUtil.instance.setWidth(180),
+                            height: ScreenUtil.instance.setHeight(73),
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    offset: Offset(-1, 2))
+                                    color: Colors.black, offset: Offset(1, 1))
                               ],
                               gradient: LinearGradient(colors: [
                                 Color.fromRGBO(247, 12, 12, 1),
                                 Color.fromRGBO(247, 12, 12, 1).withOpacity(.9),
                                 Color.fromRGBO(247, 12, 12, 1).withOpacity(.8),
-                                Color.fromRGBO(247, 12, 12, 1).withOpacity(.7),
                               ]),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
@@ -69,21 +90,25 @@ class _FlatButtonsState extends State<FlatButtons> {
                       ),
                       //amber dialogs
                       Positioned(
-                        top: 2,
-                        right: 2,
+                        top: ScreenUtil.instance.setHeight(2),
+                        right: ScreenUtil.instance.setWidth(2),
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(TabletsScreen.routeName);
                           },
                           child: Container(
-                            width: wights * .450,
-                            height: height * .090,
+                            width: ScreenUtil.instance.setWidth(180),
+                            height: ScreenUtil.instance.setHeight(73),
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    offset: Offset(1, 2))
+                                    color: Colors.black, offset: Offset(1, 1))
                               ],
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
@@ -92,7 +117,6 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomRight: Radius.circular(0),
                               ),
                               gradient: LinearGradient(colors: [
-                                Color.fromRGBO(255, 189, 89, 1).withOpacity(.7),
                                 Color.fromRGBO(255, 189, 89, 1).withOpacity(.8),
                                 Color.fromRGBO(255, 189, 89, 1).withOpacity(.9),
                                 Color.fromRGBO(255, 189, 89, 1),
@@ -103,24 +127,27 @@ class _FlatButtonsState extends State<FlatButtons> {
                       ),
                       //yellow dialog
                       Positioned(
-                        bottom: 2,
-                        right: 2,
+                        bottom: ScreenUtil.instance.setHeight(2),
+                        right: ScreenUtil.instance.setWidth(2),
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(WatchesScreen.routeName);
                           },
                           child: Container(
-                            width: wights * .450,
-                            height: height * .090,
+                            width: ScreenUtil.instance.setWidth(180),
+                            height: ScreenUtil.instance.setHeight(73),
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    offset: Offset(1, 2))
+                                    color: Colors.black, offset: Offset(1, 1))
                               ],
                               gradient: LinearGradient(colors: [
-                                Color.fromRGBO(252, 213, 5, 1).withOpacity(.7),
                                 Color.fromRGBO(252, 213, 5, 1).withOpacity(.8),
                                 Color.fromRGBO(252, 213, 5, 1).withOpacity(.9),
                                 Color.fromRGBO(252, 213, 5, 1),
@@ -138,21 +165,25 @@ class _FlatButtonsState extends State<FlatButtons> {
                       //blue dialoh
 
                       Positioned(
-                        bottom: 2,
-                        left: 2,
+                        bottom: ScreenUtil.instance.setHeight(2),
+                        left: ScreenUtil.instance.setWidth(2),
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.pushNamed(
                                 context, CategoryScreen.routeName);
                           },
                           child: Container(
-                            width: wights * .450,
-                            height: height * .090,
+                            width: ScreenUtil.instance.setWidth(180),
+                            height: ScreenUtil.instance.setHeight(73),
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    offset: Offset(-1, 2))
+                                    color: Colors.black, offset: Offset(-1, 2))
                               ],
                               gradient: LinearGradient(colors: [
                                 Color.fromRGBO(17, 58, 71, 1),
@@ -176,6 +207,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .253,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.pushNamed(
                                 context, CategoryScreen.routeName);
                           },
@@ -189,7 +225,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomLeft: Radius.circular(100),
                                 bottomRight: Radius.circular(0),
                               ),
-                              color: Color.fromRGBO(255, 255, 255, 1),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -200,6 +236,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .253,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(WatchesScreen.routeName);
                           },
@@ -213,7 +254,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomLeft: Radius.circular(0),
                                 bottomRight: Radius.circular(100),
                               ),
-                              color: Color.fromRGBO(255, 255, 255, 1),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -224,6 +265,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .260,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.pushReplacementNamed(
                                 context, CategoryScreen.routeName);
                           },
@@ -254,6 +300,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .260,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(WatchesScreen.routeName);
                           },
@@ -284,6 +335,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .253,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(TabletsScreen.routeName);
                           },
@@ -297,7 +353,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomLeft: Radius.circular(0),
                                 bottomRight: Radius.circular(0),
                               ),
-                              color: Color.fromRGBO(255, 255, 255, 1),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -308,6 +364,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .260,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(TabletsScreen.routeName);
                           },
@@ -338,6 +399,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .253,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(GamerScreen.routename);
                           },
@@ -351,7 +417,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                                 bottomLeft: Radius.circular(0),
                                 bottomRight: Radius.circular(0),
                               ),
-                              color: Color.fromRGBO(255, 255, 255, 1),
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -361,6 +427,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .060,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(GamerScreen.routename);
                           },
@@ -369,7 +440,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
                                 fontFamily: 'RobotoCondensed',
-                                fontSize: 20,
+                                fontSize: ScreenUtil(allowFontScaling: true).setSp(21),
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
@@ -383,6 +454,12 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .260,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
+
                             Navigator.of(context)
                                 .pushNamed(GamerScreen.routename);
                           },
@@ -413,6 +490,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .070,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(CategoryScreen.routeName);
                           },
@@ -422,7 +504,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'RobotoCondensed',
-                                fontSize: 18,
+                                fontSize: ScreenUtil(allowFontScaling: true).setSp(20),
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
@@ -435,6 +517,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .050,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(WatchesScreen.routeName);
                           },
@@ -443,7 +530,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
                                 fontFamily: 'RobotoCondensed',
-                                fontSize: 18,
+                                fontSize: ScreenUtil(allowFontScaling: true).setSp(20),
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
@@ -456,6 +543,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .080,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(TabletsScreen.routeName);
                           },
@@ -464,7 +556,7 @@ class _FlatButtonsState extends State<FlatButtons> {
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'RobotoCondensed',
-                                fontSize: 18,
+                                fontSize: ScreenUtil(allowFontScaling: true).setSp(20),
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
@@ -582,6 +674,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .360,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(WatchesScreen.routeName);
                           },
@@ -601,6 +698,11 @@ class _FlatButtonsState extends State<FlatButtons> {
                         left: MediaQuery.of(context).size.width * .320,
                         child: GestureDetector(
                           onTap: () {
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
                             Navigator.of(context)
                                 .pushNamed(GamerScreen.routename);
                           },
@@ -620,7 +722,13 @@ class _FlatButtonsState extends State<FlatButtons> {
                         right: MediaQuery.of(context).size.width * .345,
                         child: GestureDetector(
                           onTap: () {
-                            print('tablets');
+                            newAd.show(
+                              anchorType: AnchorType.bottom,
+                              anchorOffset: 0.0,
+                              horizontalCenterOffset: 0.0,
+                            );
+                            Navigator.pushNamed(
+                                context, TabletsScreen.routeName);
                           },
                           child: Container(
                             width: wights * .090,

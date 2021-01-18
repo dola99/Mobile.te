@@ -1,9 +1,11 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobility/providers/Gamers.dart';
 import 'package:mobility/providers/categorey.dart';
-import 'package:mobility/providers/categorys.dart';
+
+import 'package:mobility/screens/Home_Screen.dart';
 import 'package:mobility/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 //import 'dart:math';
@@ -16,6 +18,15 @@ class GamerScreen extends StatefulWidget {
 }
 
 class _GamerScreenState extends State<GamerScreen> {
+  BannerAd _bannerAd;
+  void _loadBannerAd() {
+    _bannerAd
+      ..load()
+      ..show(
+        anchorType: AnchorType.bottom,
+      );
+  }
+
   PageController pageController;
   double viewportFuncation = 0.8;
   double pageOffset = 0;
@@ -25,6 +36,10 @@ class _GamerScreenState extends State<GamerScreen> {
   @override
   void initState() {
     super.initState();
+    _bannerAd = BannerAd(
+        adUnitId: 'ca-app-pub-4854420444519405/4121646054',
+        size: AdSize.banner);
+    _loadBannerAd();
     pageController =
         PageController(initialPage: 0, viewportFraction: viewportFuncation)
           ..addListener(() {
@@ -35,18 +50,25 @@ class _GamerScreenState extends State<GamerScreen> {
   }
 
   @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
         isLoading = true;
       });
 
-      Provider.of<Gamers>(context).fetchandsetProducts().then((_) {
+      Provider.of<Gamers>(context, listen: false)
+          .fetchandsetProducts()
+          .then((_) {
         setState(() {
           isLoading = false;
         });
       });
-      Provider.of<Categorys>(context).fetchandsetProducts();
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -54,9 +76,9 @@ class _GamerScreenState extends State<GamerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loadedproducts = Provider.of<Gamers>(context);
-    final loadedCate = Provider.of<Categorys>(context);
-    final cate = loadedCate.itemss;
+    final loadedproducts = Provider.of<Gamers>(context, listen: false);
+
+    final cate = HomePage.category;
     final products = loadedproducts.items;
     final hig = MediaQuery.of(context).size.height;
     final wiq = MediaQuery.of(context).size.width;
@@ -69,7 +91,7 @@ class _GamerScreenState extends State<GamerScreen> {
             height: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment(hig*.2123234262925839e-17, hig*.0022),
+                  begin: Alignment(hig * .2123234262925839e-17, hig * .0022),
                   end: Alignment(-5.4, 2.123234262925839e-12),
                   colors: [
                     Color.fromRGBO(198, 16, 16, 1),
@@ -112,6 +134,8 @@ class _GamerScreenState extends State<GamerScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductDetailScreen(
+                          aduio: products[index].audio,
+                          antutu: products[index].antutu,
                           allimages: [products[index].images],
                           battery: products[index].capstiybattery,
                           cpu: products[index].cpu,
@@ -126,8 +150,14 @@ class _GamerScreenState extends State<GamerScreen> {
                           rearcamera: products[index].rearcamera,
                           screendetails: products[index].screen,
                           topimges: products[index].topScreen,
+                          lighttopscreen: products[index].lighttopscreen,
                           logo: cate[chose].logo,
                           namrcompany: cate[chose].name,
+                          fbsPubg: products[index].fbspubg,
+                          more: products[index].more,
+                          fbscod: products[index].fbscod,
+                          resPubg: products[index].respubg,
+                          rescode: products[index].rescod,
                         ),
                       ),
                     );
@@ -175,6 +205,23 @@ class _GamerScreenState extends State<GamerScreen> {
                                                 color: Colors.black,
                                                 fontFamily: "Oswald",
                                                 fontSize: 20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: hig * .06,
+                                      left: wiq * .02,
+                                      right: wiq * .02,
+                                      child: Container(
+                                        width: wiq * .40,
+                                        child: Center(
+                                          child: Text(
+                                            products[index].size,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "Oswald",
+                                                fontSize: 10),
                                           ),
                                         ),
                                       ),
@@ -232,7 +279,7 @@ class _GamerScreenState extends State<GamerScreen> {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: hig * .1,
+                                      bottom: hig * .12,
                                       left: wiq * .045,
                                       child: Container(
                                         width: wiq * .3,
@@ -240,7 +287,7 @@ class _GamerScreenState extends State<GamerScreen> {
                                         child: Row(
                                           children: [
                                             Container(
-                                                width: wiq * .090,
+                                                width: wiq * .060,
                                                 height: hig * .060,
                                                 child: SvgPicture.asset(
                                                   'assets/images/pubg.svg',
@@ -250,7 +297,7 @@ class _GamerScreenState extends State<GamerScreen> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                "Pubg ",
+                                                "Pubg",
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 18,
@@ -262,43 +309,50 @@ class _GamerScreenState extends State<GamerScreen> {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: hig * .0,
-                                      left: wiq * .035,
+                                      bottom: hig * .10,
+                                      left: wiq * .25,
                                       child: Container(
-                                        width: wiq * .3,
+                                        width: wiq * .5,
                                         height: hig * .1,
-                                        child: Column(
+                                        child: Row(
                                           children: [
-                                            Divider(
-                                              indent: wiq * .020,
-                                              height: hig * .001,
+                                            VerticalDivider(
+                                              indent: hig * .015,
+                                              endIndent: hig * .015,
+                                              thickness: 1,
                                               color: Colors.grey,
-                                              endIndent: wiq * .010,
                                             ),
-                                            Text(
-                                              "FBS:   ${products[index].fbspubg}",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontFamily: "Oswald"),
-                                            ),
-                                            Text(
-                                              "RES:   ${products[index].respubg}",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontFamily: "Oswald"),
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: hig * .018,
+                                                ),
+                                                Text(
+                                                  "Res: ${products[index].respubg}",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                      fontFamily: "Oswald"),
+                                                ),
+                                                Text(
+                                                  "FBS: ${products[index].fbspubg}",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                      fontFamily: "Oswald"),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: hig * .090,
-                                      right: wiq * .035,
+                                      bottom: hig * .040,
+                                      left: wiq * .01,
                                       child: Container(
-                                        width: wiq * .35,
-                                        height: hig * .09,
+                                        width: wiq * .3,
+                                        height: hig * .07,
                                         child: Column(
                                           children: [
                                             Row(
@@ -307,8 +361,8 @@ class _GamerScreenState extends State<GamerScreen> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Container(
-                                                    width: wiq * .12,
-                                                    height: hig * .07,
+                                                    width: wiq * .060,
+                                                    height: hig * .05,
                                                     child: SvgPicture.asset(
                                                       'assets/images/callofduty.svg',
                                                       color: Colors.black,
@@ -329,32 +383,39 @@ class _GamerScreenState extends State<GamerScreen> {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: hig * .0,
-                                      right: wiq * .05,
+                                      bottom: hig * .01,
+                                      left: wiq * .25,
                                       child: Container(
-                                        width: wiq * .25,
+                                        width: wiq * .5,
                                         height: hig * .1,
-                                        child: Column(
+                                        child: Row(
                                           children: [
-                                            Divider(
-                                              indent: wiq * .020,
-                                              height: hig * .001,
+                                            VerticalDivider(
+                                              indent: hig * .010,
                                               color: Colors.grey,
-                                              endIndent: wiq * .010,
+                                              thickness: 1,
+                                              endIndent: hig * .010,
                                             ),
-                                            Text(
-                                              "FBS:   ${products[index].fbscod}",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontFamily: "Oswald"),
-                                            ),
-                                            Text(
-                                              "RES:   ${products[index].rescod}",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontFamily: "Oswald"),
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: hig * .018,
+                                                ),
+                                                Text(
+                                                  "Res: ${products[index].rescod}",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                      fontFamily: "Oswald"),
+                                                ),
+                                                Text(
+                                                  "Fbs: ${products[index].fbscod}",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                      fontFamily: "Oswald"),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),

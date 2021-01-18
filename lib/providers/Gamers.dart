@@ -22,6 +22,8 @@ class Gamers with ChangeNotifier {
       final List<Gamer> loadedProduct = [];
       extractedData.forEach((key, value) {
         loadedProduct.add(Gamer(
+          audio: value['Audio'],
+          antutu: value['Antutu'],
           fbscod: value['fbscod'],
           fbspubg: value['fbspubg'],
           jumiabuy: value['jumiabuy'],
@@ -31,9 +33,11 @@ class Gamers with ChangeNotifier {
           souqbuy: value['souqbuy'],
           capstiybattery: value['capacitybattery'],
           category: value["category"],
+          lighttopscreen: value['LghtTopScreen'],
           cpu: value['cpu'],
           frontcamera: value["front camera"],
           gpu: value["gpu"],
+          more: value['More'],
           id: key,
           name: value["Name"],
           os: value["os"],

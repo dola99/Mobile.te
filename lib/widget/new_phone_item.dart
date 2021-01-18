@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobility/providers/categorey.dart';
-import 'package:mobility/providers/categorys.dart';
 import 'package:mobility/providers/product.dart';
-import 'package:mobility/providers/products.dart';
+
+import 'package:mobility/screens/Home_Screen.dart';
 import 'package:mobility/screens/product_detail_screen.dart';
 import '../providers/newphoness.dart';
 
@@ -25,9 +27,9 @@ class _NewPhonesState extends State<NewPhones> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Products>(context).fetchandsetProducts();
-      Provider.of<Categorys>(context).fetchandsetProducts();
-      Provider.of<NewPhoness>(context).fetchandSetsProducts().then((_) {
+      Provider.of<NewPhoness>(context, listen: false)
+          .fetchandSetsProducts()
+          .then((_) {
         setState(() {
           isLoading = true;
         });
@@ -38,60 +40,70 @@ class _NewPhonesState extends State<NewPhones> {
 
   @override
   Widget build(BuildContext context) {
-    final loadIdCategory = Provider.of<Categorys>(context);
-    final categrey = loadIdCategory.itemss;
-    final loadItem = Provider.of<Products>(context);
-    final item = loadItem.items;
-    final hight = MediaQuery.of(context).size.height;
-    final weight = MediaQuery.of(context).size.height;
-    final loaded = Provider.of<NewPhoness>(context);
-    final products = loaded.items;
+    double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+        width: defaultScreenWidth,
+        height: defaultScreenHeight,
+        allowFontScaling: true)
+      ..init(context);
+    final item = HomePage.product;
+    final products = HomePage.newPhone.reversed.toList();
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: .87,
+          childAspectRatio: ScreenUtil.instance.setWidth(290) /
+              ScreenUtil.instance.setHeight(300),
           crossAxisCount: 2,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 20),
+          crossAxisSpacing: ScreenUtil.instance.setWidth(18),
+          mainAxisSpacing: 10),
       itemCount: products.length,
-      itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
-        value: products[index],
+      itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+        value: products[i],
         child: GestureDetector(
           onTap: () {
-            fetshItem(products[index].idproduct, categrey, item);
+            fetshItem(products[i].idproduct, HomePage.category, item);
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProductDetailScreen(
-                          battery: item[index].capstiybattery,
-                          cpu: item[index].cpu,
-                          frontcamera: item[index].frontcamera,
-                          gpu: item[index].gpu,
-                          logo: categrey[indexcategory].logo,
-                          mainimage: item[index].mainImages,
-                          memory: item[index].space,
-                          nameProduct: item[index].name,
-                          namrcompany: categrey[indexcategory].name,
-                          os: item[index].os,
-                          price: item[index].price,
-                          ram: item[index].ram,
-                          rearcamera: item[index].rearcamera,
-                          screendetails: item[index].screen,
-                          topimges: item[index].topScreen,
-                          allimages: [item[index].images],
-                        )));
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductDetailScreen(
+                  battery: item[index].capstiybattery,
+                  cpu: item[index].cpu,
+                  frontcamera: item[index].frontcamera,
+                  gpu: item[index].gpu,
+                  logo: HomePage.category[indexcategory].logo,
+                  mainimage: item[index].mainImages,
+                  memory: item[index].space,
+                  nameProduct: item[index].name,
+                  namrcompany: HomePage.category[indexcategory].name,
+                  os: item[index].os,
+                  price: item[index].price,
+                  ram: item[index].ram,
+                  aduio: item[index].aduio,
+                  antutu: item[index].antutue,
+                  lighttopscreen: item[index].lightTopScreen,
+                  more: item[index].more,
+                  rearcamera: item[index].rearcamera,
+                  screendetails: item[index].screen,
+                  topimges: item[index].topScreen,
+                  allimages: [item[index].images],
+                  fbsPubg: item[index].fbspubg,
+                  fbscod: item[index].fbscod,
+                  resPubg: item[index].respubg,
+                  rescode: item[index].rescod,
+                ),
+              ),
+            );
           },
           child: Container(
-            width: weight * .190,
-            height: hight * .200,
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  bottom: hight * .0350,
-                  left: weight * .01,
+                  bottom: ScreenUtil.instance.setHeight(55),
+                  left: ScreenUtil.instance.setWidth(3),
                   child: Container(
-                    width: weight * .12,
-                    height: hight * .05,
+                    width: ScreenUtil.instance.setWidth(120),
+                    height: ScreenUtil.instance.setHeight(35),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
@@ -101,57 +113,68 @@ class _NewPhonesState extends State<NewPhones> {
                   ),
                 ),
                 Positioned(
-                  bottom: hight * .0450,
-                  left: weight * .050,
+                  bottom: ScreenUtil.instance.setHeight(60),
+                  left: ScreenUtil.instance.setWidth(50),
                   child: Text(
                     'New',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontFamily: 'Oswald',
-                      fontSize: 15,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
+                      fontSize: ScreenUtil(allowFontScaling: true).setSp(18),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Positioned(
-                  top: hight * .0340,
-                  bottom: hight * .10,
-                  left: weight * .0180,
+                  top: ScreenUtil.instance.setHeight(20),
+                  left: ScreenUtil.instance.setWidth(10),
                   child: Container(
-                    width: weight * .080,
-                    height: hight * .070,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(products[index].logo),
-                          fit: BoxFit.contain),
+                    width: ScreenUtil.instance.setWidth(90),
+                    height: ScreenUtil.instance.setWidth(90),
+                    child: CachedNetworkImage(
+                      imageUrl: products[i].logo,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: hight * .0250,
-                  right: weight * .0150,
+                  top: ScreenUtil.instance.setHeight(0),
+                  right: ScreenUtil.instance.setWidth(3),
                   child: Container(
-                    width: weight * .065,
-                    height: hight * .180,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(products[index].imageUrl),
-                          fit: BoxFit.cover),
+                    
+                    width: ScreenUtil.instance.setWidth(70),
+                    height: ScreenUtil.instance.setWidth(180),
+                    child: CachedNetworkImage(
+                      imageUrl: products[i].imageUrl,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: hight * .003,
-                  left: weight * .050,
-                  child: Text(
-                    products[index].color,
-                    style: TextStyle(
-                      color: Theme.of(context).dividerColor,
-                      fontSize: 14,
-                      fontFamily: 'RobotoCondensed',
+                  bottom: ScreenUtil.instance.setHeight(7),
+                  left: ScreenUtil.instance.setHeight(3),
+                  child: Container(
+                    height: ScreenUtil.instance.setHeight(45),
+                    width: ScreenUtil.instance.setWidth(105),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: ScreenUtil.instance.setWidth(10)),
+                      child: Text(
+                        products[i].color,
+                        style: TextStyle(
+                          color: Theme.of(context).dividerColor,
+                          fontSize:
+                              ScreenUtil(allowFontScaling: true).setSp(16),
+                          fontFamily: 'RobotoCondensed',
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -171,6 +194,8 @@ class _NewPhonesState extends State<NewPhones> {
 
     for (int k = 0; k < n.length; k++) {
       if (n[k].id == id) {
+        print(k);
+        print(n[k].name);
         index = k;
       }
     }

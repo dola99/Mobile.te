@@ -11,7 +11,7 @@ final darkTheme = ThemeData(
   textSelectionColor: Colors.grey[300],
   focusColor: Colors.grey[500],
   disabledColor: Colors.white,
-  cursorColor: Color.fromRGBO(255, 189, 89, 1)
+  cursorColor: Colors.black
 );
 
 final lightTheme = ThemeData(

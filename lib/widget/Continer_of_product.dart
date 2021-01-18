@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Containerofproduct extends StatelessWidget {
-  final double number;
   final String picture;
   final String name;
   final String text1;
   Containerofproduct({
-    this.number,
     this.name,
     this.text1,
     this.picture,
@@ -26,7 +24,7 @@ class Containerofproduct extends StatelessWidget {
           height: hight * .13,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Theme.of(context).dividerColor),
+              color: Theme.of(context).primaryColor),
           child: Row(
             children: [
               Padding(
@@ -42,7 +40,7 @@ class Containerofproduct extends StatelessWidget {
                         child: SvgPicture.asset(
                           picture,
                           fit: BoxFit.contain,
-                          color: Theme.of(context).cursorColor,
+                          color: Theme.of(context).accentColor,
                         ),
                       ),
                       Center(
@@ -50,7 +48,7 @@ class Containerofproduct extends StatelessWidget {
                           child: Text(
                             name,
                             style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).dividerColor,
                                 fontFamily: 'Oswald',
                                 fontSize: 12),
                           ),
@@ -60,16 +58,26 @@ class Containerofproduct extends StatelessWidget {
                   ),
                 ),
               ),
+              VerticalDivider(
+                color: Theme.of(context).dividerColor,
+                indent: hight * .025,
+                endIndent: hight * .025,
+              ),
               Padding(
-                padding: const EdgeInsets.only(right: 2, top: 8, left: 9),
+                padding: const EdgeInsets.only(
+                  right: 2,
+                  top: 5,
+                ),
                 child: Container(
-                  width: wight * .65,
-                  height: hight * .0730,
+                  width: wight * .61,
+                  height: hight * .110,
                   child: Center(
                     child: Text(
                       text1,
+                      textAlign: TextAlign.justify,
                       style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).dividerColor,
+                          height: 1.2,
                           fontFamily: "Oswald",
                           fontSize: 12),
                     ),

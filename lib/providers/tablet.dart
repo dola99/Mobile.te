@@ -14,14 +14,18 @@ class Tablet with ChangeNotifier {
   final String size;
   final String space;
   final String topScreen;
+  final String lightTopScreen;
   final String speedofcharge;
   final String category;
   final String images;
   final String mainImages;
+  final String aduio;
+  final String antutu;
   final String price;
   final String noonbuy;
   final String souqbuy;
   final String jumiabuy;
+  final String more;
   final String fbspubg;
   final String respubg;
   final String fbscod;
@@ -35,8 +39,11 @@ class Tablet with ChangeNotifier {
     @required this.id,
     @required this.category,
     @required this.cpu,
+    @required this.aduio,
+    @required this.antutu,
     @required this.gpu,
     @required this.ram,
+    @required this.more,
     @required this.frontcamera,
     @required this.rearcamera,
     @required this.screen,
@@ -53,5 +60,6 @@ class Tablet with ChangeNotifier {
     @required this.jumiabuy,
     @required this.noonbuy,
     @required this.souqbuy,
+    @required this.lightTopScreen,
   });
 }

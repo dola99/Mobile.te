@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -23,6 +23,13 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+                double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+        width: defaultScreenWidth,
+        height: defaultScreenHeight,
+        allowFontScaling: true)
+      ..init(context);
     final wight = MediaQuery.of(context).size.width;
     final hight = MediaQuery.of(context).size.height;
     final appBarSize = expandedHeight - shrinkOffset;
@@ -47,7 +54,6 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                   Navigator.of(context).pop();
                 },
               ),
-              
               elevation: 0.0,
               title: Opacity(
                 opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
@@ -76,7 +82,6 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                 padding: EdgeInsets.symmetric(horizontal: 0 * percent),
                 child: Stack(
                   children: [
-                    
                     Positioned(
                       top: hight * .070,
                       left: 0,
@@ -116,7 +121,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: wight * .42,
+                          width: wight * .47,
                           height: hight * .32,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -128,16 +133,17 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                     ),
                     Positioned(
                       top: hight * .05,
-                      right: wight * .0220,
+                      right: wight * .010,
+                      left: wight * .5,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           height: hight * .28,
-                          width: wight * .37,
+                          width: wight * .1,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: NetworkImage(mainimage),
-                                  fit: BoxFit.cover)),
+                                  fit: BoxFit.contain)),
                         ),
                       ),
                     ),
@@ -153,7 +159,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                             "$price.EGP",
                             style: TextStyle(
                                 color: Colors.orange[900],
-                                fontSize: 16,
+                                fontSize: ScreenUtil(allowFontScaling: true).setSp(14),
                                 fontFamily: "Oswald"),
                           ),
                         ),

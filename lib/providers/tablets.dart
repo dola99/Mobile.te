@@ -22,8 +22,11 @@ class Tablets with ChangeNotifier {
       final List<Tablet> loadedProduct = [];
       extractedData.forEach((key, value) {
         loadedProduct.add(Tablet(
+          lightTopScreen: value['LightTopScreen'],
           fbscod: value['fbscod'],
           fbspubg: value['fbspubg'],
+          aduio: value['Aduio'],
+          antutu: value['Antutu'],
           jumiabuy: value['jumiabuy'],
           noonbuy: value['noonbuy'],
           rescod: value['rescod'],
@@ -35,6 +38,7 @@ class Tablets with ChangeNotifier {
           frontcamera: value["front camera"],
           gpu: value["gpu"],
           id: key,
+          more: value['More'],
           name: value["Name"],
           os: value["os"],
           ram: value["Ram"],

@@ -1,40 +1,72 @@
-import 'package:firebase_admob/firebase_admob.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobility/providers/categorey.dart';
+import 'package:mobility/providers/categorys.dart';
+import 'package:mobility/providers/newphone.dart';
+import 'package:mobility/providers/newphoness.dart';
+import 'package:mobility/providers/product.dart';
+import 'package:mobility/providers/products.dart';
+import 'package:mobility/providers/tobbanner.dart';
+import 'package:mobility/providers/topbanners.dart';
 import 'package:mobility/widget/flat_buttons.dart';
+import 'package:provider/provider.dart';
 import '../widget/new_phone_item.dart';
 import 'package:flutter/material.dart';
 import '../widget/page_view_topbanner.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "Home_screen";
-
+  static List<Category> category = [];
+  static List<NewPhone> newPhone = [];
+  static List<Product> product = [];
+  static List<TopBanner> topbanner = [];
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  BannerAd mybanner;
-  BannerAd buildbannerAd() {
-    return BannerAd(
-      adUnitId: 'ca-app-pub-4854420444519405/4121646054',
-      size: AdSize.banner,
-      listener: (event) {
-        mybanner..show();
-      },
-    );
-  }
-
+  var _isInit = true;
+  var isLoading = false;
   @override
-  void initState() {
-    super.initState();
-    FirebaseAdMob.instance
-        .initialize(appId: 'ca-app-pub-4854420444519405/4121646054');
-    mybanner = buildbannerAd()..load();
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        isLoading = true;
+      });
+      Provider.of<Products>(context, listen: false)
+          .fetchandsetProducts()
+          .then((_) {
+        setState(() {
+          HomePage.product =
+              Provider.of<Products>(context, listen: false).items;
+        });
+      });
+      Provider.of<Categorys>(context, listen: false).fetchandsetProducts();
+      Provider.of<NewPhoness>(context, listen: false)
+          .fetchandSetsProducts()
+          .then((_) {
+        setState(() {
+          isLoading = true;
+        });
+      });
+    }
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final weight = MediaQuery.of(context).size.width;
+    final loadIdCategory = Provider.of<Categorys>(context, listen: false);
+    HomePage.category = loadIdCategory.itemss;
+    final loadednewphone = Provider.of<NewPhoness>(context, listen: false);
+    HomePage.newPhone = loadednewphone.items;
+    final loadedtopbanner = Provider.of<Topbanners>(context, listen: false);
+    HomePage.topbanner = loadedtopbanner.itemsss;
+    double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+        width: defaultScreenWidth,
+        height: defaultScreenHeight,
+        allowFontScaling: true)
+      ..init(context);
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SingleChildScrollView(
@@ -42,7 +74,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             SafeArea(
               child: Container(
-                height: height * .320,
+                height: ScreenUtil.instance.setHeight(260),
                 child: PageviewBanner(),
               ),
             ),
@@ -54,34 +86,35 @@ class _HomePageState extends State<HomePage> {
                 "_________",
                 style: TextStyle(
                     color: Theme.of(context).backgroundColor,
-                    fontSize: 15,
+                    fontSize: ScreenUtil(allowFontScaling: true).setSp(20),
                     fontWeight: FontWeight.w700),
               ),
             ),
             SizedBox(
-              height: 5,
+              height: ScreenUtil.instance.setHeight(5),
             ),
             Center(child: FlatButtons()),
             SizedBox(
-              height: 5,
+              height: ScreenUtil.instance.setHeight(5),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * .040),
-              child: Text(
-                "Recenty : ",
-                style: TextStyle(
-                  color: Theme.of(context).dividerColor,
-                  fontFamily: 'RobotoCondensed',
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
+            Container(
+              width: ScreenUtil.instance.setWidth(380),
+              child: Center(
+                child: Text(
+                  "Recenty",
+                  style: TextStyle(
+                    color: Theme.of(context).dividerColor,
+                    fontFamily: 'RobotoCondensed',
+                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
             Container(
-                width: weight * .9,
-                height: height*.75,
-                child: Center(child: NewPhones())),
+                width: ScreenUtil.instance.setWidth(380),
+                height: ScreenUtil.instance.setHeight(630),
+                child: NewPhones()),
           ],
         ),
       ),

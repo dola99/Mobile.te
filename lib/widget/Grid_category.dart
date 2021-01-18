@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../screens/MobileCategoryScreen.dart';
+import 'package:mobility/screens/MobileCategoryScreen.dart';
 import '../providers/categorys.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,7 @@ class GridCategory extends StatefulWidget {
 class _GridCategoryState extends State<GridCategory> {
   @override
   Widget build(BuildContext context) {
-    final _allproduct = Provider.of<Categorys>(context,listen: false);
+    final _allproduct = Provider.of<Categorys>(context, listen: false);
     final _product = _allproduct.itemss;
     return GridView.builder(
       padding: const EdgeInsets.all(10),
@@ -61,9 +62,12 @@ class _GridCategoryState extends State<GridCategory> {
                     child: Center(
                       child: Container(
                         margin: EdgeInsets.all(10),
-                        child: Image.network(
-                          _product[index].logo,
-                          fit: BoxFit.cover,
+                        child: CachedNetworkImage(
+                          imageUrl: _product[index].logo,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),

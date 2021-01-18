@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobility/providers/product.dart';
+import 'package:mobility/screens/tabs-screens.dart';
 import '../providers/products.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ class DialogSearch extends StatefulWidget {
 class _DialogSearchState extends State<DialogSearch> {
   final TextEditingController _controller = TextEditingController();
   List searchresult = [];
+  List newsearchresult = [];
   bool isSeraching = true;
 
   List<Product> listproduct = [];
@@ -29,7 +31,9 @@ class _DialogSearchState extends State<DialogSearch> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Products>(context).fetchandsetProducts().then((_) {
+      Provider.of<Products>(context, listen: false)
+          .fetchandsetProducts()
+          .then((_) {
         setState(() {
           isLoading = false;
         });
@@ -79,25 +83,27 @@ class _DialogSearchState extends State<DialogSearch> {
               child: searchresult.length != 0 || _controller.text.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: searchresult.length,
+                      itemCount: newsearchresult.length,
                       itemBuilder: (BuildContext context, int index) {
-                        String listDate = searchList(searchresult);
                         return ListTile(
                           title: Text(
-                            '$listDate',
+                            '${newsearchresult[index]}',
                             textAlign: TextAlign.center,
-                            maxLines: 5,
                           ),
                           onTap: () {
                             setState(() {
                               for (int i = 0; i < phoness.length; i++) {
-                                if (phoness[i].id == listid[id]) {
+                                if (phoness[i].id == listid[index]) {
                                   if (DialogSearch.intt == null) {
                                     DialogSearch.intt = i;
                                   } else {
                                     DialogSearch.intt2 = i;
                                   }
-                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    Navigator.of(context).pushReplacementNamed(
+                                        TabsScreens.roouteName,
+                                        arguments: TabsScreens.indexpage = 1);
+                                  });
                                 }
                               }
                             });
@@ -107,11 +113,15 @@ class _DialogSearchState extends State<DialogSearch> {
                     )
                   : ListView.builder(
                       shrinkWrap: true,
-                      itemCount: phoness.length,
+                      itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
                         String listDate = phoness[index].name;
                         return ListTile(
-                          title: Text(listDate),
+                          title: Text(
+                            listDate,
+                            textAlign: TextAlign.center,
+                            maxLines: 5,
+                          ),
                           onTap: () {
                             setState(() {
                               for (int i = 0; i < phoness.length; i++) {
@@ -121,7 +131,9 @@ class _DialogSearchState extends State<DialogSearch> {
                                   } else {
                                     DialogSearch.intt2 = i;
                                   }
-                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    Navigator.of(context).pushReplacementNamed(TabsScreens.roouteName,arguments: TabsScreens.indexpage=1);
+                                  });
                                 }
                               }
                             });
@@ -144,25 +156,9 @@ class _DialogSearchState extends State<DialogSearch> {
       var datename = listproduct[i].name;
       var dateid = listproduct[i].id;
       if (datename.toString().toLowerCase().contains(searchText)) {
+        searchresult = newsearchresult;
         searchresult.add(datename);
         listid.add(dateid);
-      }
-    }
-  }
-
-  // ignore: missing_return
-  String searchList(List list) {
-    List n = [];
-    for (int i = 0; i <= list.length; i++) {
-      String ind = list[i];
-      id = i;
-      for (int k = 0; k < 5; k++) {
-        if (n.contains(ind)) {
-          continue;
-        } else {
-          n.add(ind);
-          return ind;
-        }
       }
     }
   }

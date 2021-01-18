@@ -6,6 +6,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 
 class TabsScreens extends StatefulWidget {
   static const roouteName = "/";
+  static int indexpage = 0;
   @override
   _TabsScreensState createState() => _TabsScreensState();
 }
@@ -22,10 +23,11 @@ class _TabsScreensState extends State<TabsScreens> {
     super.initState();
   }
 
-  int _selectedpageIndex = 0;
+  int _selectedpageIndex = TabsScreens.indexpage;
+
   void _selectPage(int index) {
     setState(() {
-      _selectedpageIndex = index;
+    _selectedpageIndex = index;
     });
   }
 

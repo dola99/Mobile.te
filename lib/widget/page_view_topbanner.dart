@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobility/providers/categorys.dart';
+import 'package:mobility/screens/Home_Screen.dart';
 import 'package:mobility/screens/product_detail_screen.dart';
 import '../providers/categorey.dart';
 import 'package:mobility/providers/product.dart';
-import 'package:mobility/providers/products.dart';
 import '../providers/topbanners.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +12,7 @@ class PageviewBanner extends StatefulWidget {
 }
 
 class _PageviewBannerState extends State<PageviewBanner> {
+  String id;
   int _currentPage = 0;
   int index;
   int indexcategory;
@@ -41,9 +41,9 @@ class _PageviewBannerState extends State<PageviewBanner> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Products>(context).fetchandsetProducts();
-      Provider.of<Categorys>(context).fetchandsetProducts();
-      Provider.of<Topbanners>(context).fetchAndSetProducts().then((_) {
+      Provider.of<Topbanners>(context, listen: false)
+          .fetchAndSetProducts()
+          .then((_) {
         setState(() {
           isLoading = false;
         });
@@ -61,12 +61,9 @@ class _PageviewBannerState extends State<PageviewBanner> {
 
   @override
   Widget build(BuildContext context) {
-    final loadIdCategory = Provider.of<Categorys>(context);
-    final categrey = loadIdCategory.itemss;
-    final loadItem = Provider.of<Products>(context);
-    final item = loadItem.items;
-    final loadedproducts = Provider.of<Topbanners>(context, listen: true);
-    final products = loadedproducts.itemsss;
+    final item = HomePage.product;
+
+    final products = HomePage.topbanner;
     return isLoading
         ? Center(
             child: CircularProgressIndicator(),
@@ -79,7 +76,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
               value: products[i],
               child: GestureDetector(
                 onTap: () {
-                  fetshItem(products[i].idproduct, categrey, item);
+                  fetshItem(products[i].idproduct, HomePage.category, HomePage.product);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -88,11 +85,12 @@ class _PageviewBannerState extends State<PageviewBanner> {
                                 cpu: item[index].cpu,
                                 frontcamera: item[index].frontcamera,
                                 gpu: item[index].gpu,
-                                logo: categrey[indexcategory].logo,
+                                logo: HomePage.category[indexcategory].logo,
                                 mainimage: item[index].mainImages,
                                 memory: item[index].space,
                                 nameProduct: item[index].name,
-                                namrcompany: categrey[indexcategory].name,
+                                namrcompany:
+                                    HomePage.category[indexcategory].name,
                                 os: item[index].os,
                                 price: item[index].price,
                                 ram: item[index].ram,
@@ -100,6 +98,14 @@ class _PageviewBannerState extends State<PageviewBanner> {
                                 screendetails: item[index].screen,
                                 topimges: item[index].topScreen,
                                 allimages: [item[index].images],
+                                fbsPubg: item[index].fbspubg,
+                                fbscod: item[index].fbscod,
+                                aduio: item[index].aduio,
+                                antutu: item[index].antutue,
+                                lighttopscreen: item[index].lightTopScreen,
+                                more: item[index].more,
+                                resPubg: item[index].respubg,
+                                rescode: item[index].rescod,
                               )));
                 },
                 child: Stack(
@@ -163,19 +169,19 @@ class _PageviewBannerState extends State<PageviewBanner> {
   }
 
   void fetshItem(String id, List<Category> list2, List<Product> list1) {
-    List<Product> n = [];
-    List<Category> a = [];
-    a = list2;
-    n = list1;
-
-    for (int k = 0; k < n.length; k++) {
-      if (n[k].id == id) {
+    List<Product> n = list1;
+    List<Category> a = list2;
+    for (int k = 0; k <= 100; k++) {
+      if (id == n[k].id) {
+        print(n[k].name);
         index = k;
+        break;
       }
     }
     for (int t = 0; t < a.length; t++) {
       if (n[index].category == a[t].name) {
         indexcategory = t;
+        break;
       }
     }
   }

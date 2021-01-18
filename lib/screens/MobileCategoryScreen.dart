@@ -38,14 +38,16 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Products>(context).fetchandsetProducts().then((_) {
+      Provider.of<Products>(context, listen: false)
+          .fetchandsetProducts()
+          .then((_) {
         setState(() {
           isLoading = false;
         });
       });
     }
     _isInit = false;
-    final _availablePhones = Provider.of<Products>(context);
+    final _availablePhones = Provider.of<Products>(context, listen: false);
     final _phoness = _availablePhones.items.reversed;
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     if (_loadedInitData == false) {
@@ -68,7 +70,9 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
         title: Text(
           args.name,
           style: TextStyle(
-              color: Theme.of(context).dividerColor, fontSize: 18, fontFamily: 'RobotoCondensed'),
+              color: Theme.of(context).dividerColor,
+              fontSize: 18,
+              fontFamily: 'RobotoCondensed'),
         ),
         centerTitle: true,
         actions: [
@@ -89,7 +93,7 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: (wight / hight)*1.19,
+            childAspectRatio: (wight / hight) * 1.19,
             crossAxisSpacing: 0,
             mainAxisSpacing: 0),
         itemCount: displayedPhones.length,
@@ -101,22 +105,30 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(
+                    lighttopscreen: displayedPhones[index].lightTopScreen,
+                    aduio: displayedPhones[index].aduio,
+                    antutu: displayedPhones[index].antutue,
                     logo: args.imagesurl,
                     mainimage: displayedPhones[index].mainImages,
                     allimages: [displayedPhones[index].images],
                     os: displayedPhones[index].os,
                     nameProduct: displayedPhones[index].name,
                     ram: displayedPhones[index].ram,
-                    battery: displayedPhones[index].speedofcharge,
+                    battery: displayedPhones[index].capstiybattery,
                     namrcompany: args.name,
                     screendetails: displayedPhones[index].screen,
                     price: displayedPhones[index].price,
                     cpu: displayedPhones[index].cpu,
                     topimges: displayedPhones[index].topScreen,
+                    more: displayedPhones[index].more,
                     rearcamera: displayedPhones[index].rearcamera,
                     frontcamera: displayedPhones[index].frontcamera,
                     gpu: displayedPhones[index].gpu,
                     memory: displayedPhones[index].space,
+                    fbsPubg: displayedPhones[index].fbspubg,
+                    fbscod: displayedPhones[index].fbscod,
+                    resPubg: displayedPhones[index].respubg,
+                    rescode: displayedPhones[index].rescod,
                   ),
                 ),
               );
@@ -150,10 +162,11 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                         ),
                         Positioned(
                           top: hight * .010,
-                          left: wight * .01,
-                          right: wight * .01,
+                          left: wight * .02,
+                          right: wight * .02,
                           bottom: hight * .11,
                           child: Container(
+                            width: wight * .008,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(21),
@@ -171,7 +184,7 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                                   image: NetworkImage(
                                     displayedPhones[index].mainImages,
                                   ),
-                                  fit: BoxFit.cover),
+                                  fit: BoxFit.contain),
                             ),
                           ),
                         ),
@@ -196,8 +209,9 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                           child: Container(
                             child: Text(
                               "_____________",
-                              style:
-                                  TextStyle(color: Theme.of(context).focusColor, fontSize: 15),
+                              style: TextStyle(
+                                  color: Theme.of(context).focusColor,
+                                  fontSize: 15),
                             ),
                           ),
                         ),

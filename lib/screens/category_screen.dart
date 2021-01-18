@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/categorys.dart';
@@ -11,6 +12,26 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+    BannerAd _bannerAd;
+  void _loadBannerAd() {
+    _bannerAd
+      ..load()
+      ..show(anchorType: AnchorType.bottom, anchorOffset: .5);
+  }
+
+  @override
+  void initState() {
+    _bannerAd = BannerAd(adUnitId:'ca-app-pub-4854420444519405/2303654585', size: AdSize.banner);
+    _loadBannerAd();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
   var _isInit = true;
   var isLoading = false;
   @override
@@ -19,7 +40,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Categorys>(context).fetchandsetProducts().then((_) {
+      Provider.of<Categorys>(context,listen: false).fetchandsetProducts().then((_) {
         setState(() {
           isLoading = false;
         });
@@ -50,7 +71,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : SafeArea(child: GridCategory()),
+            : SafeArea(child: Padding(
+              padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height*.04),
+              child: GridCategory(),
+            )),
       ),
     );
   }

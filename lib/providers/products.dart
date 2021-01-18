@@ -22,7 +22,10 @@ class Products with ChangeNotifier {
       final List<Product> loadedProduct = [];
       extractedData.forEach((key, value) {
         loadedProduct.add(Product(
+          lightTopScreen: value['LightTopScreen'],
           fbscod: value['fbscod'],
+          aduio: value['Audio'],
+          antutue: value['Antutu'],
           fbspubg: value['fbspubg'],
           jumiabuy: value['jumiabuy'],
           noonbuy: value['noonbuy'],
@@ -33,6 +36,7 @@ class Products with ChangeNotifier {
           category: value["category"],
           cpu: value['cpu'],
           frontcamera: value["front camera"],
+          more: value['More'],
           gpu: value["gpu"],
           id: key,
           name: value["Name"],

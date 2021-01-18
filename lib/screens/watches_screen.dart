@@ -1,5 +1,7 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobility/providers/categorey.dart';
 import 'package:mobility/providers/categorys.dart';
 import 'package:mobility/providers/watches.dart';
@@ -14,6 +16,28 @@ class WatchesScreen extends StatefulWidget {
 }
 
 class _WatchesScreenState extends State<WatchesScreen> {
+  BannerAd _bannerAd;
+  void _loadBannerAd() {
+    _bannerAd
+      ..load()
+      ..show(anchorType: AnchorType.bottom, anchorOffset: .5);
+  }
+
+  @override
+  void initState() {
+    _bannerAd = BannerAd(
+        adUnitId: 'ca-app-pub-4854420444519405/2004271684',
+        size: AdSize.banner);
+    _loadBannerAd();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
   var _isInit = true;
   var isLoading = false;
   int chose;
@@ -23,11 +47,13 @@ class _WatchesScreenState extends State<WatchesScreen> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Watches>(context).fetchandsetProducts().then((_) {
+      Provider.of<Watches>(context, listen: false)
+          .fetchandsetProducts()
+          .then((_) {
         setState(() {
           isLoading = false;
         });
-        Provider.of<Categorys>(context).fetchandsetProducts();
+        Provider.of<Categorys>(context, listen: false).fetchandsetProducts();
       });
     }
     _isInit = false;
@@ -36,9 +62,16 @@ class _WatchesScreenState extends State<WatchesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loadedproducts = Provider.of<Watches>(context);
-    final products = loadedproducts.items;
-    final loadedCate = Provider.of<Categorys>(context);
+        double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+        width: defaultScreenWidth,
+        height: defaultScreenHeight,
+        allowFontScaling: true)
+      ..init(context);
+    final loadedproducts = Provider.of<Watches>(context, listen: false);
+    final products = loadedproducts.items.reversed.toList();
+    final loadedCate = Provider.of<Categorys>(context, listen: false);
     final cate = loadedCate.itemss;
     final high = MediaQuery.of(context).size.height;
     final wigh = MediaQuery.of(context).size.width;
@@ -83,7 +116,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
                           width: wigh * .6,
                           height: high * .040,
                           child: Text(
-                            "Smart Watch :",
+                            "Smart Watch ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -100,15 +133,19 @@ class _WatchesScreenState extends State<WatchesScreen> {
                   ? Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: EdgeInsets.only(
-                          top: high * .1, left: wigh * .03, right: wigh * .03),
+                        top: high * .1,
+                        left: wigh * .03,
+                        right: wigh * .03,
+                        bottom: high * .09,
+                      ),
                       child: GridView.builder(
                           itemCount: products.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 0.5,
+                            childAspectRatio: 0.55,
                             crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
                           ),
                           itemBuilder: (ctx, index) {
                             chosen(cate, products[index].brand);
@@ -153,7 +190,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
                                     right: 0,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: Theme.of(context).primaryColor,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                     ),
@@ -163,55 +200,58 @@ class _WatchesScreenState extends State<WatchesScreen> {
                                     top: high * .08,
                                     right: wigh * .02,
                                     left: wigh * .02,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        width: wigh * .3,
-                                        height: high * .02,
-                                        child: Image.network(
-                                          products[index].mainIages,
-                                          fit: BoxFit.contain,
-                                        ),
+                                    child: Container(
+                                      width: wigh * .3,
+                                      height: high * .02,
+                                      child: Image.network(
+                                        products[index].mainIages,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
                                   Positioned(
-                                    top: high * .3,
-                                    bottom: high * .02,
+                                    bottom: high * .035,
                                     left: wigh * .025,
                                     right: wigh * .04,
                                     child: Container(
+                                      height: high * .06,
+                                      
+                                      width: wigh * .05,
                                       child: Text(
                                         products[index].name,
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
+                                            color:
+                                                Theme.of(context).dividerColor,
+                                            fontSize: ScreenUtil(allowFontScaling: true).setSp(15),
                                             fontFamily: 'Oswald'),
                                       ),
                                     ),
                                   ),
                                   Positioned(
-                                    top: high * .02,
-                                    bottom: high * .3,
-                                    left: wigh * .025,
-                                    right: wigh * .04,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        child: Image.network(cate[chose].logo),
-                                      ),
+                                    top: high * .01,
+                                    left: wigh * .045,
+                                    right: wigh * .05,
+                                    child: Container(
+                                      height: high * .07,
+                                      width: wigh * .05,
+                                      child: Image.network(cate[chose].logo),
                                     ),
                                   ),
                                   Positioned(
-                                    top: high * .37,
-                                    bottom: high * .00,
-                                    left: wigh * .070,
-                                    right: wigh * .01,
+                                    bottom: high * .01,
+                                    right: wigh * .05,
+                                    left: wigh * .05,
                                     child: Container(
-                                      child: Text(
-                                        "Start From: ${products[index].price}",
-                                        style: TextStyle(
-                                            fontSize: 10, fontFamily: 'Oswald'),
+                                      width: wigh * .05,
+                                      child: Center(
+                                        child: Text(
+                                          "Start From: ${products[index].price}",
+                                          style: TextStyle(
+                                              fontSize: ScreenUtil(allowFontScaling: true).setSp(10),
+                                              fontFamily: 'Oswald',
+                                              color: Theme.of(context)
+                                                  .dividerColor),
+                                        ),
                                       ),
                                     ),
                                   ),

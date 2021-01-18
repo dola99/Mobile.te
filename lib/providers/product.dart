@@ -19,14 +19,17 @@ class Product with ChangeNotifier {
   final String images;
   final String mainImages;
   final String price;
+  final String aduio;
+  final String antutue;
   final String noonbuy;
   final String souqbuy;
   final String jumiabuy;
   final String fbspubg;
   final String respubg;
   final String fbscod;
+  final String more;
   final String rescod;
-
+  final String lightTopScreen;
   Product({
     @required this.price,
     @required this.mainImages,
@@ -42,6 +45,8 @@ class Product with ChangeNotifier {
     @required this.screen,
     @required this.os,
     @required this.capstiybattery,
+    @required this.aduio,
+    @required this.antutue,
     @required this.size,
     @required this.space,
     @required this.topScreen,
@@ -52,6 +57,8 @@ class Product with ChangeNotifier {
     @required this.respubg,
     @required this.jumiabuy,
     @required this.noonbuy,
+    @required this.more,
     @required this.souqbuy,
+    @required this.lightTopScreen,
   });
 }

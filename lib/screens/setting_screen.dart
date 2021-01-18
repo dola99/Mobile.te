@@ -8,7 +8,9 @@ import 'package:mobility/providers/ThemeChanger.dart';
 import 'package:provider/provider.dart';
 import '../widget/open_apps.dart';
 
+// ignore: must_be_immutable
 class SettingScreen extends StatefulWidget {
+  static bool darktheme;
   static bool isswitch = true;
   static const routeName = "/setting_screen";
 
@@ -20,12 +22,13 @@ class _SettingScreenState extends State<SettingScreen> {
   var _darkTheme = false;
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeChanger>(context);
+    final themeNotifier = Provider.of<ThemeChanger>(context, listen: false);
     _darkTheme = (themeNotifier.getTheme() == darkTheme);
     //  final high = MediaQuery.of(context).size.height;
     //  final wigh = MediaQuery.of(context).size.width;
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
+    
     ScreenUtil.instance = ScreenUtil(
         width: defaultScreenWidth,
         height: defaultScreenHeight,
@@ -165,7 +168,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             onChanged: (value) {
                               setState(() {
                                 _darkTheme = value;
-
+                                SettingScreen.darktheme = value;
                                 //  }
                               });
                               onThemeChanged(value, themeNotifier);
@@ -186,9 +189,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     height: 30,
                   ),
                   Text(
-                    "Share",
+                    "Follow Us",
                     style: TextStyle(
                         color: Theme.of(context).dividerColor,
+                        fontSize: 17,
                         fontFamily: "Oswald"),
                   ),
                   SizedBox(
@@ -229,16 +233,23 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Positioned(
-                        top: ScreenUtil.instance.setHeight(35),
-                        left: ScreenUtil.instance.setWidth(50),
+                        top: ScreenUtil.instance.setHeight(32),
+                        left: ScreenUtil.instance.setWidth(42),
                         child: GestureDetector(
                           onTap: () {
                             Provider.of<OpenApps>(context, listen: false)
                                 .launchSocial('fb://page/109013927681503', '');
                           },
-                          child: SvgPicture.asset(
-                            'assets/images/face.svg',
-                            semanticsLabel: 'f',
+                          child: Center(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .07,
+                              height: MediaQuery.of(context).size.height * .045,
+                              
+                              child: SvgPicture.asset(
+                                'assets/images/face.svg',
+                                semanticsLabel: 'f',
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -263,8 +274,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Positioned(
-                        top: ScreenUtil.instance.setHeight(36),
-                        left: ScreenUtil.instance.setWidth(136),
+                        top: ScreenUtil.instance.setHeight(32),
+                        left: ScreenUtil.instance.setWidth(137),
                         child: GestureDetector(
                           onTap: () {
                             Provider.of<OpenApps>(context, listen: false)
@@ -272,9 +283,15 @@ class _SettingScreenState extends State<SettingScreen> {
                                     'https://www.instagram.com/mobile.te.eg/',
                                     '');
                           },
-                          child: SvgPicture.asset(
-                            'assets/images/insta.svg',
-                            semanticsLabel: 'insta',
+                          child: Center(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .07,
+                              height: MediaQuery.of(context).size.height * .045,
+                              child: SvgPicture.asset(
+                                'assets/images/insta.svg',
+                                semanticsLabel: 'insta',
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -291,18 +308,27 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Positioned(
-                        top: ScreenUtil.instance.setHeight(37),
-                        right: ScreenUtil.instance.setWidth(40),
+                        top: MediaQuery.of(context).size.height*.044,
+                        bottom: MediaQuery.of(context).size.height*.056,
+                        right: MediaQuery.of(context).size.width*.09,
+                        left: MediaQuery.of(context).size.width*.55,
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Provider.of<OpenApps>(context, listen: false)
                                 .launchSocial(
                                     'https://www.youtube.com/channel/UC1uP9aUxEGRdDL1lwzuJQLg',
                                     '');
                           },
-                          child: SvgPicture.asset(
-                            'assets/images/youtube.svg',
-                            semanticsLabel: 'pin',
+                          child: Center(
+                            child: Container(
+                               
+                              width: MediaQuery.of(context).size.width * .09,
+                              height: MediaQuery.of(context).size.height * .045,
+                              child: SvgPicture.asset(
+                                'assets/images/youtube.svg',
+                                semanticsLabel: 'pin',
+                              ),
+                            ),
                           ),
                         ),
                       ),

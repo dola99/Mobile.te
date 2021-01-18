@@ -14,14 +14,18 @@ class Gamer with ChangeNotifier {
   final String size;
   final String space;
   final String topScreen;
+  final String lighttopscreen;
   final String speedofcharge;
   final String category;
   final String images;
   final String mainImages;
+  final String audio;
+  final String antutu;
   final String fbspubg;
   final String respubg;
   final String fbscod;
   final String rescod;
+  final String more;
   final String price;
   final String jumiabuy;
   final String noonbuy;
@@ -36,8 +40,11 @@ class Gamer with ChangeNotifier {
     @required this.name,
     @required this.id,
     @required this.category,
+    @required this.antutu,
+    @required this.audio,
     @required this.cpu,
     @required this.gpu,
+    @required this.more,
     @required this.ram,
     @required this.frontcamera,
     @required this.rearcamera,
@@ -52,5 +59,6 @@ class Gamer with ChangeNotifier {
     @required this.fbspubg,
     @required this.rescod,
     @required this.respubg,
+    @required this.lighttopscreen,
   });
 }
