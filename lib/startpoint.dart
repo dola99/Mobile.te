@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'matrialapp.dart';
 import 'providers/Gamers.dart';
 import 'providers/categorys.dart';

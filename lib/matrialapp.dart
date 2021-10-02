@@ -23,11 +23,10 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
       setState(() {
         isLoading = true;
       });
-      await Provider.of<Products>(context, listen: false).fetchandsetProducts();
-      await Provider.of<Categorys>(context, listen: false)
-          .fetchandsetProducts();
       await Provider.of<Topbanners>(context, listen: false)
           .fetchAndSetProducts();
+      await Provider.of<Categorys>(context, listen: false)
+          .fetchandsetProducts();
       await Provider.of<NewPhoness>(context, listen: false)
           .fetchandSetsProducts()
           .then((_) {
@@ -35,6 +34,7 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
           isLoading = true;
         });
       });
+      await Provider.of<Products>(context, listen: false).fetchandsetProducts();
     }
     super.didChangeDependencies();
   }

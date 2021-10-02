@@ -5,8 +5,7 @@ import 'package:mobility/models/Gamer.dart';
 import 'package:mobility/models/product.dart';
 import 'package:mobility/screens/setting/setting_screen.dart';
 import 'package:mobility/screens/product/componets/Continer_of_product.dart';
-import 'package:mobility/screens/product/componets/Silver_appbar.dart';
-import 'package:mobility/widget/custom_silver_delgte.dart';
+import 'package:mobility/screens/product/componets/custom_silver_delgte.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;

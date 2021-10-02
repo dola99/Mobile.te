@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BannerAd myBanner;
-
   @override
   void initState() {
     myBanner = BannerAd(

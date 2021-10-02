@@ -17,19 +17,6 @@ class TabsScreens extends StatefulWidget {
 class _TabsScreensState extends State<TabsScreens> {
   bool _isoffline = false;
 
-  @override
-  void didChangeDependencies() async {
-    try {
-      final result = await InternetAddress.lookup('example.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        _isoffline = false;
-      }
-    } on SocketException catch (_) {
-      _isoffline = true;
-    }
-    super.didChangeDependencies();
-  }
-
   List<Map<String, Object>> _pages;
   @override
   void initState() {

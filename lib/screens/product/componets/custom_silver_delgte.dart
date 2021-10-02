@@ -102,7 +102,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                 child: Stack(
                   children: [
                     Positioned(
-                      top: hight * .070,
+                      top: 20.h,
                       left: 0,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -117,7 +117,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       ),
                     ),
                     Positioned(
-                      top: hight * .180,
+                      top: 90.h,
                       left: wight * .00,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -143,11 +143,19 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: wight * .45,
-                          height: hight * .36,
+                          height: hight * .35,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(.3),
+                                  offset: Offset(10, 20),
+                                  blurRadius:
+                                      MediaQuery.of(context).size.aspectRatio *
+                                          10)
+                            ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.black, width: 4),
+                            border: Border.all(color: Colors.black, width: 2),
                           ),
                         ),
                       ),
@@ -169,7 +177,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       ),
                     ),
                     Positioned(
-                      top: hight * .30,
+                      top: hight * .25,
                       left: 0.0,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -248,7 +256,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                         ),
                       ),
                     ),
-                    Positioned(
+                    /*Positioned(
                       bottom: 0,
                       left: 130.w,
                       child: GestureDetector(
@@ -271,7 +279,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           )),
                         ),
                       ),
-                    )
+                    )*/
                   ],
                 ),
               ),
