@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'tobbanner.dart';
+import '../models/tobbanner.dart';
 
 class Topbanners with ChangeNotifier {
   List<TopBanner> _itemsss = [];
@@ -16,7 +16,7 @@ class Topbanners with ChangeNotifier {
   }
 
   Future<void> fetchAndSetProducts() async {
-    const url = 'https://mobile-63038.firebaseio.com/topbanner.json';
+    final url = Uri.parse('https://mobile-63038.firebaseio.com/topbanner.json');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -34,5 +34,4 @@ class Topbanners with ChangeNotifier {
       throw (error);
     }
   }
-
 }

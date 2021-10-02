@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import '../screens/Home_Screen.dart';
-import '../screens/compare_screen.dart';
-import '../screens/setting_screen.dart';
+import 'package:mobility/screens/offline_screen.dart';
+import 'home/Home_Screen.dart';
+import 'compare/compare_screen.dart';
+import 'setting/setting_screen.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 
 class TabsScreens extends StatefulWidget {
@@ -12,6 +15,21 @@ class TabsScreens extends StatefulWidget {
 }
 
 class _TabsScreensState extends State<TabsScreens> {
+  bool _isoffline = false;
+
+  @override
+  void didChangeDependencies() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        _isoffline = false;
+      }
+    } on SocketException catch (_) {
+      _isoffline = true;
+    }
+    super.didChangeDependencies();
+  }
+
   List<Map<String, Object>> _pages;
   @override
   void initState() {
@@ -27,7 +45,7 @@ class _TabsScreensState extends State<TabsScreens> {
 
   void _selectPage(int index) {
     setState(() {
-    _selectedpageIndex = index;
+      _selectedpageIndex = index;
     });
   }
 
@@ -35,7 +53,7 @@ class _TabsScreensState extends State<TabsScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: _pages[_selectedpageIndex]['page'],
+      body: _isoffline ? OfflineScreen() : _pages[_selectedpageIndex]['page'],
       bottomNavigationBar: CustomNavigationBar(
         iconSize: 26,
         onTap: _selectPage,
@@ -45,9 +63,36 @@ class _TabsScreensState extends State<TabsScreens> {
         selectedColor: Theme.of(context).accentColor,
         currentIndex: _selectedpageIndex,
         items: [
-          CustomNavigationBarItem(icon: Icons.home),
-          CustomNavigationBarItem(icon: Icons.compare),
-          CustomNavigationBarItem(icon: Icons.settings),
+          CustomNavigationBarItem(
+            icon: Icon(Icons.home),
+            /*  title: Text(
+              'Home',
+              style: TextStyle(
+                  color: Theme.of(context).dividerColor,
+                  fontFamily: "Oswald",
+                  fontSize: 10),
+            ),*/
+          ),
+          CustomNavigationBarItem(
+            icon: Icon(Icons.compare),
+            /* title: Text(
+              'Compare',
+              style: TextStyle(
+                  color: Theme.of(context).dividerColor,
+                  fontFamily: "Oswald",
+                  fontSize: 10),
+            ),*/
+          ),
+          CustomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            /*title: Text(
+              'Setting',
+              style: TextStyle(
+                  color: Theme.of(context).dividerColor,
+                  fontFamily: "Oswald",
+                  fontSize: 10),
+            ),*/
+          ),
         ],
       ),
     );

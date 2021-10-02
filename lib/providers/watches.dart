@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import './watch.dart';
+import '../models/watch.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +14,7 @@ class Watches with ChangeNotifier {
   }
 
   Future<void> fetchandsetProducts() async {
-    const url = 'https://mobile-63038.firebaseio.com/watch.json';
+    final url = Uri.parse('https://mobile-63038.firebaseio.com/watch.json');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;

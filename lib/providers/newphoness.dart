@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'newphone.dart';
+import '../models/newphone.dart';
 import 'dart:convert';
 
 class NewPhoness with ChangeNotifier {
@@ -16,7 +16,7 @@ class NewPhoness with ChangeNotifier {
   }
 
   Future<void> fetchandSetsProducts() async {
-    const url = 'https://mobile-63038.firebaseio.com/NewPhone.json';
+    final url = Uri.parse('https://mobile-63038.firebaseio.com/NewPhone.json');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;

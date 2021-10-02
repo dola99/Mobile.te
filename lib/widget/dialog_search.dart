@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobility/providers/product.dart';
-import 'package:mobility/screens/tabs-screens.dart';
-import '../providers/products.dart';
+import 'package:mobility/providers/compare_screen_provider.dart';
+import 'package:mobility/models/product.dart';
+import 'package:mobility/providers/products.dart';
 import 'package:provider/provider.dart';
 
 class DialogSearch extends StatefulWidget {
-  static int intt;
-  static int intt2;
   @override
   _DialogSearchState createState() => _DialogSearchState();
 }
@@ -21,25 +19,8 @@ class _DialogSearchState extends State<DialogSearch> {
   List<Product> listproductchoosen = [];
   int id;
   List listid = [];
-  var _isInit = true;
-  var isLoading = false;
 
-  @override
-  // ignore: must_call_super
-  void didChangeDependencies() {
-    if (_isInit) {
-      setState(() {
-        isLoading = true;
-      });
-      Provider.of<Products>(context, listen: false)
-          .fetchandsetProducts()
-          .then((_) {
-        setState(() {
-          isLoading = false;
-        });
-      });
-    }
-  }
+  var isLoading = false;
 
   @override
   void initState() {
@@ -51,8 +32,7 @@ class _DialogSearchState extends State<DialogSearch> {
   Widget build(BuildContext context) {
     //  final weig = MediaQuery.of(context).size.width;
     final high = MediaQuery.of(context).size.height;
-    final availablePhones = Provider.of<Products>(context);
-    final phoness = availablePhones.items;
+    final phoness = Provider.of<Products>(context).items;
     listproduct = phoness;
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -94,16 +74,16 @@ class _DialogSearchState extends State<DialogSearch> {
                             setState(() {
                               for (int i = 0; i < phoness.length; i++) {
                                 if (phoness[i].id == listid[index]) {
-                                  if (DialogSearch.intt == null) {
-                                    DialogSearch.intt = i;
-                                  } else {
-                                    DialogSearch.intt2 = i;
-                                  }
-                                  setState(() {
+                                  Provider.of<Compare>(context, listen: false)
+                                      .addproduct(phoness[i].id, phoness);
+                                  Navigator.of(context).pop();
+                                  //setState(() {
+                                  /*  setState(() {
                                     Navigator.of(context).pushReplacementNamed(
                                         TabsScreens.roouteName,
                                         arguments: TabsScreens.indexpage = 1);
                                   });
+                              */
                                 }
                               }
                             });
@@ -126,14 +106,15 @@ class _DialogSearchState extends State<DialogSearch> {
                             setState(() {
                               for (int i = 0; i < phoness.length; i++) {
                                 if (phoness[i].id == phoness[index].id) {
-                                  if (DialogSearch.intt == null) {
-                                    DialogSearch.intt = i;
-                                  } else {
-                                    DialogSearch.intt2 = i;
-                                  }
-                                  setState(() {
-                                    Navigator.of(context).pushReplacementNamed(TabsScreens.roouteName,arguments: TabsScreens.indexpage=1);
-                                  });
+                                  Provider.of<Compare>(context, listen: false)
+                                      .addproduct(phoness[i].id, phoness);
+
+                                  Navigator.of(context).pop();
+                                  //setState(() {
+                                  // Navigator.of(context).pushReplacementNamed(
+                                  //   TabsScreens.roouteName,
+                                  //     arguments: TabsScreens.indexpage = 1);
+                                  // });
                                 }
                               }
                             });
@@ -149,6 +130,7 @@ class _DialogSearchState extends State<DialogSearch> {
   }
 
   void searchOpreation(String searchText) {
+    setState(() {});
     searchresult.clear();
     listid.clear();
     searchText = searchText.toLowerCase();
