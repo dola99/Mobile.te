@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  BannerAd myBanner;
+  /*late BannerAd myBanner;
   @override
   void initState() {
     myBanner = BannerAd(
@@ -40,16 +40,16 @@ class _HomePageState extends State<HomePage> {
     myBanner.dispose();
     super.dispose();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
-    final AdWidget adWidget = AdWidget(ad: myBanner);
+    /* final AdWidget adWidget = AdWidget(ad: myBanner);
     final Container adContainer = Container(
       alignment: Alignment.center,
       child: adWidget,
       width: myBanner.size.width.toDouble(),
       height: myBanner.size.height.toDouble(),
-    );
+    );*/
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 700.0;
     ScreenUtil.init(
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                   width: ScreenUtil().setWidth(380),
                   height: ScreenUtil().setHeight(530),
                   child: NewPhones()),
-              adContainer
+              //   adContainer
             ],
           ),
         ),

@@ -16,9 +16,9 @@ class TabletsScreen extends StatefulWidget {
 }
 
 class _TabletsScreenState extends State<TabletsScreen> {
-  BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   void _loadBannerAd() {
-    _bannerAd..load();
+    _bannerAd!..load();
   }
 
   @override
@@ -40,7 +40,7 @@ class _TabletsScreenState extends State<TabletsScreen> {
 
   var _isInit = true;
   var isLoading = false;
-  int chose;
+  late int chose;
   @override
   void didChangeDependencies() {
     if (_isInit) {
@@ -175,7 +175,7 @@ class _TabletsScreenState extends State<TabletsScreen> {
                                       width: wigh * .3,
                                       height: high * .02,
                                       child: Image.network(
-                                        products[index].mainImages,
+                                        products[index].mainImages!,
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -188,7 +188,7 @@ class _TabletsScreenState extends State<TabletsScreen> {
                                       height: high * .06,
                                       width: wigh * .05,
                                       child: Text(
-                                        products[index].name,
+                                        products[index].name!,
                                         style: TextStyle(
                                             color:
                                                 Theme.of(context).dividerColor,
@@ -204,7 +204,7 @@ class _TabletsScreenState extends State<TabletsScreen> {
                                     child: Container(
                                       height: high * .07,
                                       width: wigh * .05,
-                                      child: Image.network(cate[chose].logo),
+                                      child: Image.network(cate[chose].logo!),
                                     ),
                                   ),
                                   Positioned(
@@ -237,7 +237,7 @@ class _TabletsScreenState extends State<TabletsScreen> {
     );
   }
 
-  void chosen(List<Category> list, String string) {
+  void chosen(List<Category> list, String? string) {
     for (int i = 0; i < list.length; i++) {
       if (list[i].name == string) {
         chose = i;

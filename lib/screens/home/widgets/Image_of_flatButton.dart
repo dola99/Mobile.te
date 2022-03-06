@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ImageOfFlatButton extends StatelessWidget {
-  final String image;
-  final double width;
-  final double height;
+  final String? image;
+  final double? width;
+  final double? height;
   final BoxFit boxFit;
   ImageOfFlatButton(
       {this.image, this.height, this.width, this.boxFit = BoxFit.fitWidth});
@@ -12,10 +12,10 @@ class ImageOfFlatButton extends StatelessWidget {
     final heights = MediaQuery.of(context).size.height;
     final wights = MediaQuery.of(context).size.width;
     return Container(
-      width: wights * width,
-      height: heights * height,
+      width: wights * width!,
+      height: heights * height!,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(image), fit: boxFit),
+        image: DecorationImage(image: AssetImage(image!), fit: boxFit),
       ),
     );
   }

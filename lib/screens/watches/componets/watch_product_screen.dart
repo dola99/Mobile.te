@@ -3,26 +3,26 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobility/screens/watches/componets/Container_of_watchproduct.dart';
 
 class ProductWatchDetailScreen extends StatelessWidget {
-  final String nameProduct;
-  final String logo;
-  final String mainImage;
-  final String blutooth;
-  final String os;
-  final String size;
-  final String screenType;
-  final String batterycapacity;
-  final String alwayswork;
-  final String colors;
-  final String comatabilty;
-  final String dimensios;
-  final String memory;
-  final String price;
-  final String protatype;
-  final String type;
-  final String warrenty;
-  final String waterproof;
-  final String battery;
-  final List images;
+  final String? nameProduct;
+  final String? logo;
+  final String? mainImage;
+  final String? blutooth;
+  final String? os;
+  final String? size;
+  final String? screenType;
+  final String? batterycapacity;
+  final String? alwayswork;
+  final String? colors;
+  final String? comatabilty;
+  final String? dimensios;
+  final String? memory;
+  final String? price;
+  final String? protatype;
+  final String? type;
+  final String? warrenty;
+  final String? waterproof;
+  final String? battery;
+  final List? images;
   ProductWatchDetailScreen(
       {this.nameProduct,
       this.logo,
@@ -50,7 +50,7 @@ class ProductWatchDetailScreen extends StatelessWidget {
     final wigh = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: Text(nameProduct),
+          title: Text(nameProduct!),
           centerTitle: true,
           elevation: 0,
         ),
@@ -71,7 +71,7 @@ class ProductWatchDetailScreen extends StatelessWidget {
                           width: wigh * .6,
                           height: high * .1,
                           child: Image.network(
-                            logo,
+                            logo!,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -83,7 +83,7 @@ class ProductWatchDetailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Colors.black, width: 3),
                           ),
-                          child: Image.network(mainImage))
+                          child: Image.network(mainImage!))
                     ],
                   ),
                 ),

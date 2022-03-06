@@ -5,10 +5,10 @@ import 'package:mobility/providers/products.dart';
 import 'package:provider/provider.dart';
 
 class RowofCompare extends StatefulWidget {
-  final String icon;
-  final String name;
-  final String firsttext;
-  final String secondText;
+  final String? icon;
+  final String? name;
+  final String? firsttext;
+  final String? secondText;
   RowofCompare({this.icon, this.name, this.firsttext, this.secondText});
   @override
   _RowofCompareState createState() => _RowofCompareState();
@@ -29,7 +29,7 @@ class _RowofCompareState extends State<RowofCompare> {
               child: Container(
                   width: weig * .370,
                   child: Text(
-                    widget.firsttext,
+                    widget.firsttext!,
                     style: TextStyle(
                       color: Theme.of(context).dividerColor,
                       fontSize: ScreenUtil().setSp(13),
@@ -52,7 +52,7 @@ class _RowofCompareState extends State<RowofCompare> {
                           width: weig * .10,
                           height: hig * .040,
                           child: SvgPicture.asset(
-                            widget.icon,
+                            widget.icon!,
                             color: Theme.of(context).backgroundColor,
                             semanticsLabel: 'g',
                             fit: BoxFit.fitHeight,
@@ -62,7 +62,7 @@ class _RowofCompareState extends State<RowofCompare> {
                           height: 15,
                         ),
                         Text(
-                          widget.name,
+                          widget.name!,
                           style: TextStyle(
                               color: Theme.of(context).dividerColor,
                               fontSize: 12,
@@ -81,7 +81,7 @@ class _RowofCompareState extends State<RowofCompare> {
               child: Container(
                 width: weig * .370,
                 child: Text(
-                  widget.secondText,
+                  widget.secondText!,
                   style: TextStyle(
                     color: Theme.of(context).dividerColor,
                     fontSize: ScreenUtil().setSp(13),

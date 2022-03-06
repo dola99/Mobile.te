@@ -18,11 +18,11 @@ class FlatButtons extends StatefulWidget {
 
 class _FlatButtonsState extends State<FlatButtons> {
   static const int maxFailedLoadAttempts = 3;
-  InterstitialAd _interstitialAd;
-  RewardedAd _rewardedAd;
+  InterstitialAd? _interstitialAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
   int _numInterstitialLoadAttempts = 0;
-  void _createInterstitialAd() {
+  /* void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: InterstitialAd.testAdUnitId,
         request: AdRequest(),
@@ -48,7 +48,7 @@ class _FlatButtonsState extends State<FlatButtons> {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -62,7 +62,7 @@ class _FlatButtonsState extends State<FlatButtons> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
   }
 
@@ -92,7 +92,7 @@ class _FlatButtonsState extends State<FlatButtons> {
       print('Warning: attempt to show rewarded before loaded.');
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (RewardedAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
@@ -107,23 +107,23 @@ class _FlatButtonsState extends State<FlatButtons> {
       },
     );
 
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
     });
     _rewardedAd = null;
   }
-
-  @override
+*/
+  /*@override
   void initState() {
     _createInterstitialAd();
     _createRewardedAd();
     super.initState();
   }
-
+*/
   @override
   void dispose() {
-    _interstitialAd.dispose();
-    _rewardedAd.dispose();
+    _interstitialAd!.dispose();
+    _rewardedAd!.dispose();
     super.dispose();
   }
 
@@ -147,7 +147,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: ScreenUtil().setWidth(2),
           child: GestureDetector(
               onTap: () {
-                _showRewardedAd();
+                //    _showRewardedAd();
                 Navigator.of(context).pushNamed(GamerScreen.routename);
               },
               child: BackgroudnFlatButtonContainer(
@@ -170,7 +170,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: ScreenUtil().setWidth(2),
           child: GestureDetector(
               onTap: () {
-                _showInterstitialAd();
+                //     _showInterstitialAd();
                 Navigator.of(context).pushNamed(TabletsScreen.routeName);
               },
               child: BackgroudnFlatButtonContainer(
@@ -193,7 +193,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: ScreenUtil().setWidth(2),
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //   _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: BackgroudnFlatButtonContainer(
@@ -218,7 +218,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: ScreenUtil().setWidth(2),
           child: GestureDetector(
               onTap: () {
-                _showInterstitialAd();
+                //  _showInterstitialAd();
                 Navigator.pushNamed(context, CategoryScreen.routeName);
               },
               child: BackgroudnFlatButtonContainer(
@@ -243,7 +243,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .253,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.pushNamed(context, CategoryScreen.routeName);
             },
             child: WhiteOfShape(
@@ -262,7 +262,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .253,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: WhiteOfShape(
@@ -281,7 +281,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .260,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //  _showInterstitialAd();
               Navigator.pushReplacementNamed(context, CategoryScreen.routeName);
             },
             child: Container(
@@ -311,7 +311,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .260,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: Container(
@@ -341,7 +341,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .253,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.of(context).pushNamed(TabletsScreen.routeName);
             },
             child: WhiteOfShape(
@@ -360,7 +360,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .260,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.of(context).pushNamed(TabletsScreen.routeName);
             },
             child: Container(
@@ -390,7 +390,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .253,
           child: GestureDetector(
             onTap: () {
-              _showRewardedAd();
+              //    _showRewardedAd();
               Navigator.of(context).pushNamed(GamerScreen.routename);
             },
             child: WhiteOfShape(
@@ -416,7 +416,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .060,
           child: GestureDetector(
               onTap: () {
-                _showRewardedAd();
+                //      _showRewardedAd();
                 Navigator.of(context).pushNamed(GamerScreen.routename);
               },
               child: TextFlatButton(
@@ -431,7 +431,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .260,
           child: GestureDetector(
             onTap: () {
-              _showRewardedAd();
+              //  _showRewardedAd();
 
               Navigator.of(context).pushNamed(GamerScreen.routename);
             },
@@ -462,7 +462,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .070,
           child: GestureDetector(
               onTap: () {
-                _showInterstitialAd();
+                //   _showInterstitialAd();
                 Navigator.of(context).pushNamed(CategoryScreen.routeName);
               },
               child: TextFlatButton('Brands', Colors.white)),
@@ -472,7 +472,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .050,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //  _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: TextFlatButton('Watches', Colors.black),
@@ -483,7 +483,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .080,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //    _showInterstitialAd();
               Navigator.of(context).pushNamed(TabletsScreen.routeName);
             },
             child: TextFlatButton('Tablets', Colors.white),
@@ -520,7 +520,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .360,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              // _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: ImageOfFlatButton(
@@ -535,7 +535,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           left: MediaQuery.of(context).size.width * .320,
           child: GestureDetector(
             onTap: () {
-              _showRewardedAd();
+              //     _showRewardedAd();
               Navigator.of(context).pushNamed(GamerScreen.routename);
             },
             child: ImageOfFlatButton(
@@ -551,7 +551,7 @@ class _FlatButtonsState extends State<FlatButtons> {
           right: MediaQuery.of(context).size.width * .345,
           child: GestureDetector(
             onTap: () {
-              _showInterstitialAd();
+              //     _showInterstitialAd();
               Navigator.pushNamed(context, TabletsScreen.routeName);
             },
             child: ImageOfFlatButton(

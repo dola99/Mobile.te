@@ -17,7 +17,7 @@ class _DialogSearchState extends State<DialogSearch> {
 
   List<Product> listproduct = [];
   List<Product> listproductchoosen = [];
-  int id;
+  int? id;
   List listid = [];
 
   var isLoading = false;
@@ -95,7 +95,7 @@ class _DialogSearchState extends State<DialogSearch> {
                       shrinkWrap: true,
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
-                        String listDate = phoness[index].name;
+                        String listDate = phoness[index].name!;
                         return ListTile(
                           title: Text(
                             listDate,

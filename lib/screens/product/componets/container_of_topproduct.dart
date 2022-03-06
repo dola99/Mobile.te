@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TopProduct extends StatelessWidget {
-  final String name;
-  final String namecompany;
-  final String price;
-  final String mainimage;
-  final List<String> allimages;
+  final String? name;
+  final String? namecompany;
+  final String? price;
+  final String? mainimage;
+  final List<String>? allimages;
   TopProduct(
       {this.name,
       this.allimages,

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContainerOfNewItem extends StatelessWidget {
-  final String logo;
-  final String image;
-  final String text;
+  final String? logo;
+  final String? image;
+  final String? text;
 
   const ContainerOfNewItem({this.logo, this.image, this.text});
 
@@ -57,7 +57,7 @@ class ContainerOfNewItem extends StatelessWidget {
               width: ScreenUtil().setWidth(90),
               height: ScreenUtil().setHeight(70),
               child: CachedNetworkImage(
-                imageUrl: logo,
+                imageUrl: logo!,
                 fit: BoxFit.contain,
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
@@ -71,7 +71,7 @@ class ContainerOfNewItem extends StatelessWidget {
               width: ScreenUtil().setWidth(70),
               height: ScreenUtil().setHeight(160),
               child: CachedNetworkImage(
-                imageUrl: image,
+                imageUrl: image!,
                 fit: BoxFit.fill,
                 placeholder: (context, url) =>
                     Center(child: CircularProgressIndicator()),
@@ -88,7 +88,7 @@ class ContainerOfNewItem extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
                 child: Text(
-                  text,
+                  text!,
                   style: TextStyle(
                     color: Theme.of(context).dividerColor,
                     fontSize: ScreenUtil().setSp(16),

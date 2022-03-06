@@ -12,9 +12,9 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   bool _loadingAnchoredBanner = false;
-  BannerAd _anchoredBanner;
+  BannerAd? _anchoredBanner;
   Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize size =
+    final AnchoredAdaptiveBannerAdSize? size =
         await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
       MediaQuery.of(context).size.width.truncate(),
@@ -50,7 +50,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   void dispose() {
-    _anchoredBanner.dispose();
+    _anchoredBanner!.dispose();
 
     super.dispose();
   }
@@ -84,9 +84,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   bottom: 0,
                   child: Container(
                     color: Colors.green,
-                    width: _anchoredBanner.size.width.toDouble(),
-                    height: _anchoredBanner.size.height.toDouble(),
-                    child: AdWidget(ad: _anchoredBanner),
+                    width: _anchoredBanner!.size.width.toDouble(),
+                    height: _anchoredBanner!.size.height.toDouble(),
+                    child: AdWidget(ad: _anchoredBanner!),
                   ),
                 ),
             ],

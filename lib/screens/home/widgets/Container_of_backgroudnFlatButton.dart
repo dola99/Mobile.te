@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BackgroudnFlatButtonContainer extends StatelessWidget {
   final Offset offset;
-  final LinearGradient linearGradient;
-  final BorderRadius borderRadius;
+  final LinearGradient? linearGradient;
+  final BorderRadius? borderRadius;
 
   BackgroudnFlatButtonContainer(
       {this.borderRadius,

@@ -15,12 +15,12 @@ class PageviewBanner extends StatefulWidget {
 }
 
 class _PageviewBannerState extends State<PageviewBanner> {
-  String id;
+  String? id;
   int _currentPage = 0;
-  int index;
-  int indexcategory;
+  late int index;
+  late int indexcategory;
 
-  PageController _pagecontroller;
+  PageController? _pagecontroller;
 
   void _onscroll() {}
 
@@ -35,7 +35,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
 
   @override
   void dispose() {
-    _pagecontroller.dispose();
+    _pagecontroller!.dispose();
     super.dispose();
   }
 
@@ -87,7 +87,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
     );
   }
 
-  void fetshItem(String id, List<Category> list2, List<Product> list1) {
+  void fetshItem(String? id, List<Category> list2, List<Product> list1) {
     List<Product> n = list1;
     List<Category> a = list2;
     for (int k = 0; k <= 100; k++) {

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'Container_of_toppanner.dart';
 
 class AndictorOfTopPanner extends StatelessWidget {
-  final int currentPage;
-  final String image;
-  final int productlenth;
+  final int? currentPage;
+  final String? image;
+  final int? productlenth;
   AndictorOfTopPanner({this.currentPage, this.image, this.productlenth});
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AndictorOfTopPanner extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: List<Widget>.generate(
-                  productlenth,
+                  productlenth!,
                   (int index) {
                     return AnimatedContainer(
                       duration: Duration(milliseconds: 300),

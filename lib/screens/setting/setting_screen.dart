@@ -11,7 +11,7 @@ import 'componets/open_apps.dart';
 
 // ignore: must_be_immutable
 class SettingScreen extends StatefulWidget {
-  static bool darktheme;
+  static late bool darktheme;
   static bool isswitch = true;
   static const routeName = "/setting_screen";
 

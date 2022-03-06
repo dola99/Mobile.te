@@ -10,7 +10,7 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
-  Product findbyId(String id) {
+  Product findbyId(String? id) {
     return _items.firstWhere((element) => element.id == id);
   }
 

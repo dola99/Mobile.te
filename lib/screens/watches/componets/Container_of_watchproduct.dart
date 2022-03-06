@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ContainerOfWatchPrduct extends StatelessWidget {
-  final Widget widget;
-  final String name;
-  final String text;
+  final Widget? widget;
+  final String? name;
+  final String? text;
   ContainerOfWatchPrduct({this.name, this.text, this.widget});
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ContainerOfWatchPrduct extends StatelessWidget {
                   height: high * .03,
                   child: Center(
                     child: Text(
-                      name,
+                      name!,
                       style: TextStyle(
                           fontFamily: 'Oswald',
                           fontSize: 13,
@@ -50,7 +50,7 @@ class ContainerOfWatchPrduct extends StatelessWidget {
               height: high * .2,
               child: Center(
                 child: Text(
-                  text,
+                  text!,
                   style: TextStyle(
                     fontFamily: 'oswald',
                     color: Theme.of(context).primaryColor,

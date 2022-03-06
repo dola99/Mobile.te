@@ -52,8 +52,8 @@ class _CompareScreenState extends State<CompareScreen> {
                             ? Container(
                                 child: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        return showDialog(
+                                      setState(() async {
+                                        return await showDialog(
                                             context: context,
                                             builder: (context) {
                                               return DialogSearch();
@@ -94,7 +94,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                         height: high * .25,
                                         width: weig * .3,
                                         child: Image.network(
-                                          product1.mainImages,
+                                          product1.mainImages!,
                                           fit: BoxFit.contain,
                                         ),
                                       ),
@@ -108,7 +108,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                         height: high * .06,
                                         child: Center(
                                           child: Text(
-                                            product1.name,
+                                            product1.name!,
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .dividerColor,
@@ -125,8 +125,8 @@ class _CompareScreenState extends State<CompareScreen> {
                         product2 == null
                             ? Container(
                                 child: GestureDetector(
-                                    onTap: () {
-                                      return showDialog(
+                                    onTap: () async {
+                                      return await showDialog(
                                           context: context,
                                           builder: (context) {
                                             return DialogSearch();
@@ -162,8 +162,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        setState(() {
-                                          return showDialog(
+                                        setState(() async {
+                                          return await showDialog(
                                               context: context,
                                               builder: (context) {
                                                 return DialogSearch();
@@ -178,7 +178,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                           height: high * .25,
                                           width: weig * .3,
                                           child: Image.network(
-                                            product2.mainImages,
+                                            product2.mainImages!,
                                             fit: BoxFit.contain,
                                           ),
                                         ),
@@ -193,7 +193,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                         height: high * .06,
                                         child: Center(
                                           child: Text(
-                                            product2.name,
+                                            product2.name!,
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .dividerColor,
@@ -234,9 +234,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                   child: (product1 == null)
                                       ? Text('')
                                       : SettingScreen.darktheme
-                                          ? Image.network(product1.topScreen)
+                                          ? Image.network(product1.topScreen!)
                                           : Image.network(
-                                              product1.lightTopScreen)),
+                                              product1.lightTopScreen!)),
                             ),
                           ),
                           VerticalDivider(
@@ -289,9 +289,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: (product2 == null)
                                     ? Text('')
                                     : SettingScreen.darktheme
-                                        ? Image.network(product2.topScreen)
+                                        ? Image.network(product2.topScreen!)
                                         : Image.network(
-                                            product2.lightTopScreen),
+                                            product2.lightTopScreen!),
                               ),
                             ),
                           )
@@ -456,7 +456,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: (product1 == null)
                                     ? Text('')
                                     : Text(
-                                        product1.aduio,
+                                        product1.aduio!,
                                         style: TextStyle(
                                             color:
                                                 Theme.of(context).dividerColor,
@@ -514,7 +514,7 @@ class _CompareScreenState extends State<CompareScreen> {
                               child: (product2 == null)
                                   ? Text('')
                                   : Text(
-                                      product2.aduio,
+                                      product2.aduio!,
                                       style: TextStyle(
                                           color: Theme.of(context).dividerColor,
                                           fontFamily: 'Oswald',
@@ -548,7 +548,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: (product1 == null)
                                     ? Text('')
                                     : Text(
-                                        product1.antutue,
+                                        product1.antutue!,
                                         style: TextStyle(
                                             color:
                                                 Theme.of(context).dividerColor,
@@ -603,7 +603,7 @@ class _CompareScreenState extends State<CompareScreen> {
                               child: (product2 == null)
                                   ? Text('')
                                   : Text(
-                                      product2.antutue,
+                                      product2.antutue!,
                                       style: TextStyle(
                                           color: Theme.of(context).dividerColor,
                                           fontFamily: 'Oswald',

@@ -16,9 +16,9 @@ class WatchesScreen extends StatefulWidget {
 }
 
 class _WatchesScreenState extends State<WatchesScreen> {
-  BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   void _loadBannerAd() {
-    _bannerAd..load();
+    _bannerAd!..load();
   }
 
   @override
@@ -40,7 +40,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
 
   var _isInit = true;
   var isLoading = false;
-  int chose;
+  late int chose;
   @override
   void didChangeDependencies() {
     if (_isInit) {
@@ -206,7 +206,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
                                       width: wigh * .3,
                                       height: high * .02,
                                       child: Image.network(
-                                        products[index].mainIages,
+                                        products[index].mainIages!,
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -219,7 +219,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
                                       height: high * .06,
                                       width: wigh * .05,
                                       child: Text(
-                                        products[index].name,
+                                        products[index].name!,
                                         style: TextStyle(
                                             color:
                                                 Theme.of(context).dividerColor,
@@ -235,7 +235,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
                                     child: Container(
                                       height: high * .07,
                                       width: wigh * .05,
-                                      child: Image.network(cate[chose].logo),
+                                      child: Image.network(cate[chose].logo!),
                                     ),
                                   ),
                                   Positioned(
@@ -268,7 +268,7 @@ class _WatchesScreenState extends State<WatchesScreen> {
     );
   }
 
-  void chosen(List<Category> list, String string) {
+  void chosen(List<Category> list, String? string) {
     for (int i = 0; i < list.length; i++) {
       if (list[i].name == string) {
         chose = i;

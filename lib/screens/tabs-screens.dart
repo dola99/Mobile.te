@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mobility/screens/offline_screen.dart';
 import 'home/Home_Screen.dart';
@@ -17,7 +15,7 @@ class TabsScreens extends StatefulWidget {
 class _TabsScreensState extends State<TabsScreens> {
   bool _isoffline = false;
 
-  List<Map<String, Object>> _pages;
+  late List<Map<String, Object>> _pages;
   @override
   void initState() {
     _pages = [
@@ -40,7 +38,9 @@ class _TabsScreensState extends State<TabsScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: _isoffline ? OfflineScreen() : _pages[_selectedpageIndex]['page'],
+      body: _isoffline
+          ? OfflineScreen()
+          : _pages[_selectedpageIndex]['page'] as Widget?,
       bottomNavigationBar: CustomNavigationBar(
         iconSize: 26,
         onTap: _selectPage,

@@ -7,8 +7,8 @@ import '../../providers/products.dart';
 import 'package:provider/provider.dart';
 
 class ScreenArguments {
-  final String name;
-  final String imagesurl;
+  final String? name;
+  final String? imagesurl;
   ScreenArguments({
     this.name,
     this.imagesurl,
@@ -23,8 +23,8 @@ class MobileCategoryScreen extends StatefulWidget {
 }
 
 class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
-  String categoryName;
-  List<Product> displayedPhones;
+  String? categoryName;
+  late List<Product> displayedPhones;
 
   var isLoading = false;
   var _loadedInitData = false;
@@ -37,11 +37,11 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
   void didChangeDependencies() {
     final _availablePhones = Provider.of<Products>(context, listen: false);
     final _phoness = _availablePhones.items.reversed;
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+    final ScreenArguments? args = ModalRoute.of(context)!.settings.arguments as ScreenArguments?;
     if (_loadedInitData == false) {
-      categoryName = args.name;
+      categoryName = args!.name;
       displayedPhones = _phoness.where((element) {
-        return element.category.contains(categoryName);
+        return element.category!.contains(categoryName!);
       }).toList();
     }
     super.didChangeDependencies();
@@ -51,12 +51,12 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
   Widget build(BuildContext context) {
     final wight = MediaQuery.of(context).size.width;
     final hight = MediaQuery.of(context).size.height;
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+    final ScreenArguments args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text(
-          args.name,
+          args.name!,
           style: TextStyle(
               color: Theme.of(context).dividerColor,
               fontSize: 18,
@@ -70,7 +70,7 @@ class _MobileCategoryScreenState extends State<MobileCategoryScreen> {
                 width: MediaQuery.of(context).size.width * .200,
                 padding: EdgeInsets.only(right: 10),
                 child: Image.network(
-                  args.imagesurl,
+                  args.imagesurl!,
                   fit: BoxFit.fill,
                 ),
               ),

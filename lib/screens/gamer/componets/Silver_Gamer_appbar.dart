@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SilverGamerAppBar extends StatelessWidget {
-  final String name;
-  final String category;
-  final String imageproduct;
-  final String logo;
-  final String id;
+  final String? name;
+  final String? category;
+  final String? imageproduct;
+  final String? logo;
+  final String? id;
   SilverGamerAppBar(
       {this.name, this.imageproduct, this.category, this.logo, this.id});
   @override
@@ -37,14 +37,14 @@ class SilverGamerAppBar extends StatelessWidget {
             height: 50.h,
             width: 80.w,
             child: Center(
-              child: Image.network(logo),
+              child: Image.network(logo!),
             ),
           ),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
-          name,
+          name!,
           style: TextStyle(color: Colors.black, fontFamily: "RobotoCondensed"),
         ),
         background: Padding(
@@ -61,9 +61,9 @@ class SilverGamerAppBar extends StatelessWidget {
                     child: Center(
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey.withOpacity(.5),
-                        highlightColor: Colors.grey[300],
+                        highlightColor: Colors.grey[300]!,
                         child: Text(
-                          category,
+                          category!,
                           style: TextStyle(
                             fontSize: 85.sp,
                             fontFamily: "Oswald",
@@ -94,7 +94,7 @@ class SilverGamerAppBar extends StatelessWidget {
                     height: 250.h,
                     child: Center(
                       child: Image.network(
-                        imageproduct,
+                        imageproduct!,
                         fit: BoxFit.fill,
                       ),
                     ),

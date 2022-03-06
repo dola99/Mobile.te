@@ -16,10 +16,10 @@ class GamerScreen extends StatefulWidget {
 }
 
 class _GamerScreenState extends State<GamerScreen> {
-  PageController pageController;
+  PageController? pageController;
   double viewportFuncation = 0.8;
-  double pageOffset = 0;
-  int chose;
+  double? pageOffset = 0;
+  late int chose;
   var _isInit = true;
   var isLoading = false;
   @override
@@ -29,7 +29,7 @@ class _GamerScreenState extends State<GamerScreen> {
         PageController(initialPage: 0, viewportFraction: viewportFuncation)
           ..addListener(() {
             setState(() {
-              pageOffset = pageController.page;
+              pageOffset = pageController!.page;
             });
           });
   }
@@ -101,7 +101,7 @@ class _GamerScreenState extends State<GamerScreen> {
               itemBuilder: (ctx, index) {
                 // double scale = max(viewportFuncation,
                 //(1 - (pageOffset - index).abs()) + viewportFuncation);
-                double angle = (pageOffset - index).abs();
+                double angle = (pageOffset! - index).abs();
                 if (angle > 0.5) {
                   angle = 1 - angle;
                 }
@@ -150,7 +150,7 @@ class _GamerScreenState extends State<GamerScreen> {
     );
   }
 
-  void chosen(List<Category> list, String string) {
+  void chosen(List<Category> list, String? string) {
     for (int i = 0; i < list.length; i++) {
       if (list[i].name == string) {
         chose = i;

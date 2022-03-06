@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SilverAppBar extends StatelessWidget {
-  final String name;
-  final String category;
-  final String imageproduct;
-  final String logo;
-  final String id;
+  final String? name;
+  final String? category;
+  final String? imageproduct;
+  final String? logo;
+  final String? id;
   SilverAppBar(
       {this.name, this.imageproduct, this.category, this.logo, this.id});
   @override
@@ -37,7 +37,7 @@ class SilverAppBar extends StatelessWidget {
             height: 50.h,
             width: 80.w,
             child: Center(
-              child: Image.network(logo),
+              child: Image.network(logo!),
             ),
           ),
         ),
@@ -62,7 +62,7 @@ class SilverAppBar extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
-          name,
+          name!,
           style: TextStyle(color: Colors.black, fontFamily: "RobotoCondensed"),
         ),
         background: Padding(
@@ -79,13 +79,13 @@ class SilverAppBar extends StatelessWidget {
                     child: Center(
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey.withOpacity(.5),
-                        highlightColor: Colors.grey[300],
+                        highlightColor: Colors.grey[300]!,
                         child: FittedBox(
                           fit: BoxFit.fitWidth,
                           child: Padding(
                             padding: const EdgeInsets.all(15),
                             child: Text(
-                              category,
+                              category!,
                               strutStyle: StrutStyle(),
                               style: TextStyle(
                                 fontSize: 300,
@@ -119,7 +119,7 @@ class SilverAppBar extends StatelessWidget {
                     height: 250.h,
                     child: Center(
                       child: Image.network(
-                        imageproduct,
+                        imageproduct!,
                         fit: BoxFit.fill,
                       ),
                     ),

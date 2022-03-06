@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Containerofproduct extends StatelessWidget {
-  final String picture;
-  final String name;
-  final String text1;
+  final String? picture;
+  final String? name;
+  final String? text1;
   Containerofproduct({
     this.name,
     this.text1,
@@ -38,7 +38,7 @@ class Containerofproduct extends StatelessWidget {
                         height: hight * .070,
                         width: wight * .08,
                         child: SvgPicture.asset(
-                          picture,
+                          picture!,
                           fit: BoxFit.contain,
                           color: Theme.of(context).accentColor,
                         ),
@@ -46,7 +46,7 @@ class Containerofproduct extends StatelessWidget {
                       Center(
                         child: Container(
                           child: Text(
-                            name,
+                            name!,
                             style: TextStyle(
                                 color: Theme.of(context).dividerColor,
                                 fontFamily: 'Oswald',
@@ -74,7 +74,7 @@ class Containerofproduct extends StatelessWidget {
                   child: Wrap(
                     children: [
                       Text(
-                        text1,
+                        text1!,
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Theme.of(context).dividerColor,

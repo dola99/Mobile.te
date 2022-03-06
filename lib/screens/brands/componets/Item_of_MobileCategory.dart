@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MobileItemCategry extends StatelessWidget {
-  final String image;
-  final String companyname;
-  final String productnme;
-  final String price;
+  final String? image;
+  final String? companyname;
+  final String? productnme;
+  final String? price;
 
   const MobileItemCategry(
       {this.image, this.companyname, this.productnme, this.price});
@@ -39,7 +39,7 @@ class MobileItemCategry extends StatelessWidget {
             width: wight * .30,
             height: hight * .26,
             child: CachedNetworkImage(
-              imageUrl: image,
+              imageUrl: image!,
               fit: BoxFit.contain,
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
@@ -53,7 +53,7 @@ class MobileItemCategry extends StatelessWidget {
           right: wight * .02,
           top: hight * .274,
           child: Text(
-            companyname,
+            companyname!,
             style: TextStyle(
                 // ignore: deprecated_member_use
                 color: Theme.of(context).hintColor,
@@ -82,7 +82,7 @@ class MobileItemCategry extends StatelessWidget {
             width: wight * .55,
             height: hight * .050,
             child: Text(
-              productnme,
+              productnme!,
               style: TextStyle(
                   color: Theme.of(context).dividerColor,
                   fontSize: 15,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContainerOfTopPanner extends StatelessWidget {
-  final String image;
+  final String? image;
   ContainerOfTopPanner({this.image});
 
   @override
@@ -20,7 +20,7 @@ class ContainerOfTopPanner extends StatelessWidget {
               offset: Offset(0, 1), // changes position of shadow
             ),
           ],
-          image: DecorationImage(image: NetworkImage(image), fit: BoxFit.fill)),
+          image: DecorationImage(image: NetworkImage(image!), fit: BoxFit.fill)),
     );
   }
 }

@@ -8,15 +8,15 @@ import 'package:shimmer/shimmer.dart';
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final bool hideTitleWhenExpanded;
-  final String brandimage;
-  final String namrcompany;
-  final String nameProduct;
-  final String price;
-  final String mainimage;
-  final String id;
-  final List<String> allimages;
+  final String? brandimage;
+  final String? namrcompany;
+  final String? nameProduct;
+  final String? price;
+  final String? mainimage;
+  final String? id;
+  final List<String>? allimages;
   CustomSliverDelegate(
-      {@required this.expandedHeight,
+      {required this.expandedHeight,
       this.nameProduct,
       this.namrcompany,
       this.mainimage,
@@ -54,13 +54,13 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       width: 80.w,
                       child: Center(
                         child: Image.network(
-                          brandimage,
+                          brandimage!,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                     Text(
-                      nameProduct,
+                      nameProduct!,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -111,7 +111,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           width: wight * .30,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(brandimage),
+                                  image: NetworkImage(brandimage!),
                                   fit: BoxFit.contain)),
                         ),
                       ),
@@ -125,7 +125,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           height: hight * .10,
                           width: wight * .35,
                           child: Text(
-                            nameProduct,
+                            nameProduct!,
                             softWrap: true,
                             style: TextStyle(
                                 color: Colors.black,
@@ -170,7 +170,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           height: hight * .32,
                           width: wight * .1,
                           child: Image.network(
-                            mainimage,
+                            mainimage!,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -213,7 +213,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Image.network(mainimage),
+                              child: Image.network(mainimage!),
                             ),
                             SizedBox(
                               height: 10.h,
@@ -224,7 +224,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Image.network(mainimage),
+                              child: Image.network(mainimage!),
                             ),
                             SizedBox(
                               height: 10.h,
@@ -235,7 +235,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Image.network(mainimage),
+                              child: Image.network(mainimage!),
                             ),
                             SizedBox(
                               height: 10.h,
@@ -246,7 +246,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Image.network(mainimage),
+                              child: Image.network(mainimage!),
                             ),
                             SizedBox(
                               height: 10.h,

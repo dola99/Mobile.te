@@ -8,9 +8,9 @@ import 'package:mobility/screens/product/componets/Continer_of_product.dart';
 import 'package:mobility/screens/product/componets/custom_silver_delgte.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final Product product;
-  final String logo;
-  final Gamer gamer;
+  final Product? product;
+  final String? logo;
+  final Gamer? gamer;
   ProductDetailScreen({this.product, this.logo, this.gamer});
   Widget build(BuildContext context) {
     double defaultScreenWidth = 400.0;
@@ -34,10 +34,10 @@ class ProductDetailScreen extends StatelessWidget {
             delegate: CustomSliverDelegate(
                 expandedHeight: hight * .29,
                 brandimage: logo,
-                nameProduct: product.name,
-                namrcompany: product.category,
-                mainimage: product.mainImages,
-                price: product.price),
+                nameProduct: product!.name,
+                namrcompany: product!.category,
+                mainimage: product!.mainImages,
+                price: product!.price),
           ),
           /*  SilverAppBar(
             name: product.name,
@@ -117,11 +117,11 @@ class ProductDetailScreen extends StatelessWidget {
                                   height: hight * .0730,
                                   child: Center(
                                       child: SettingScreen.darktheme
-                                          ? Image.network(product.topScreen ??
-                                              gamer.topScreen)
+                                          ? Image.network(product!.topScreen ??
+                                              gamer!.topScreen!)
                                           : Image.network(
-                                              product.lightTopScreen ??
-                                                  gamer.lighttopscreen)),
+                                              product!.lightTopScreen ??
+                                                  gamer!.lighttopscreen!)),
                                 ),
                               )
                             ],
@@ -132,47 +132,47 @@ class ProductDetailScreen extends StatelessWidget {
                     Containerofproduct(
                       name: 'Screen:',
                       picture: 'assets/images/screen.svg',
-                      text1: product.screen ?? gamer.screen,
+                      text1: product!.screen ?? gamer!.screen,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/cpu.svg',
                       name: 'Cpu:',
-                      text1: product.cpu ?? gamer.cpu,
+                      text1: product!.cpu ?? gamer!.cpu,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/Ram.svg',
                       name: 'Ram:',
-                      text1: product.ram ?? gamer.ram,
+                      text1: product!.ram ?? gamer!.ram,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/battery.svg',
                       name: 'Battery:',
-                      text1: product.capstiybattery ?? gamer.capstiybattery,
+                      text1: product!.capstiybattery ?? gamer!.capstiybattery,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/gpu.svg',
                       name: 'Gpu:',
-                      text1: product.gpu ?? gamer.gpu,
+                      text1: product!.gpu ?? gamer!.gpu,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/frontcamera.svg',
                       name: 'Front Camera:',
-                      text1: product.frontcamera ?? gamer.frontcamera,
+                      text1: product!.frontcamera ?? gamer!.frontcamera,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/backcamera.svg',
                       name: 'Rear Camera:',
-                      text1: product.rearcamera ?? gamer.rearcamera,
+                      text1: product!.rearcamera ?? gamer!.rearcamera,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/memory.svg',
                       name: 'Memory',
-                      text1: product.space ?? gamer.space,
+                      text1: product!.space ?? gamer!.space,
                     ),
                     Containerofproduct(
                       picture: 'assets/images/system.svg',
                       name: 'System:',
-                      text1: product.os ?? gamer.os,
+                      text1: product!.os ?? gamer!.os,
                     ),
                     SizedBox(
                       height: 10,
@@ -228,7 +228,7 @@ class ProductDetailScreen extends StatelessWidget {
                               height: hight * .0730,
                               child: Center(
                                   child: Text(
-                                product.aduio ?? gamer.audio,
+                                product!.aduio ?? gamer!.audio!,
                                 style: TextStyle(
                                     fontFamily: 'Oswald',
                                     color: Theme.of(context).dividerColor),
@@ -244,7 +244,7 @@ class ProductDetailScreen extends StatelessWidget {
                     Containerofproduct(
                       picture: 'assets/images/more.svg',
                       name: 'More:',
-                      text1: product.more ?? gamer.more,
+                      text1: product!.more ?? gamer!.more,
                     ),
                     SizedBox(
                       height: 10,
@@ -299,7 +299,7 @@ class ProductDetailScreen extends StatelessWidget {
                               height: hight * .0730,
                               child: Center(
                                   child: Text(
-                                product.antutue ?? gamer.antutu,
+                                product!.antutue ?? gamer!.antutu!,
                                 style: TextStyle(
                                     fontFamily: 'Oswald',
                                     color: Theme.of(context).dividerColor),
@@ -365,14 +365,14 @@ class ProductDetailScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      'Res : ${(product.respubg) ?? (gamer.respubg)}',
+                                      'Res : ${(product!.respubg) ?? (gamer!.respubg)}',
                                       style: TextStyle(
                                           fontFamily: 'Oswald',
                                           color:
                                               Theme.of(context).dividerColor),
                                     ),
                                     Text(
-                                      'FBS : ${product.fbspubg ?? gamer.fbspubg}',
+                                      'FBS : ${product!.fbspubg ?? gamer!.fbspubg}',
                                       style: TextStyle(
                                           fontFamily: 'Oswald',
                                           color:
@@ -442,14 +442,14 @@ class ProductDetailScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      'Res : ${product.rescod ?? gamer.rescod}',
+                                      'Res : ${product!.rescod ?? gamer!.rescod}',
                                       style: TextStyle(
                                           fontFamily: 'Oswald',
                                           color:
                                               Theme.of(context).dividerColor),
                                     ),
                                     Text(
-                                      'FBS : ${product.fbscod ?? gamer.fbscod}',
+                                      'FBS : ${product!.fbscod ?? gamer!.fbscod}',
                                       style: TextStyle(
                                           fontFamily: 'Oswald',
                                           color:
@@ -466,7 +466,7 @@ class ProductDetailScreen extends StatelessWidget {
                     Containerofproduct(
                       picture: 'assets/images/price.svg',
                       name: 'Price:',
-                      text1: '${product.price ?? gamer.price}E.G.P',
+                      text1: '${product!.price ?? gamer!.price}E.G.P',
                     ),
                     Container(
                       height: hight * .080,

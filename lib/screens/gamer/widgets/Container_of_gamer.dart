@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ContainerOfGamer extends StatelessWidget {
-  final double angle;
-  final String category;
-  final String size;
-  final String mainImage;
-  final String name;
-  final String price;
-  final String respubg;
-  final String fbspubg;
-  final String rescod;
-  final String fbscod;
+  final double? angle;
+  final String? category;
+  final String? size;
+  final String? mainImage;
+  final String? name;
+  final String? price;
+  final String? respubg;
+  final String? fbspubg;
+  final String? rescod;
+  final String? fbscod;
   ContainerOfGamer(
       {this.angle,
       this.category,
@@ -35,7 +35,7 @@ class ContainerOfGamer extends StatelessWidget {
       child: Transform(
         transform: Matrix4.identity()
           ..setEntry(3, 2, 0.001)
-          ..rotateY(angle),
+          ..rotateY(angle!),
         alignment: Alignment.centerLeft,
         child: Container(
           child: Center(
@@ -63,7 +63,7 @@ class ContainerOfGamer extends StatelessWidget {
                           width: wiq * .40,
                           child: Center(
                             child: Text(
-                              category,
+                              category!,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontFamily: "Oswald",
@@ -80,7 +80,7 @@ class ContainerOfGamer extends StatelessWidget {
                           width: wiq * .40,
                           child: Center(
                             child: Text(
-                              size,
+                              size!,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontFamily: "Oswald",
@@ -98,7 +98,7 @@ class ContainerOfGamer extends StatelessWidget {
                           width: wiq * .7,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(mainImage),
+                                  image: NetworkImage(mainImage!),
                                   fit: BoxFit.cover)),
                         ),
                       ),
@@ -115,7 +115,7 @@ class ContainerOfGamer extends StatelessWidget {
                                 height: hig * .035,
                                 child: Center(
                                   child: Text(
-                                    name,
+                                    name!,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: "RobotoCondensed",

@@ -57,7 +57,7 @@ class GridCategory extends StatelessWidget {
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: CachedNetworkImage(
-                          imageUrl: _product[index].logo,
+                          imageUrl: _product[index].logo!,
                           placeholder: (context, url) =>
                               CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
@@ -74,7 +74,7 @@ class GridCategory extends StatelessWidget {
                       child: Container(
                         child: Center(
                           child: Text(
-                            _product[index].name,
+                            _product[index].name!,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,

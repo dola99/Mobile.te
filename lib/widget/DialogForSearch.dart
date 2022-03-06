@@ -17,11 +17,11 @@ class _DialogForSearchState extends State<DialogForSearch> {
   List searchresult = [];
   List newsearchresult = [];
   bool isSeraching = true;
-  int index;
-  int indexcategory;
+  late int index;
+  late int indexcategory;
   List<Product> listproduct = [];
   List<Product> listproductchoosen = [];
-  int id;
+  int? id;
   List listid = [];
 
   var isLoading = false;
@@ -87,7 +87,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
                                               listen: false)
                                           .items);
                                   Provider.of<Compare>(context, listen: false)
-                                      .SearchProduct(phoness[i].id, phoness);
+                                      .searchProduct(phoness[i].id, phoness);
 
                                   Navigator.of(context).pop();
 
@@ -118,7 +118,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
                       shrinkWrap: true,
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
-                        String listDate = phoness[index].name;
+                        String listDate = phoness[index].name!;
                         return ListTile(
                           title: Text(
                             listDate,
@@ -138,9 +138,9 @@ class _DialogForSearchState extends State<DialogForSearch> {
                                               listen: false)
                                           .items);
                                   Provider.of<Compare>(context, listen: false)
-                                      .SearchProduct(phoness[i].id, phoness);
+                                      .searchProduct(phoness[i].id, phoness);
                                   Provider.of<Compare>(context, listen: false)
-                                      .SearchProduct(phoness[i].id, phoness);
+                                      .searchProduct(phoness[i].id, phoness);
 
                                   Navigator.of(context).pop();
 

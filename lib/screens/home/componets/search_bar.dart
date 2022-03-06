@@ -7,8 +7,8 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        return showDialog(
+      onTap: () async {
+        return await showDialog(
             context: context,
             builder: (context) {
               return DialogForSearch();

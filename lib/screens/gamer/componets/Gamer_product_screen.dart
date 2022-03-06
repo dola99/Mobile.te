@@ -8,8 +8,8 @@ import 'package:mobility/screens/gamer/componets/Silver_Gamer_appbar.dart';
 import 'package:mobility/screens/product/componets/Silver_appbar.dart';
 
 class GamerProductScreen extends StatelessWidget {
-  final String logo;
-  final Gamer gamer;
+  final String? logo;
+  final Gamer? gamer;
   GamerProductScreen({this.logo, this.gamer});
   Widget build(BuildContext context) {
     double defaultScreenWidth = 400.0;
@@ -27,11 +27,11 @@ class GamerProductScreen extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SilverGamerAppBar(
-            name: gamer.name,
-            imageproduct: gamer.mainImages,
-            category: gamer.category,
+            name: gamer!.name,
+            imageproduct: gamer!.mainImages,
+            category: gamer!.category,
             logo: logo,
-            id: gamer.id,
+            id: gamer!.id,
           ),
           SliverFillRemaining(
             child: Container(
@@ -105,9 +105,9 @@ class GamerProductScreen extends StatelessWidget {
                                     height: hight * .0730,
                                     child: Center(
                                         child: SettingScreen.darktheme
-                                            ? Image.network(gamer.topScreen)
+                                            ? Image.network(gamer!.topScreen!)
                                             : Image.network(
-                                                gamer.lighttopscreen)),
+                                                gamer!.lighttopscreen!)),
                                   ),
                                 )
                               ],
@@ -118,47 +118,47 @@ class GamerProductScreen extends StatelessWidget {
                       Containerofproduct(
                         name: 'Screen:',
                         picture: 'assets/images/screen.svg',
-                        text1: gamer.screen,
+                        text1: gamer!.screen,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/cpu.svg',
                         name: 'Cpu:',
-                        text1: gamer.cpu,
+                        text1: gamer!.cpu,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/Ram.svg',
                         name: 'Ram:',
-                        text1: gamer.ram,
+                        text1: gamer!.ram,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/battery.svg',
                         name: 'Battery:',
-                        text1: gamer.capstiybattery,
+                        text1: gamer!.capstiybattery,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/gpu.svg',
                         name: 'Gpu:',
-                        text1: gamer.gpu,
+                        text1: gamer!.gpu,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/frontcamera.svg',
                         name: 'Front Camera:',
-                        text1: gamer.frontcamera,
+                        text1: gamer!.frontcamera,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/backcamera.svg',
                         name: 'Rear Camera:',
-                        text1: gamer.rearcamera,
+                        text1: gamer!.rearcamera,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/memory.svg',
                         name: 'Memory',
-                        text1: gamer.space,
+                        text1: gamer!.space,
                       ),
                       Containerofproduct(
                         picture: 'assets/images/system.svg',
                         name: 'System:',
-                        text1: gamer.os,
+                        text1: gamer!.os,
                       ),
                       SizedBox(
                         height: 10,
@@ -214,7 +214,7 @@ class GamerProductScreen extends StatelessWidget {
                                 height: hight * .0730,
                                 child: Center(
                                     child: Text(
-                                  gamer.audio,
+                                  gamer!.audio!,
                                   style: TextStyle(
                                       fontFamily: 'Oswald',
                                       color: Theme.of(context).dividerColor),
@@ -230,7 +230,7 @@ class GamerProductScreen extends StatelessWidget {
                       Containerofproduct(
                         picture: 'assets/images/more.svg',
                         name: 'More:',
-                        text1: gamer.more,
+                        text1: gamer!.more,
                       ),
                       SizedBox(
                         height: 10,
@@ -285,7 +285,7 @@ class GamerProductScreen extends StatelessWidget {
                                 height: hight * .0730,
                                 child: Center(
                                     child: Text(
-                                  gamer.antutu,
+                                  gamer!.antutu!,
                                   style: TextStyle(
                                       fontFamily: 'Oswald',
                                       color: Theme.of(context).dividerColor),
@@ -351,14 +351,14 @@ class GamerProductScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Res : ${(gamer.respubg)}',
+                                        'Res : ${(gamer!.respubg)}',
                                         style: TextStyle(
                                             fontFamily: 'Oswald',
                                             color:
                                                 Theme.of(context).dividerColor),
                                       ),
                                       Text(
-                                        'FBS : ${gamer.fbspubg}',
+                                        'FBS : ${gamer!.fbspubg}',
                                         style: TextStyle(
                                             fontFamily: 'Oswald',
                                             color:
@@ -428,14 +428,14 @@ class GamerProductScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Res : ${gamer.rescod}',
+                                        'Res : ${gamer!.rescod}',
                                         style: TextStyle(
                                             fontFamily: 'Oswald',
                                             color:
                                                 Theme.of(context).dividerColor),
                                       ),
                                       Text(
-                                        'FBS : ${gamer.fbscod}',
+                                        'FBS : ${gamer!.fbscod}',
                                         style: TextStyle(
                                             fontFamily: 'Oswald',
                                             color:
@@ -452,7 +452,7 @@ class GamerProductScreen extends StatelessWidget {
                       Containerofproduct(
                         picture: 'assets/images/price.svg',
                         name: 'Price:',
-                        text1: '${gamer.price ?? gamer.price}E.G.P',
+                        text1: '${gamer!.price ?? gamer!.price}E.G.P',
                       ),
                       Container(
                         height: hight * .080,

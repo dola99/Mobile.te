@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OpenApps with ChangeNotifier {
-  Future<void> launched;
+  Future<void>? launched;
 
   void launchSocial(String url, String fallbackUrl) async {
     // Don't use canLaunch because of fbProtocolUrl (fb://)

@@ -15,7 +15,7 @@
           android:name="com.google.android.gms.ads.APPLICATION_ID"
           android:value="ca-app-pub-4854420444519405~4860028562"/>
         <activity
-            android:name=".MainActivity"
+            android:name="io.flutter.embedding.android.FlutterActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

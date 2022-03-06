@@ -15,8 +15,8 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  FirebaseAnalytics analytics = FirebaseAnalytics();
-  FirebaseAnalyticsObserver(analytics: analytics);
+  //FirebaseAnalytics analytics = FirebaseAnalytics();
+  // FirebaseAnalyticsObserver(analytics: analytics);
   SharedPreferences.getInstance().then((prefs) {
     var darkModeON = prefs.getBool('darkMode') ?? false;
     SettingScreen.darktheme = darkModeON;
