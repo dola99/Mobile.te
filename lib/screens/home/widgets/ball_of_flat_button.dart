@@ -8,7 +8,7 @@ class BallOfMatrerial extends StatelessWidget {
     return Container(
       width: wights * .070,
       height: height * .030,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color.fromRGBO(251, 248, 248, 0.4699999988079071),
         borderRadius: BorderRadius.all(Radius.circular(50)),
       ),

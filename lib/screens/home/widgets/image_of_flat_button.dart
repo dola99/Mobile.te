@@ -5,8 +5,12 @@ class ImageOfFlatButton extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit boxFit;
-  ImageOfFlatButton(
-      {this.image, this.height, this.width, this.boxFit = BoxFit.fitWidth});
+  const ImageOfFlatButton({
+    this.image,
+    this.height,
+    this.width,
+    this.boxFit = BoxFit.fitWidth,
+  });
   @override
   Widget build(BuildContext context) {
     final heights = MediaQuery.of(context).size.height;

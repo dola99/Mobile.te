@@ -7,13 +7,13 @@ class NewPhone with ChangeNotifier {
   final String? logo;
   final String? nameofCampany;
   final String? color;
-  
 
-  NewPhone(
-      {required this.id,
-      required this.idproduct,
-      required this.imageUrl,
-      required this.logo,
-      required this.nameofCampany,
-      required this.color});
+  NewPhone({
+    required this.id,
+    required this.idproduct,
+    required this.imageUrl,
+    required this.logo,
+    required this.nameofCampany,
+    required this.color,
+  });
 }

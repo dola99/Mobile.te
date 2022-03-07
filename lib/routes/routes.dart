@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../screens/home/Home_Screen.dart';
-import '../screens/brands/MobileCategoryScreen.dart';
-import '../screens/tablets/Tablets_screen.dart';
-import '../screens/brands/category_screen.dart';
-import '../screens/compare/compare_screen.dart';
-import '../screens/gamer/gamer_models_screen.dart';
-import '../screens/setting/setting_screen.dart';
-import '../screens/tabs-screens.dart';
-import '../screens/watches/watches_screen.dart';
+import 'package:mobility/screens/brands/category_screen.dart';
+import 'package:mobility/screens/brands/mobile_category_screen.dart';
+import 'package:mobility/screens/compare/compare_screen.dart';
+import 'package:mobility/screens/gamer/gamer_models_screen.dart';
+import 'package:mobility/screens/home/home_screen.dart';
+import 'package:mobility/screens/setting/setting_screen.dart';
+import 'package:mobility/screens/tablets/tablets_screen.dart';
+import 'package:mobility/screens/tabs_screens.dart';
+import 'package:mobility/screens/watches/watches_screen.dart';
 
 Map<String, WidgetBuilder> routes = {
   TabsScreens.roouteName: (ctx) => TabsScreens(),

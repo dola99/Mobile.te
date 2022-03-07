@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/tobbanner.dart';
+import 'package:mobility/models/tobbanner.dart';
 
 class Topbanners with ChangeNotifier {
   List<TopBanner> _itemsss = [];
@@ -22,16 +22,19 @@ class Topbanners with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<TopBanner> loadedProductsss = [];
       extractedData.forEach((prodId, prodData) {
-        loadedProductsss.add(TopBanner(
-          id: prodId,
-          idproduct: prodData['idProduct'],
-          imageUrl: prodData['imageUrl'],
-        ));
+        prodData as Map<String, dynamic>;
+        loadedProductsss.add(
+          TopBanner(
+            id: prodId,
+            idproduct: prodData['idProduct'].toString(),
+            imageUrl: prodData['imageUrl'].toString(),
+          ),
+        );
       });
       _itemsss = loadedProductsss;
       notifyListeners();
     } catch (error) {
-      throw (error);
+      rethrow;
     }
   }
 }

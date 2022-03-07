@@ -6,12 +6,13 @@ class TopProduct extends StatelessWidget {
   final String? price;
   final String? mainimage;
   final List<String>? allimages;
-  TopProduct(
-      {this.name,
-      this.allimages,
-      this.mainimage,
-      this.namecompany,
-      this.price});
+  const TopProduct({
+    this.name,
+    this.allimages,
+    this.mainimage,
+    this.namecompany,
+    this.price,
+  });
   @override
   Widget build(BuildContext context) {
     final wight = MediaQuery.of(context).size.width;
@@ -27,8 +28,11 @@ class TopProduct extends StatelessWidget {
             left: wight * .05,
             child: Text(
               "$namecompany",
-              style: TextStyle(
-                  color: Colors.black, fontSize: 20, fontFamily: 'Oswald'),
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontFamily: 'Oswald',
+              ),
             ),
           ),
           Positioned(
@@ -36,8 +40,11 @@ class TopProduct extends StatelessWidget {
             top: hight * .09,
             child: Text(
               '$name',
-              style: TextStyle(
-                  color: Colors.black, fontSize: 16, fontFamily: 'Oswald'),
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Oswald',
+              ),
             ),
           ),
           Positioned(
@@ -45,8 +52,11 @@ class TopProduct extends StatelessWidget {
             left: wight * .35,
             child: Text(
               '$price L.e',
-              style: TextStyle(
-                  color: Colors.grey, fontSize: 15, fontFamily: 'Oswald'),
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 15,
+                fontFamily: 'Oswald',
+              ),
             ),
           ),
           Positioned(
@@ -54,7 +64,7 @@ class TopProduct extends StatelessWidget {
             child: Container(
               width: wight * .3,
               height: hight * .33,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
                     'https://i.ibb.co/yhQ5GyC/huawei-y9a-8gb-128gb-space-silver-2-1.png',
@@ -68,12 +78,13 @@ class TopProduct extends StatelessWidget {
             top: 0,
             right: 2,
             child: IconButton(
-                iconSize: 30,
-                icon: Icon(
-                  Icons.arrow_drop_up_outlined,
-                  color: Theme.of(context).accentColor,
-                ),
-                onPressed: () {}),
+              iconSize: 30,
+              icon: Icon(
+                Icons.arrow_drop_up_outlined,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              onPressed: () {},
+            ),
           ),
           Positioned(
             top: hight * .045,
@@ -87,38 +98,42 @@ class TopProduct extends StatelessWidget {
                     height: hight * .06,
                     width: wight * .140,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.green,
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
                     height: hight * .06,
                     width: wight * .140,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.green,
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
                     height: hight * .06,
                     width: wight * .140,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.green,
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
                     height: hight * .06,
                     width: wight * .140,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.green,
+                    ),
                   ),
                 ],
               ),
@@ -128,12 +143,13 @@ class TopProduct extends StatelessWidget {
             bottom: 0,
             right: 2,
             child: IconButton(
-                iconSize: 30,
-                icon: Icon(
-                  Icons.arrow_drop_down_outlined,
-                  color: Theme.of(context).accentColor,
-                ),
-                onPressed: () {}),
+              iconSize: 30,
+              icon: Icon(
+                Icons.arrow_drop_down_outlined,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              onPressed: () {},
+            ),
           ),
         ],
       ),

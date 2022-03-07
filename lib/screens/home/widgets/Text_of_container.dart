@@ -5,19 +5,20 @@ class TextFlatButton extends StatelessWidget {
   final String text;
   final Color color;
   final double size;
-  TextFlatButton(this.text, this.color, {this.size = 20});
+  const TextFlatButton(this.text, this.color, {this.size = 20});
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-          color: color,
-          fontFamily: 'RobotoCondensed',
-          fontSize: ScreenUtil().setSp(size),
-          letterSpacing:
-              0 /*percentages not used in flutter. defaulting to zero*/,
-          fontWeight: FontWeight.bold,
-          height: 1),
+        color: color,
+        fontFamily: 'RobotoCondensed',
+        fontSize: ScreenUtil().setSp(size),
+        letterSpacing:
+            0 /*percentages not used in flutter. defaulting to zero*/,
+        fontWeight: FontWeight.bold,
+        height: 1,
+      ),
     );
   }
 }

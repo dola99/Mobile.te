@@ -7,14 +7,17 @@ class MobileItemCategry extends StatelessWidget {
   final String? productnme;
   final String? price;
 
-  const MobileItemCategry(
-      {this.image, this.companyname, this.productnme, this.price});
+  const MobileItemCategry({
+    this.image,
+    this.companyname,
+    this.productnme,
+    this.price,
+  });
   @override
   Widget build(BuildContext context) {
     final wight = MediaQuery.of(context).size.width;
     final hight = MediaQuery.of(context).size.height;
     return Stack(
-      fit: StackFit.loose,
       children: [
         Positioned(
           left: 0,
@@ -23,7 +26,7 @@ class MobileItemCategry extends StatelessWidget {
             height: hight * .27,
             decoration: BoxDecoration(
               color: Theme.of(context).canvasColor,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
@@ -35,15 +38,15 @@ class MobileItemCategry extends StatelessWidget {
         Positioned(
           top: 5,
           left: 0,
-          child: Container(
+          child: SizedBox(
             width: wight * .30,
             height: hight * .26,
             child: CachedNetworkImage(
               imageUrl: image!,
               fit: BoxFit.contain,
               placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
@@ -55,22 +58,20 @@ class MobileItemCategry extends StatelessWidget {
           child: Text(
             companyname!,
             style: TextStyle(
-                // ignore: deprecated_member_use
-                color: Theme.of(context).hintColor,
-                fontSize: 15,
-                fontFamily: 'RobotoCondensed'),
+              // ignore: deprecated_member_use
+              color: Theme.of(context).hintColor,
+              fontSize: 15,
+              fontFamily: 'RobotoCondensed',
+            ),
           ),
         ),
         Positioned(
           bottom: hight * .085,
           left: 0,
           top: hight * .252,
-          child: Container(
-            child: Text(
-              "_____________",
-              style:
-                  TextStyle(color: Theme.of(context).focusColor, fontSize: 15),
-            ),
+          child: Text(
+            "_____________",
+            style: TextStyle(color: Theme.of(context).focusColor, fontSize: 15),
           ),
         ),
         Positioned(
@@ -78,15 +79,16 @@ class MobileItemCategry extends StatelessWidget {
           right: wight * .05,
           top: hight * .297,
           left: wight * .02,
-          child: Container(
+          child: SizedBox(
             width: wight * .55,
             height: hight * .050,
             child: Text(
               productnme!,
               style: TextStyle(
-                  color: Theme.of(context).dividerColor,
-                  fontSize: 15,
-                  fontFamily: 'RobotoCondensed'),
+                color: Theme.of(context).dividerColor,
+                fontSize: 15,
+                fontFamily: 'RobotoCondensed',
+              ),
             ),
           ),
         ),
@@ -98,9 +100,10 @@ class MobileItemCategry extends StatelessWidget {
           child: Text(
             '$price E.G.P',
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor,
-                fontSize: 15,
-                fontFamily: 'RobotoCondensed'),
+              color: Theme.of(context).bottomAppBarColor,
+              fontSize: 15,
+              fontFamily: 'RobotoCondensed',
+            ),
           ),
         ),
       ],

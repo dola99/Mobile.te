@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobility/providers/compare_screen_provider.dart';
 import 'package:mobility/models/product.dart';
+import 'package:mobility/providers/compare_screen_provider.dart';
 import 'package:mobility/providers/products.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class _DialogSearchState extends State<DialogSearch> {
   int? id;
   List listid = [];
 
-  var isLoading = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _DialogSearchState extends State<DialogSearch> {
         borderRadius: BorderRadius.circular(30),
       ),
       elevation: 16,
-      child: Container(
+      child: SizedBox(
         height: high * .6,
         child: Column(
           children: [
@@ -47,9 +47,10 @@ class _DialogSearchState extends State<DialogSearch> {
               padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _controller,
-                style: TextStyle(color: Colors.black, fontFamily: "Owsald"),
+                style:
+                    const TextStyle(color: Colors.black, fontFamily: "Owsald"),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.black,
                   ),
@@ -60,7 +61,7 @@ class _DialogSearchState extends State<DialogSearch> {
               ),
             ),
             Flexible(
-              child: searchresult.length != 0 || _controller.text.isNotEmpty
+              child: _controller.text.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
                       itemCount: newsearchresult.length,
@@ -95,7 +96,7 @@ class _DialogSearchState extends State<DialogSearch> {
                       shrinkWrap: true,
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
-                        String listDate = phoness[index].name!;
+                        final listDate = phoness[index].name!;
                         return ListTile(
                           title: Text(
                             listDate,
@@ -133,10 +134,10 @@ class _DialogSearchState extends State<DialogSearch> {
     setState(() {});
     searchresult.clear();
     listid.clear();
-    searchText = searchText.toLowerCase();
+    searchText.toLowerCase();
     for (int i = 0; i < listproduct.length; i++) {
-      var datename = listproduct[i].name;
-      var dateid = listproduct[i].id;
+      final datename = listproduct[i].name;
+      final dateid = listproduct[i].id;
       if (datename.toString().toLowerCase().contains(searchText)) {
         searchresult = newsearchresult;
         searchresult.add(datename);

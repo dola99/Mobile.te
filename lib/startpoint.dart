@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mobility/matrialapp.dart';
+import 'package:mobility/providers/categorys.dart';
+import 'package:mobility/providers/compare_screen_provider.dart';
+import 'package:mobility/providers/gamers.dart';
+import 'package:mobility/providers/newphoness.dart';
+import 'package:mobility/providers/products.dart';
+import 'package:mobility/providers/tablets.dart';
+import 'package:mobility/providers/topbanners.dart';
+import 'package:mobility/providers/watches.dart';
+import 'package:mobility/screens/setting/componets/open_apps.dart';
 import 'package:provider/provider.dart';
-import 'matrialapp.dart';
-import 'providers/Gamers.dart';
-import 'providers/categorys.dart';
-import 'providers/compare_screen_provider.dart';
-import 'providers/newphoness.dart';
-import 'providers/products.dart';
-import 'providers/tablets.dart';
-import 'providers/topbanners.dart';
-import 'providers/watches.dart';
-import 'screens/setting/componets/open_apps.dart';
 
 class StartPonint extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [

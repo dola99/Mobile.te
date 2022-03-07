@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobility/providers/compare_screen_provider.dart';
 import 'package:mobility/providers/products.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -15,20 +14,24 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final String? mainimage;
   final String? id;
   final List<String>? allimages;
-  CustomSliverDelegate(
-      {required this.expandedHeight,
-      this.nameProduct,
-      this.namrcompany,
-      this.mainimage,
-      this.allimages,
-      this.price,
-      this.id,
-      this.hideTitleWhenExpanded = true,
-      this.brandimage});
+  CustomSliverDelegate({
+    required this.expandedHeight,
+    this.nameProduct,
+    this.namrcompany,
+    this.mainimage,
+    this.allimages,
+    this.price,
+    this.id,
+    this.hideTitleWhenExpanded = true,
+    this.brandimage,
+  });
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     final products = Provider.of<Products>(context).items;
     final wight = MediaQuery.of(context).size.width;
     final hight = MediaQuery.of(context).size.height;
@@ -49,7 +52,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 50.h,
                       width: 80.w,
                       child: Center(
@@ -61,29 +64,35 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                     ),
                     Text(
                       nameProduct!,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: "Oswald"),
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontFamily: "Oswald",
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          bottom: 8.h, left: 8.w, right: 8.w, top: 8.h),
-                      child: Container(
-                          height: 50.h,
-                          width: 30.w,
-                          child: Center(
-                            child: IconButton(
-                              tooltip: 'Add To Compare',
-                              onPressed: () =>
-                                  Provider.of<Compare>(context, listen: false)
-                                      .addproduct(id, products),
-                              icon: Icon(
-                                Icons.add_box_rounded,
-                                color: Colors.black,
-                              ),
+                        bottom: 8.h,
+                        left: 8.w,
+                        right: 8.w,
+                        top: 8.h,
+                      ),
+                      child: SizedBox(
+                        height: 50.h,
+                        width: 30.w,
+                        child: Center(
+                          child: IconButton(
+                            tooltip: 'Add To Compare',
+                            onPressed: () =>
+                                Provider.of<Compare>(context, listen: false)
+                                    .addproduct(id, products),
+                            icon: const Icon(
+                              Icons.add_box_rounded,
+                              color: Colors.black,
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -110,9 +119,11 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           height: hight * .1000,
                           width: wight * .30,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(brandimage!),
-                                  fit: BoxFit.contain)),
+                            image: DecorationImage(
+                              image: NetworkImage(brandimage!),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -121,17 +132,18 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       left: wight * .00,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Container(
+                        child: SizedBox(
                           height: hight * .10,
                           width: wight * .35,
                           child: Text(
                             nameProduct!,
                             softWrap: true,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Oswald"),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Oswald",
+                            ),
                           ),
                         ),
                       ),
@@ -147,15 +159,16 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.grey.withOpacity(.3),
-                                  offset: Offset(10, 20),
-                                  blurRadius:
-                                      MediaQuery.of(context).size.aspectRatio *
-                                          10)
+                                color: Colors.grey.withOpacity(.3),
+                                offset: const Offset(10, 20),
+                                blurRadius:
+                                    MediaQuery.of(context).size.aspectRatio *
+                                        10,
+                              )
                             ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.black, width: 2),
+                            border: Border.all(width: 2),
                           ),
                         ),
                       ),
@@ -166,7 +179,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       left: wight * .28,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
+                        child: SizedBox(
                           height: hight * .32,
                           width: wight * .1,
                           child: Image.network(
@@ -181,16 +194,17 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       left: 0.0,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Container(
+                        child: SizedBox(
                           height: hight * .25,
                           width: wight * .35,
                           child: Text(
                             "$price.EGP",
                             style: TextStyle(
-                                color: Colors.orange[900],
-                                fontSize: ScreenUtil().setSp(15),
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Oswald"),
+                              color: Colors.orange[900],
+                              fontSize: ScreenUtil().setSp(15),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Oswald",
+                            ),
                           ),
                         ),
                       ),
@@ -198,12 +212,12 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                     Positioned(
                       top: hight * .02,
                       right: 2.w,
-                      child: Container(
+                      child: SizedBox(
                         height: hight * .46,
                         width: wight * .14,
                         child: Column(
                           children: [
-                            Icon(Icons.arrow_drop_up_rounded),
+                            const Icon(Icons.arrow_drop_up_rounded),
                             SizedBox(
                               height: 10.h,
                             ),
@@ -251,7 +265,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                             SizedBox(
                               height: 10.h,
                             ),
-                            Icon(Icons.arrow_drop_down_rounded),
+                            const Icon(Icons.arrow_drop_down_rounded),
                           ],
                         ),
                       ),

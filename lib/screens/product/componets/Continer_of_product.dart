@@ -5,7 +5,7 @@ class Containerofproduct extends StatelessWidget {
   final String? picture;
   final String? name;
   final String? text1;
-  Containerofproduct({
+  const Containerofproduct({
     this.name,
     this.text1,
     this.picture,
@@ -16,41 +16,40 @@ class Containerofproduct extends StatelessWidget {
     final hight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
           width: wight * .95,
           height: hight * .13,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.circular(20),
+            color: Theme.of(context).primaryColor,
+          ),
           child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 4, right: 4),
-                child: Container(
+                child: SizedBox(
                   width: wight * .240,
                   height: hight * .0950,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: hight * .070,
                         width: wight * .08,
                         child: SvgPicture.asset(
                           picture!,
-                          fit: BoxFit.contain,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                       Center(
-                        child: Container(
-                          child: Text(
-                            name!,
-                            style: TextStyle(
-                                color: Theme.of(context).dividerColor,
-                                fontFamily: 'Oswald',
-                                fontSize: 12),
+                        child: Text(
+                          name!,
+                          style: TextStyle(
+                            color: Theme.of(context).dividerColor,
+                            fontFamily: 'Oswald',
+                            fontSize: 12,
                           ),
                         ),
                       ),
@@ -68,7 +67,7 @@ class Containerofproduct extends StatelessWidget {
                   right: 2,
                   top: 5,
                 ),
-                child: Container(
+                child: SizedBox(
                   width: wight * .61,
                   height: hight * .110,
                   child: Wrap(
@@ -77,10 +76,11 @@ class Containerofproduct extends StatelessWidget {
                         text1!,
                         textAlign: TextAlign.justify,
                         style: TextStyle(
-                            color: Theme.of(context).dividerColor,
-                            height: 1.2,
-                            fontFamily: "Oswald",
-                            fontSize: 12),
+                          color: Theme.of(context).dividerColor,
+                          height: 1.2,
+                          fontFamily: "Oswald",
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),

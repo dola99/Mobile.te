@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class WhiteOfShape extends StatelessWidget {
   final BorderRadiusGeometry? borderRadiusGeometry;
-  WhiteOfShape({this.borderRadiusGeometry});
+  const WhiteOfShape({this.borderRadiusGeometry});
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

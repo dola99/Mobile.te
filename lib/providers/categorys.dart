@@ -1,7 +1,7 @@
 import 'dart:convert';
-import '../models/categorey.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:mobility/models/categorey.dart';
 
 class Categorys with ChangeNotifier {
   List<Category> _itemss = [];
@@ -21,21 +21,24 @@ class Categorys with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Category> loadedProduct = [];
       extractedData.forEach((key, value) {
-        loadedProduct.add(Category(
-          birthday: value["birthday"],
-          color: value["Color"],
-          id: key,
-          logo: value['Logo'],
-          madeIn: value["Made In"],
-          name: value["Name"],
-          rateinEgypt: value["Rate In Egypt"],
-          rateintheworld: value["Rate In The World"],
-        ));
+        value as Map<String, dynamic>;
+        loadedProduct.add(
+          Category(
+            birthday: value["birthday"].toString(),
+            color: value["Color"].toString(),
+            id: key,
+            logo: value['Logo'].toString(),
+            madeIn: value["Made In"].toString(),
+            name: value["Name"].toString(),
+            rateinEgypt: value["Rate In Egypt"].toString(),
+            rateintheworld: value["Rate In The World"].toString(),
+          ),
+        );
       });
       _itemss = loadedProduct;
       notifyListeners();
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobility/providers/Gamers.dart';
 import 'package:mobility/models/categorey.dart';
 import 'package:mobility/providers/categorys.dart';
-import 'package:mobility/screens/gamer/componets/Gamer_product_screen.dart';
-import 'package:mobility/screens/product/product_detail_screen.dart';
-import 'package:mobility/screens/gamer/widgets/Container_of_gamer.dart';
+import 'package:mobility/providers/gamers.dart';
+import 'package:mobility/screens/gamer/componets/gamer_product_screen.dart';
+import 'package:mobility/screens/gamer/widgets/container_gamer.dart';
 import 'package:provider/provider.dart';
 //import 'dart:math';
 
@@ -20,18 +19,17 @@ class _GamerScreenState extends State<GamerScreen> {
   double viewportFuncation = 0.8;
   double? pageOffset = 0;
   late int chose;
-  var _isInit = true;
-  var isLoading = false;
+  bool _isInit = true;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
-    pageController =
-        PageController(initialPage: 0, viewportFraction: viewportFuncation)
-          ..addListener(() {
-            setState(() {
-              pageOffset = pageController!.page;
-            });
-          });
+    pageController = PageController(viewportFraction: viewportFuncation)
+      ..addListener(() {
+        setState(() {
+          pageOffset = pageController!.page;
+        });
+      });
   }
 
   @override
@@ -69,75 +67,77 @@ class _GamerScreenState extends State<GamerScreen> {
             height: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment(hig * .2123234262925839e-17, hig * .0022),
-                  end: Alignment(-5.4, 2.123234262925839e-12),
-                  colors: [
-                    Color.fromRGBO(198, 16, 16, 1),
-                    Color.fromRGBO(0, 0, 0, 1),
-                    Color.fromRGBO(198, 16, 16, 1),
-                    Color.fromRGBO(0, 0, 0, 1),
-                  ]),
+                begin: Alignment(hig * .2123234262925839e-17, hig * .0022),
+                end: const Alignment(-5.4, 2.123234262925839e-12),
+                colors: const [
+                  Color.fromRGBO(198, 16, 16, 1),
+                  Color.fromRGBO(0, 0, 0, 1),
+                  Color.fromRGBO(198, 16, 16, 1),
+                  Color.fromRGBO(0, 0, 0, 1),
+                ],
+              ),
             ),
           ),
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Positioned(
-                  top: hig * .060,
-                  left: wiq * .420,
-                  child: Text(
-                    "Gamer",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Oswald'),
-                  ),
+          if (isLoading)
+            const Center(
+              child: CircularProgressIndicator(),
+            )
+          else
+            Positioned(
+              top: hig * .060,
+              left: wiq * .420,
+              child: const Text(
+                "Gamer",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontFamily: 'Oswald',
                 ),
-          Container(
-            child: PageView.builder(
-              controller: pageController,
-              itemCount: products.length,
-              itemBuilder: (ctx, index) {
-                // double scale = max(viewportFuncation,
-                //(1 - (pageOffset - index).abs()) + viewportFuncation);
-                double angle = (pageOffset! - index).abs();
-                if (angle > 0.5) {
-                  angle = 1 - angle;
-                }
-                return GestureDetector(
-                  onTap: () {
-                    chosen(cate, products[index].category);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GamerProductScreen(
-                          gamer: products[index],
-                          logo: cate[chose].logo,
-                        ),
-                      ),
-                    );
-                  },
-                  child: ContainerOfGamer(
-                      angle: angle,
-                      category: products[index].category,
-                      fbscod: products[index].fbscod,
-                      fbspubg: products[index].fbspubg,
-                      mainImage: products[index].mainImages,
-                      name: products[index].name,
-                      price: products[index].price,
-                      rescod: products[index].rescod,
-                      respubg: products[index].respubg,
-                      size: products[index].size),
-                );
-              },
+              ),
             ),
+          PageView.builder(
+            controller: pageController,
+            itemCount: products.length,
+            itemBuilder: (ctx, index) {
+              // double scale = max(viewportFuncation,
+              //(1 - (pageOffset - index).abs()) + viewportFuncation);
+              double angle = (pageOffset! - index).abs();
+              if (angle > 0.5) {
+                angle = 1 - angle;
+              }
+              return GestureDetector(
+                onTap: () {
+                  chosen(cate, products[index].category);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GamerProductScreen(
+                        gamer: products[index],
+                        logo: cate[chose].logo,
+                      ),
+                    ),
+                  );
+                },
+                child: ContainerOfGamer(
+                  angle: angle,
+                  category: products[index].category,
+                  fbscod: products[index].fbscod,
+                  fbspubg: products[index].fbspubg,
+                  mainImage: products[index].mainImages,
+                  name: products[index].name,
+                  price: products[index].price,
+                  rescod: products[index].rescod,
+                  respubg: products[index].respubg,
+                  size: products[index].size,
+                ),
+              );
+            },
           ),
           Positioned(
             top: hig * .055,
             left: wiq * .030,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_rounded),
+              icon: const Icon(Icons.arrow_back_rounded),
               color: Colors.white,
               iconSize: 30,
               onPressed: () {
@@ -158,4 +158,3 @@ class _GamerScreenState extends State<GamerScreen> {
     }
   }
 }
-//

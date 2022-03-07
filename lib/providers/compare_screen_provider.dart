@@ -32,13 +32,12 @@ class Compare with ChangeNotifier {
   // ignore: missing_return
   Future<void> addproduct1(String? id, List<Product> items) async {
     _product1 = items.firstWhere((element) => element.id == id);
-    print(1);
   }
 
   // ignore: missing_return
   Future<void> addproduct2(String? id, List<Product> items) async {
     _product2 = items.firstWhere((element) => element.id == id);
-    print(2);
+    debugPrint('2');
   }
 
   Future<void> searchProduct(String id, List<Product> items) async {

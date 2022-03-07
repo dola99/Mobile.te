@@ -11,29 +11,27 @@ class SilverAppBar extends StatelessWidget {
   final String? imageproduct;
   final String? logo;
   final String? id;
-  SilverAppBar(
-      {this.name, this.imageproduct, this.category, this.logo, this.id});
+  const SilverAppBar({
+    this.name,
+    this.imageproduct,
+    this.category,
+    this.logo,
+    this.id,
+  });
   @override
   Widget build(BuildContext context) {
-    double defaultScreenWidth = 400.0;
-    double defaultScreenHeight = 700.0;
     final products = Provider.of<Products>(context).items;
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(defaultScreenWidth, defaultScreenHeight),
-        orientation: Orientation.portrait);
+
     return SliverAppBar(
       expandedHeight: 400.h,
       backgroundColor: Theme.of(context).disabledColor,
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: Colors.black),
       pinned: true,
       stretch: true,
       actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
+          child: SizedBox(
             height: 50.h,
             width: 80.w,
             child: Center(
@@ -44,53 +42,55 @@ class SilverAppBar extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.only(bottom: 8.h, left: 8.w, right: 8.w, top: 8.h),
-          child: Container(
-              height: 50.h,
-              width: 30.w,
-              child: Center(
-                child: IconButton(
-                  tooltip: 'Add To Compare',
-                  onPressed: () => Provider.of<Compare>(context, listen: false)
-                      .addproduct(id, products),
-                  icon: Icon(
-                    Icons.add_box_rounded,
-                    color: Colors.black,
-                  ),
+          child: SizedBox(
+            height: 50.h,
+            width: 30.w,
+            child: Center(
+              child: IconButton(
+                tooltip: 'Add To Compare',
+                onPressed: () => Provider.of<Compare>(context, listen: false)
+                    .addproduct(id, products),
+                icon: const Icon(
+                  Icons.add_box_rounded,
+                  color: Colors.black,
                 ),
-              )),
+              ),
+            ),
+          ),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           name!,
-          style: TextStyle(color: Colors.black, fontFamily: "RobotoCondensed"),
+          style: const TextStyle(
+            color: Colors.black,
+            fontFamily: "RobotoCondensed",
+          ),
         ),
         background: Padding(
           padding: EdgeInsets.only(top: 8.h),
-          child: Container(
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 100.h,
-                  left: 5.w,
-                  right: 5.w,
-                  child: Container(
-                    width: double.infinity,
-                    child: Center(
-                      child: Shimmer.fromColors(
-                        baseColor: Colors.grey.withOpacity(.5),
-                        highlightColor: Colors.grey[300]!,
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Text(
-                              category!,
-                              strutStyle: StrutStyle(),
-                              style: TextStyle(
-                                fontSize: 300,
-                                fontFamily: "Oswald",
-                              ),
+          child: Stack(
+            children: [
+              Positioned(
+                top: 100.h,
+                left: 5.w,
+                right: 5.w,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey.withOpacity(.5),
+                      highlightColor: Colors.grey[300]!,
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text(
+                            category!,
+                            strutStyle: const StrutStyle(),
+                            style: const TextStyle(
+                              fontSize: 300,
+                              fontFamily: "Oswald",
                             ),
                           ),
                         ),
@@ -98,34 +98,35 @@ class SilverAppBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 45.h,
-                  left: 100.w,
-                  right: 100.w,
-                  child: Container(
-                    height: 330.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.9),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black, width: 2),
+              ),
+              Positioned(
+                top: 45.h,
+                left: 100.w,
+                right: 100.w,
+                child: Container(
+                  height: 330.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(.9),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: 2),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 50.h,
+                left: 85.w,
+                right: 80.w,
+                child: SizedBox(
+                  height: 250.h,
+                  child: Center(
+                    child: Image.network(
+                      imageproduct!,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 50.h,
-                  left: 85.w,
-                  right: 80.w,
-                  child: Container(
-                    height: 250.h,
-                    child: Center(
-                      child: Image.network(
-                        imageproduct!,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-                /*  Positioned(
+              ),
+              /*  Positioned(
                   bottom: 0.h,
                   right: 60.w,
                   child: Container(
@@ -157,8 +158,7 @@ class SilverAppBar extends StatelessWidget {
                     )),
                   ),
                 ),*/
-              ],
-            ),
+            ],
           ),
         ),
       ),

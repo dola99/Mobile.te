@@ -1,8 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/newphone.dart';
-import 'dart:convert';
+import 'package:mobility/models/newphone.dart';
 
 class NewPhoness with ChangeNotifier {
   List<NewPhone> _items = [];
@@ -22,19 +22,22 @@ class NewPhoness with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<NewPhone> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
-        loadedProducts.add(NewPhone(
-          id: prodId,
-          color: prodData['Color'],
-          idproduct: prodData["Id Product"],
-          logo: prodData["Logo"],
-          imageUrl: prodData['imageUrl'],
-          nameofCampany: prodData["Name Of Company"],
-        ));
+        prodData as Map<String, dynamic>;
+        loadedProducts.add(
+          NewPhone(
+            id: prodId,
+            color: prodData['Color'].toString(),
+            idproduct: prodData["Id Product"].toString(),
+            logo: prodData["Logo"].toString(),
+            imageUrl: prodData['imageUrl'].toString(),
+            nameofCampany: prodData["Name Of Company"].toString(),
+          ),
+        );
       });
       _items = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw (error);
+      rethrow;
     }
   }
 }

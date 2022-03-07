@@ -1,10 +1,9 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mobility/screens/home/componets/flat_buttons.dart';
-import 'package:mobility/screens/home/componets/search_bar.dart';
-import 'componets/new_phone_item.dart';
 import 'package:flutter/material.dart';
-import 'componets/page_view_topbanner.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobility/screens/home/componets/flat_buttons.dart';
+import 'package:mobility/screens/home/componets/new_phone_item.dart';
+import 'package:mobility/screens/home/componets/page_view_topbanner.dart';
+import 'package:mobility/screens/home/componets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "Home_screen";
@@ -50,14 +49,6 @@ class _HomePageState extends State<HomePage> {
       width: myBanner.size.width.toDouble(),
       height: myBanner.size.height.toDouble(),
     );*/
-    double defaultScreenWidth = 400.0;
-    double defaultScreenHeight = 700.0;
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(defaultScreenWidth, defaultScreenHeight),
-        orientation: Orientation.portrait);
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -65,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: ScreenUtil().setHeight(230),
                 child: PageviewBanner(),
               ),
@@ -76,20 +67,22 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: ScreenUtil().setHeight(10),
               ),
-              Container(
-                  height: ScreenUtil().setHeight(140),
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: ScreenUtil().setHeight(4),
-                        right: ScreenUtil().setWidth(10),
-                        left: ScreenUtil().setWidth(10)),
-                    child: FlatButtons(),
-                  )),
+              SizedBox(
+                height: ScreenUtil().setHeight(140),
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: ScreenUtil().setHeight(4),
+                    right: ScreenUtil().setWidth(10),
+                    left: ScreenUtil().setWidth(10),
+                  ),
+                  child: FlatButtons(),
+                ),
+              ),
               SizedBox(
                 height: ScreenUtil().setHeight(5),
               ),
-              Container(
+              SizedBox(
                 width: ScreenUtil().setWidth(380),
                 child: Center(
                   child: Text(
@@ -106,10 +99,11 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: ScreenUtil().setHeight(8),
               ),
-              Container(
-                  width: ScreenUtil().setWidth(380),
-                  height: ScreenUtil().setHeight(530),
-                  child: NewPhones()),
+              SizedBox(
+                width: ScreenUtil().setWidth(380),
+                height: ScreenUtil().setHeight(530),
+                child: NewPhones(),
+              ),
               //   adContainer
             ],
           ),

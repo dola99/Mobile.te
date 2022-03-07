@@ -1,7 +1,7 @@
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
-import 'package:mobility/widget/background_Continer.dart';
-import 'componets/Grid_category.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mobility/screens/brands/componets/grid_category.dart';
+import 'package:mobility/widget/background_continer.dart';
 
 class CategoryScreen extends StatefulWidget {
   static const routeName = "/Category_screen";
@@ -21,27 +21,27 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
 
     if (size == null) {
-      print('Unable to get height of anchored banner.');
+      debugPrint('Unable to get height of anchored banner.');
       return;
     }
 
     final BannerAd banner = BannerAd(
       size: size,
-      request: AdRequest(),
+      request: const AdRequest(),
       adUnitId: BannerAd.testAdUnitId,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          print('$BannerAd loaded.');
+          debugPrint('$BannerAd loaded.');
           setState(() {
             _anchoredBanner = ad as BannerAd;
           });
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('$BannerAd failedToLoad: $error');
+          debugPrint('$BannerAd failedToLoad: $error');
           ad.dispose();
         },
-        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
+        onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
+        onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
       ),
     );
     banner.dispose();
@@ -64,9 +64,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: BackgroundColor(
-        begin: Alignment(2.123234262925839e-17, 2),
-        end: Alignment(-5.4, 2.123234262925839e-12),
-        colors: [
+        begin: const Alignment(2.123234262925839e-17, 2),
+        end: const Alignment(-5.4, 2.123234262925839e-12),
+        colors: const [
           Color.fromRGBO(17, 85, 71, 1),
           Color.fromRGBO(0, 0, 0, 1),
           Color.fromRGBO(17, 85, 71, 1),

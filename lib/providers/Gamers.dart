@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../models/Gamer.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobility/models/gamer.dart';
 
 class Gamers with ChangeNotifier {
   List<Gamer> _items = [];
@@ -21,42 +21,45 @@ class Gamers with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Gamer> loadedProduct = [];
       extractedData.forEach((key, value) {
-        loadedProduct.add(Gamer(
-          audio: value['Audio'],
-          antutu: value['Antutu'],
-          fbscod: value['fbscod'],
-          fbspubg: value['fbspubg'],
-          jumiabuy: value['jumiabuy'],
-          noonbuy: value['noonbuy'],
-          rescod: value['rescod'],
-          respubg: value['respubg'],
-          souqbuy: value['souqbuy'],
-          capstiybattery: value['capacitybattery'],
-          category: value["category"],
-          lighttopscreen: value['LghtTopScreen'],
-          cpu: value['cpu'],
-          frontcamera: value["front camera"],
-          gpu: value["gpu"],
-          more: value['More'],
-          id: key,
-          name: value["Name"],
-          os: value["os"],
-          ram: value["Ram"],
-          rearcamera: value["Rear Camera"],
-          screen: value["Screen"],
-          size: value["Size"],
-          space: value["Space"],
-          speedofcharge: value["Speed of Charge"],
-          topScreen: value["Top Screen"],
-          images: value["images"],
-          mainImages: value["Main Image"],
-          price: value["Price"],
-        ));
+        value as Map<String, dynamic>;
+        loadedProduct.add(
+          Gamer(
+            audio: extractedData['Audio'].toString(),
+            antutu: extractedData['Antutu'].toString(),
+            fbscod: extractedData['fbscod'].toString(),
+            fbspubg: extractedData['fbspubg'].toString(),
+            jumiabuy: extractedData['jumiabuy'].toString(),
+            noonbuy: extractedData['noonbuy'].toString(),
+            rescod: extractedData['rescod'].toString(),
+            respubg: extractedData['respubg'].toString(),
+            souqbuy: extractedData['souqbuy'].toString(),
+            capstiybattery: extractedData['capacitybattery'].toString(),
+            category: extractedData["category"].toString(),
+            lighttopscreen: extractedData['LghtTopScreen'].toString(),
+            cpu: extractedData['cpu'].toString(),
+            frontcamera: extractedData["front camera"].toString(),
+            gpu: extractedData["gpu"].toString(),
+            more: extractedData['More'].toString(),
+            id: key,
+            name: extractedData["Name"].toString(),
+            os: extractedData["os"].toString(),
+            ram: extractedData["Ram"].toString(),
+            rearcamera: extractedData["Rear Camera"].toString(),
+            screen: extractedData["Screen"].toString(),
+            size: extractedData["Size"].toString(),
+            space: extractedData["Space"].toString(),
+            speedofcharge: extractedData["Speed of Charge"].toString(),
+            topScreen: extractedData["Top Screen"].toString(),
+            images: extractedData["images"].toString(),
+            mainImages: extractedData["Main Image"].toString(),
+            price: extractedData["Price"].toString(),
+          ),
+        );
       });
       _items = loadedProduct;
       notifyListeners();
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 }

@@ -1,13 +1,12 @@
-import 'package:mobility/screens/setting/componets/row_of_settingpage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../providers/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobility/providers/ThemeChanger.dart';
+import 'package:mobility/providers/theme.dart';
+import 'package:mobility/providers/theme_changer.dart';
+import 'package:mobility/screens/setting/componets/open_apps.dart';
+import 'package:mobility/screens/setting/componets/row_of_settingpage.dart';
 import 'package:provider/provider.dart';
-import 'componets/open_apps.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class SettingScreen extends StatefulWidget {
@@ -24,35 +23,36 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeChanger>(context, listen: false);
-    _darkTheme = (themeNotifier.getTheme() == darkTheme);
+    _darkTheme = themeNotifier.getTheme() == darkTheme;
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Center(
               child: Padding(
                 padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(40.0),
-                    bottom: ScreenUtil().setWidth(5.0)),
+                  top: ScreenUtil().setHeight(40.0),
+                  bottom: ScreenUtil().setWidth(5.0),
+                ),
                 child: SafeArea(
                   child: Container(
                     width: ScreenUtil().setWidth(250),
                     height: ScreenUtil().setHeight(200),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        image: DecorationImage(
-                          image: _darkTheme
-                              ? AssetImage("assets/images/logo.png")
-                              : AssetImage("assets/images/logo2.png"),
-                        )),
+                      borderRadius: BorderRadius.circular(50),
+                      image: DecorationImage(
+                        image: _darkTheme
+                            ? const AssetImage("assets/images/logo.png")
+                            : const AssetImage("assets/images/logo2.png"),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 40.h,
               child: RowOfSetting(
@@ -60,9 +60,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 widget: Text(
                   "Arabic",
                   style: TextStyle(
-                      color: Theme.of(context).dividerColor,
-                      fontSize: ScreenUtil().setSp(17.0),
-                      fontFamily: 'RobotoCondensed'),
+                    color: Theme.of(context).dividerColor,
+                    fontSize: ScreenUtil().setSp(17.0),
+                    fontFamily: 'RobotoCondensed',
+                  ),
                 ),
               ),
             ),
@@ -71,7 +72,7 @@ class _SettingScreenState extends State<SettingScreen> {
               indent: MediaQuery.of(context).size.width * .30,
               endIndent: MediaQuery.of(context).size.width * .30,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 40.h,
               child: RowOfSetting(
@@ -79,9 +80,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 widget: Text(
                   "Egypt",
                   style: TextStyle(
-                      color: Theme.of(context).dividerColor,
-                      fontSize: ScreenUtil().setSp(17.0),
-                      fontFamily: 'RobotoCondensed'),
+                    color: Theme.of(context).dividerColor,
+                    fontSize: ScreenUtil().setSp(17.0),
+                    fontFamily: 'RobotoCondensed',
+                  ),
                 ),
               ),
             ),
@@ -90,44 +92,46 @@ class _SettingScreenState extends State<SettingScreen> {
               indent: MediaQuery.of(context).size.width * .30,
               endIndent: MediaQuery.of(context).size.width * .30,
             ),
-            Container(
+            SizedBox(
               width: 270.w,
               height: 50.h,
               child: RowOfSetting(
-                  text: "Dark Mode:",
-                  widget: Padding(
-                    padding: EdgeInsets.only(left: ScreenUtil().setSp(110)),
-                    child: Switch(
-                      value: _darkTheme,
-                      onChanged: (value) {
-                        setState(() {
-                          _darkTheme = value;
-                          SettingScreen.darktheme = value;
-                          //  }
-                        });
-                        onThemeChanged(value, themeNotifier);
-                      },
-                      activeTrackColor: Colors.lightBlueAccent,
-                      activeColor: Colors.blue,
-                    ),
-                  )),
+                text: "Dark Mode:",
+                widget: Padding(
+                  padding: EdgeInsets.only(left: ScreenUtil().setSp(110)),
+                  child: Switch(
+                    value: _darkTheme,
+                    onChanged: (value) {
+                      setState(() {
+                        _darkTheme = value;
+                        SettingScreen.darktheme = value;
+                        //  }
+                      });
+                      onThemeChanged(themeNotifier, value: value);
+                    },
+                    activeTrackColor: Colors.lightBlueAccent,
+                    activeColor: Colors.blue,
+                  ),
+                ),
+              ),
             ),
             Divider(
               color: Colors.grey,
               indent: MediaQuery.of(context).size.width * .30,
               endIndent: MediaQuery.of(context).size.width * .30,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Text(
               "Follow Us",
               style: TextStyle(
-                  color: Theme.of(context).dividerColor,
-                  fontSize: 17,
-                  fontFamily: "Oswald"),
+                color: Theme.of(context).dividerColor,
+                fontSize: 17,
+                fontFamily: "Oswald",
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Stack(
@@ -136,15 +140,21 @@ class _SettingScreenState extends State<SettingScreen> {
                   width: ScreenUtil().setWidth(300),
                   height: ScreenUtil().setHeight(110),
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(22),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(
-                                140, 148, 169, 0.2384793907403946),
-                            offset: Offset(0, 4),
-                            blurRadius: 20)
-                      ]),
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(22),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromRGBO(
+                          140,
+                          148,
+                          169,
+                          0.2384793907403946,
+                        ),
+                        offset: Offset(0, 4),
+                        blurRadius: 20,
+                      )
+                    ],
+                  ),
                 ),
                 Positioned(
                   top: ScreenUtil().setHeight(20),
@@ -159,7 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       width: ScreenUtil().setWidth(65),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35),
-                        color: Color.fromRGBO(238, 238, 255, 1),
+                        color: const Color.fromRGBO(238, 238, 255, 1),
                       ),
                     ),
                   ),
@@ -173,7 +183,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           .launchSocial('fb://page/109013927681503', '');
                     },
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * .07,
                         height: MediaQuery.of(context).size.height * .045,
                         child: SvgPicture.asset(
@@ -191,14 +201,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     onTap: () {
                       Provider.of<OpenApps>(context, listen: false)
                           .launchSocial(
-                              'https://www.instagram.com/mobile.te.eg/', '');
+                        'https://www.instagram.com/mobile.te.eg/',
+                        '',
+                      );
                     },
                     child: Container(
                       height: ScreenUtil().setHeight(60),
                       width: ScreenUtil().setWidth(65),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35),
-                        color: Color.fromRGBO(255, 215, 223, 1),
+                        color: const Color.fromRGBO(255, 215, 223, 1),
                       ),
                     ),
                   ),
@@ -210,10 +222,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     onTap: () {
                       Provider.of<OpenApps>(context, listen: false)
                           .launchSocial(
-                              'https://www.instagram.com/mobile.te.eg/', '');
+                        'https://www.instagram.com/mobile.te.eg/',
+                        '',
+                      );
                     },
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * .07,
                         height: MediaQuery.of(context).size.height * .045,
                         child: SvgPicture.asset(
@@ -232,7 +246,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     width: ScreenUtil().setWidth(65),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(35),
-                      color: Color.fromRGBO(255, 238, 238, 1),
+                      color: const Color.fromRGBO(255, 238, 238, 1),
                     ),
                   ),
                 ),
@@ -243,12 +257,14 @@ class _SettingScreenState extends State<SettingScreen> {
                   left: MediaQuery.of(context).size.width * .55,
                   child: GestureDetector(
                     onTap: () {
-                      Provider.of<OpenApps>(context, listen: false).launchSocial(
-                          'https://www.youtube.com/channel/UC1uP9aUxEGRdDL1lwzuJQLg',
-                          '');
+                      Provider.of<OpenApps>(context, listen: false)
+                          .launchSocial(
+                        'https://www.youtube.com/channel/UC1uP9aUxEGRdDL1lwzuJQLg',
+                        '',
+                      );
                     },
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * .09,
                         height: MediaQuery.of(context).size.height * .045,
                         child: SvgPicture.asset(
@@ -267,11 +283,14 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  void onThemeChanged(bool value, ThemeChanger themeNotifier) async {
-    (value)
+  Future<void> onThemeChanged(
+    ThemeChanger themeNotifier, {
+    required bool value,
+  }) async {
+    value
         ? themeNotifier.setTheme(darkTheme)
         : themeNotifier.setTheme(lightTheme);
-    var prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     prefs.setBool('darkMode', value);
   }
 }

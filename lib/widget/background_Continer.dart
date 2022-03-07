@@ -10,10 +10,11 @@ class BackgroundColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(begin: begin!, end: end!, colors: colors!),
-        ),
-        child: widget);
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(begin: begin!, end: end!, colors: colors!),
+      ),
+      child: widget,
+    );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobility/models/categorey.dart';
+import 'package:mobility/models/product.dart';
 import 'package:mobility/providers/categorys.dart';
 import 'package:mobility/providers/compare_screen_provider.dart';
-import 'package:mobility/models/product.dart';
 import 'package:mobility/providers/products.dart';
 import 'package:mobility/screens/product/product_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
   int? id;
   List listid = [];
 
-  var isLoading = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
         borderRadius: BorderRadius.circular(30),
       ),
       elevation: 16,
-      child: Container(
+      child: SizedBox(
         height: high * .6,
         child: Column(
           children: [
@@ -51,9 +51,10 @@ class _DialogForSearchState extends State<DialogForSearch> {
               padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _controller,
-                style: TextStyle(color: Colors.black, fontFamily: "Owsald"),
+                style:
+                    const TextStyle(color: Colors.black, fontFamily: "Owsald"),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.black,
                   ),
@@ -64,7 +65,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
               ),
             ),
             Flexible(
-              child: searchresult.length != 0 || _controller.text.isNotEmpty
+              child: _controller.text.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
                       itemCount: newsearchresult.length,
@@ -79,13 +80,16 @@ class _DialogForSearchState extends State<DialogForSearch> {
                               for (int i = 0; i < phoness.length; i++) {
                                 if (phoness[i].id == phoness[index].id) {
                                   fetshItem(
-                                      phoness[i].id,
-                                      Provider.of<Categorys>(context,
-                                              listen: false)
-                                          .itemss,
-                                      Provider.of<Products>(context,
-                                              listen: false)
-                                          .items);
+                                    phoness[i].id,
+                                    Provider.of<Categorys>(
+                                      context,
+                                      listen: false,
+                                    ).itemss,
+                                    Provider.of<Products>(
+                                      context,
+                                      listen: false,
+                                    ).items,
+                                  );
                                   Provider.of<Compare>(context, listen: false)
                                       .searchProduct(phoness[i].id, phoness);
 
@@ -97,10 +101,10 @@ class _DialogForSearchState extends State<DialogForSearch> {
                                       builder: (context) => ProductDetailScreen(
                                         product: Provider.of<Compare>(context)
                                             .searchbar,
-                                        logo: Provider.of<Categorys>(context,
-                                                listen: false)
-                                            .itemss[indexcategory]
-                                            .logo,
+                                        logo: Provider.of<Categorys>(
+                                          context,
+                                          listen: false,
+                                        ).itemss[indexcategory].logo,
                                       ),
                                     ),
                                   );
@@ -118,7 +122,7 @@ class _DialogForSearchState extends State<DialogForSearch> {
                       shrinkWrap: true,
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
-                        String listDate = phoness[index].name!;
+                        final listDate = phoness[index].name!;
                         return ListTile(
                           title: Text(
                             listDate,
@@ -130,13 +134,16 @@ class _DialogForSearchState extends State<DialogForSearch> {
                               for (int i = 0; i < phoness.length; i++) {
                                 if (phoness[i].id == phoness[index].id) {
                                   fetshItem(
-                                      phoness[i].id,
-                                      Provider.of<Categorys>(context,
-                                              listen: false)
-                                          .itemss,
-                                      Provider.of<Products>(context,
-                                              listen: false)
-                                          .items);
+                                    phoness[i].id,
+                                    Provider.of<Categorys>(
+                                      context,
+                                      listen: false,
+                                    ).itemss,
+                                    Provider.of<Products>(
+                                      context,
+                                      listen: false,
+                                    ).items,
+                                  );
                                   Provider.of<Compare>(context, listen: false)
                                       .searchProduct(phoness[i].id, phoness);
                                   Provider.of<Compare>(context, listen: false)
@@ -150,10 +157,10 @@ class _DialogForSearchState extends State<DialogForSearch> {
                                       builder: (context) => ProductDetailScreen(
                                         product: Provider.of<Compare>(context)
                                             .searchbar,
-                                        logo: Provider.of<Categorys>(context,
-                                                listen: false)
-                                            .itemss[indexcategory]
-                                            .logo,
+                                        logo: Provider.of<Categorys>(
+                                          context,
+                                          listen: false,
+                                        ).itemss[indexcategory].logo,
                                       ),
                                     ),
                                   );
@@ -178,10 +185,10 @@ class _DialogForSearchState extends State<DialogForSearch> {
     setState(() {});
     searchresult.clear();
     listid.clear();
-    searchText = searchText.toLowerCase();
+    searchText.toLowerCase();
     for (int i = 0; i < listproduct.length; i++) {
-      var datename = listproduct[i].name;
-      var dateid = listproduct[i].id;
+      final datename = listproduct[i].name;
+      final dateid = listproduct[i].id;
       if (datename.toString().toLowerCase().contains(searchText)) {
         searchresult = newsearchresult;
         searchresult.add(datename);
@@ -191,11 +198,11 @@ class _DialogForSearchState extends State<DialogForSearch> {
   }
 
   void fetshItem(String id, List<Category> list2, List<Product> list1) {
-    List<Product> n = list1;
-    List<Category> a = list2;
+    final List<Product> n = list1;
+    final List<Category> a = list2;
     for (int k = 0; k <= 100; k++) {
       if (id == n[k].id) {
-        print(n[k].name);
+        debugPrint(n[k].name);
         index = k;
         break;
       }

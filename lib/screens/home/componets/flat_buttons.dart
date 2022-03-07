@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mobility/screens/home/widgets/Ball_of_flatButton.dart';
-import 'package:mobility/screens/home/widgets/Container_of_backgroudnFlatButton.dart';
-import 'package:mobility/screens/home/widgets/Image_of_flatButton.dart';
+import 'package:mobility/screens/brands/category_screen.dart';
+import 'package:mobility/screens/gamer/gamer_models_screen.dart';
+import 'package:mobility/screens/home/widgets/ball_of_flat_button.dart';
+import 'package:mobility/screens/home/widgets/container_backgroud_flat_button.dart';
+import 'package:mobility/screens/home/widgets/image_of_flat_button.dart';
+import 'package:mobility/screens/home/widgets/text_of_container.dart';
 import 'package:mobility/screens/home/widgets/white_of_shape.dart';
-import '../../brands/category_screen.dart';
-import '../../gamer/gamer_models_screen.dart';
-import '../../watches/watches_screen.dart';
-import '../../tablets/Tablets_screen.dart';
-import '../widgets/Text_of_container.dart';
+import 'package:mobility/screens/tablets/tablets_screen.dart';
+import 'package:mobility/screens/watches/watches_screen.dart';
 
 class FlatButtons extends StatefulWidget {
   @override
@@ -17,11 +17,9 @@ class FlatButtons extends StatefulWidget {
 }
 
 class _FlatButtonsState extends State<FlatButtons> {
-  static const int maxFailedLoadAttempts = 3;
-  InterstitialAd? _interstitialAd;
-  RewardedAd? _rewardedAd;
-  int _numRewardedLoadAttempts = 0;
-  int _numInterstitialLoadAttempts = 0;
+  late InterstitialAd? _interstitialAd;
+  late RewardedAd? _rewardedAd;
+
   /* void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: InterstitialAd.testAdUnitId,
@@ -129,14 +127,6 @@ class _FlatButtonsState extends State<FlatButtons> {
 
   @override
   Widget build(BuildContext context) {
-    double defaultScreenWidth = 400.0;
-    double defaultScreenHeight = 810.0;
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(defaultScreenWidth, defaultScreenHeight),
-        orientation: Orientation.portrait);
     final height = MediaQuery.of(context).size.height;
     final wights = MediaQuery.of(context).size.width;
     return Stack(
@@ -146,46 +136,46 @@ class _FlatButtonsState extends State<FlatButtons> {
           top: ScreenUtil().setHeight(1),
           left: ScreenUtil().setWidth(2),
           child: GestureDetector(
-              onTap: () {
-                //    _showRewardedAd();
-                Navigator.of(context).pushNamed(GamerScreen.routename);
-              },
-              child: BackgroudnFlatButtonContainer(
-                linearGradient: LinearGradient(colors: [
-                  Color.fromRGBO(247, 12, 12, 1),
-                  Color.fromRGBO(247, 12, 12, 1).withOpacity(.9),
-                  Color.fromRGBO(247, 12, 12, 1).withOpacity(.8),
-                ]),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                ),
-              )),
+            onTap: () {
+              //    _showRewardedAd();
+              Navigator.of(context).pushNamed(GamerScreen.routename);
+            },
+            child: BackgroudnFlatButtonContainer(
+              linearGradient: LinearGradient(
+                colors: [
+                  const Color.fromRGBO(247, 12, 12, 1),
+                  const Color.fromRGBO(247, 12, 12, 1).withOpacity(.9),
+                  const Color.fromRGBO(247, 12, 12, 1).withOpacity(.8),
+                ],
+              ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+              ),
+            ),
+          ),
         ),
         //amber dialogs
         Positioned(
           top: ScreenUtil().setHeight(2),
           right: ScreenUtil().setWidth(2),
           child: GestureDetector(
-              onTap: () {
-                //     _showInterstitialAd();
-                Navigator.of(context).pushNamed(TabletsScreen.routeName);
-              },
-              child: BackgroudnFlatButtonContainer(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                ),
-                linearGradient: LinearGradient(colors: [
-                  Color.fromRGBO(255, 189, 89, 1).withOpacity(.8),
-                  Color.fromRGBO(255, 189, 89, 1).withOpacity(.9),
-                  Color.fromRGBO(255, 189, 89, 1),
-                ]),
-              )),
+            onTap: () {
+              //     _showInterstitialAd();
+              Navigator.of(context).pushNamed(TabletsScreen.routeName);
+            },
+            child: BackgroudnFlatButtonContainer(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20),
+              ),
+              linearGradient: LinearGradient(
+                colors: [
+                  const Color.fromRGBO(255, 189, 89, 1).withOpacity(.8),
+                  const Color.fromRGBO(255, 189, 89, 1).withOpacity(.9),
+                  const Color.fromRGBO(255, 189, 89, 1),
+                ],
+              ),
+            ),
+          ),
         ),
         //yellow dialog
         Positioned(
@@ -197,15 +187,14 @@ class _FlatButtonsState extends State<FlatButtons> {
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
             child: BackgroudnFlatButtonContainer(
-              linearGradient: LinearGradient(colors: [
-                Color.fromRGBO(252, 213, 5, 1).withOpacity(.8),
-                Color.fromRGBO(252, 213, 5, 1).withOpacity(.9),
-                Color.fromRGBO(252, 213, 5, 1),
-              ]),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
-                bottomLeft: Radius.circular(0),
+              linearGradient: LinearGradient(
+                colors: [
+                  const Color.fromRGBO(252, 213, 5, 1).withOpacity(.8),
+                  const Color.fromRGBO(252, 213, 5, 1).withOpacity(.9),
+                  const Color.fromRGBO(252, 213, 5, 1),
+                ],
+              ),
+              borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(20),
               ),
             ),
@@ -217,25 +206,25 @@ class _FlatButtonsState extends State<FlatButtons> {
           bottom: ScreenUtil().setHeight(2),
           left: ScreenUtil().setWidth(2),
           child: GestureDetector(
-              onTap: () {
-                //  _showInterstitialAd();
-                Navigator.pushNamed(context, CategoryScreen.routeName);
-              },
-              child: BackgroudnFlatButtonContainer(
-                linearGradient: LinearGradient(colors: [
-                  Color.fromRGBO(17, 58, 71, 1),
-                  Color.fromRGBO(17, 58, 71, 1).withOpacity(.9),
-                  Color.fromRGBO(17, 58, 71, 1).withOpacity(.8),
-                  Color.fromRGBO(17, 58, 71, 1).withOpacity(.7),
-                ]),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(0),
-                ),
-                offset: Offset(-1, 2),
-              )),
+            onTap: () {
+              //  _showInterstitialAd();
+              Navigator.pushNamed(context, CategoryScreen.routeName);
+            },
+            child: BackgroudnFlatButtonContainer(
+              linearGradient: LinearGradient(
+                colors: [
+                  const Color.fromRGBO(17, 58, 71, 1),
+                  const Color.fromRGBO(17, 58, 71, 1).withOpacity(.9),
+                  const Color.fromRGBO(17, 58, 71, 1).withOpacity(.8),
+                  const Color.fromRGBO(17, 58, 71, 1).withOpacity(.7),
+                ],
+              ),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+              ),
+              offset: const Offset(-1, 2),
+            ),
+          ),
         ),
         //white of blue dialog
         Positioned(
@@ -246,12 +235,9 @@ class _FlatButtonsState extends State<FlatButtons> {
               //    _showInterstitialAd();
               Navigator.pushNamed(context, CategoryScreen.routeName);
             },
-            child: WhiteOfShape(
+            child: const WhiteOfShape(
               borderRadiusGeometry: BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
                 bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(0),
               ),
             ),
           ),
@@ -265,11 +251,8 @@ class _FlatButtonsState extends State<FlatButtons> {
               //    _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
-            child: WhiteOfShape(
+            child: const WhiteOfShape(
               borderRadiusGeometry: BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
-                bottomLeft: Radius.circular(0),
                 bottomRight: Radius.circular(100),
               ),
             ),
@@ -287,18 +270,16 @@ class _FlatButtonsState extends State<FlatButtons> {
             child: Container(
               width: wights * .200,
               height: height * .077,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 4),
-                      blurRadius: 4)
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                  )
                 ],
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
                   bottomLeft: Radius.circular(100),
-                  bottomRight: Radius.circular(0),
                 ),
                 color: Color.fromRGBO(17, 58, 71, 1),
               ),
@@ -317,17 +298,15 @@ class _FlatButtonsState extends State<FlatButtons> {
             child: Container(
               width: wights * .200,
               height: height * .077,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 4),
-                      blurRadius: 4)
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                  )
                 ],
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
-                  topRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(0),
                   bottomRight: Radius.circular(100),
                 ),
                 color: Color.fromRGBO(252, 213, 5, 1),
@@ -344,12 +323,10 @@ class _FlatButtonsState extends State<FlatButtons> {
               //    _showInterstitialAd();
               Navigator.of(context).pushNamed(TabletsScreen.routeName);
             },
-            child: WhiteOfShape(
+            child: const WhiteOfShape(
               borderRadiusGeometry: BorderRadius.only(
-                topLeft: Radius.circular(0),
                 topRight: Radius.circular(100),
                 bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(0),
               ),
             ),
           ),
@@ -366,18 +343,16 @@ class _FlatButtonsState extends State<FlatButtons> {
             child: Container(
               width: wights * .200,
               height: height * .077,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(0),
                   topRight: Radius.circular(100),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
                 ),
                 boxShadow: [
                   BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 4),
-                      blurRadius: 4)
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                  )
                 ],
                 color: Color.fromRGBO(255, 189, 89, 1),
               ),
@@ -393,37 +368,37 @@ class _FlatButtonsState extends State<FlatButtons> {
               //    _showRewardedAd();
               Navigator.of(context).pushNamed(GamerScreen.routename);
             },
-            child: WhiteOfShape(
+            child: const WhiteOfShape(
               borderRadiusGeometry: BorderRadius.only(
                 topLeft: Radius.circular(100),
-                topRight: Radius.circular(0),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
               ),
             ),
           ),
         ),
         Positioned(
-            top: MediaQuery.of(context).size.height * .012,
-            left: MediaQuery.of(context).size.width * .030,
-            child: BallOfMatrerial()),
+          top: MediaQuery.of(context).size.height * .012,
+          left: MediaQuery.of(context).size.width * .030,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            bottom: MediaQuery.of(context).size.height * .055,
-            left: MediaQuery.of(context).size.width * .030,
-            child: BallOfMatrerial()),
+          bottom: MediaQuery.of(context).size.height * .055,
+          left: MediaQuery.of(context).size.width * .030,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
           top: MediaQuery.of(context).size.height * .035,
           left: MediaQuery.of(context).size.width * .060,
           child: GestureDetector(
-              onTap: () {
-                //      _showRewardedAd();
-                Navigator.of(context).pushNamed(GamerScreen.routename);
-              },
-              child: TextFlatButton(
-                'Gamer',
-                Colors.black,
-                size: 22,
-              )),
+            onTap: () {
+              //      _showRewardedAd();
+              Navigator.of(context).pushNamed(GamerScreen.routename);
+            },
+            child: const TextFlatButton(
+              'Gamer',
+              Colors.black,
+              size: 22,
+            ),
+          ),
         ),
         //red of top white of red dialog
         Positioned(
@@ -438,18 +413,16 @@ class _FlatButtonsState extends State<FlatButtons> {
             child: Container(
               width: wights * .200,
               height: height * .077,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(100),
-                  topRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
                 ),
                 boxShadow: [
                   BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 4),
-                      blurRadius: 4)
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                  )
                 ],
                 color: Color.fromRGBO(255, 13, 13, 1),
               ),
@@ -461,11 +434,12 @@ class _FlatButtonsState extends State<FlatButtons> {
           bottom: MediaQuery.of(context).size.height * .025,
           left: MediaQuery.of(context).size.width * .070,
           child: GestureDetector(
-              onTap: () {
-                //   _showInterstitialAd();
-                Navigator.of(context).pushNamed(CategoryScreen.routeName);
-              },
-              child: TextFlatButton('Brands', Colors.white)),
+            onTap: () {
+              //   _showInterstitialAd();
+              Navigator.of(context).pushNamed(CategoryScreen.routeName);
+            },
+            child: const TextFlatButton('Brands', Colors.white),
+          ),
         ),
         Positioned(
           bottom: MediaQuery.of(context).size.height * .025,
@@ -475,7 +449,7 @@ class _FlatButtonsState extends State<FlatButtons> {
               //  _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
-            child: TextFlatButton('Watches', Colors.black),
+            child: const TextFlatButton('Watches', Colors.black),
           ),
         ),
         Positioned(
@@ -486,34 +460,40 @@ class _FlatButtonsState extends State<FlatButtons> {
               //    _showInterstitialAd();
               Navigator.of(context).pushNamed(TabletsScreen.routeName);
             },
-            child: TextFlatButton('Tablets', Colors.white),
+            child: const TextFlatButton('Tablets', Colors.white),
           ),
         ),
 
         Positioned(
-            top: MediaQuery.of(context).size.height * .042,
-            left: MediaQuery.of(context).size.width * .34,
-            child: BallOfMatrerial()),
+          top: MediaQuery.of(context).size.height * .042,
+          left: MediaQuery.of(context).size.width * .34,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            bottom: MediaQuery.of(context).size.height * .040,
-            left: MediaQuery.of(context).size.width * .34,
-            child: BallOfMatrerial()),
+          bottom: MediaQuery.of(context).size.height * .040,
+          left: MediaQuery.of(context).size.width * .34,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            bottom: MediaQuery.of(context).size.height * .04,
-            right: MediaQuery.of(context).size.width * .34,
-            child: BallOfMatrerial()),
+          bottom: MediaQuery.of(context).size.height * .04,
+          right: MediaQuery.of(context).size.width * .34,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            top: MediaQuery.of(context).size.height * .04,
-            right: MediaQuery.of(context).size.width * .33,
-            child: BallOfMatrerial()),
+          top: MediaQuery.of(context).size.height * .04,
+          right: MediaQuery.of(context).size.width * .33,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            bottom: MediaQuery.of(context).size.height * .055,
-            right: MediaQuery.of(context).size.width * .030,
-            child: BallOfMatrerial()),
+          bottom: MediaQuery.of(context).size.height * .055,
+          right: MediaQuery.of(context).size.width * .030,
+          child: BallOfMatrerial(),
+        ),
         Positioned(
-            top: MediaQuery.of(context).size.height * .020,
-            right: MediaQuery.of(context).size.width * .030,
-            child: BallOfMatrerial()),
+          top: MediaQuery.of(context).size.height * .020,
+          right: MediaQuery.of(context).size.width * .030,
+          child: BallOfMatrerial(),
+        ),
 
         Positioned(
           bottom: MediaQuery.of(context).size.height * .02,
@@ -523,7 +503,7 @@ class _FlatButtonsState extends State<FlatButtons> {
               // _showInterstitialAd();
               Navigator.of(context).pushNamed(WatchesScreen.routeName);
             },
-            child: ImageOfFlatButton(
+            child: const ImageOfFlatButton(
               image: 'assets/images/watch.png',
               width: .070,
               height: .070,
@@ -538,7 +518,7 @@ class _FlatButtonsState extends State<FlatButtons> {
               //     _showRewardedAd();
               Navigator.of(context).pushNamed(GamerScreen.routename);
             },
-            child: ImageOfFlatButton(
+            child: const ImageOfFlatButton(
               image: 'assets/images/gamer.png',
               width: .1770,
               height: .130,
@@ -554,15 +534,21 @@ class _FlatButtonsState extends State<FlatButtons> {
               //     _showInterstitialAd();
               Navigator.pushNamed(context, TabletsScreen.routeName);
             },
-            child: ImageOfFlatButton(
-                image: 'assets/images/tablet.png', width: .1, height: 0.060),
+            child: const ImageOfFlatButton(
+              image: 'assets/images/tablet.png',
+              width: .1,
+              height: 0.060,
+            ),
           ),
         ),
         Positioned(
           bottom: MediaQuery.of(context).size.height * .023,
           left: MediaQuery.of(context).size.width * .370,
-          child: ImageOfFlatButton(
-              image: 'assets/images/mobil.png', width: .060, height: 0.0680),
+          child: const ImageOfFlatButton(
+            image: 'assets/images/mobil.png',
+            width: .060,
+            height: 0.0680,
+          ),
         ),
       ],
     );
