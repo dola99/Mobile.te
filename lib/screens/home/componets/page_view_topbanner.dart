@@ -26,6 +26,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
   @override
   void initState() {
     _pagecontroller = PageController()..addListener(_onscroll);
+
     super.initState();
   }
 
@@ -44,6 +45,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
 
   @override
   Widget build(BuildContext context) {
+    
     final products = Provider.of<Topbanners>(context).itemsss;
     return PageView.builder(
       onPageChanged: _onchanged,
@@ -55,12 +57,7 @@ class _PageviewBannerState extends State<PageviewBanner> {
           value: products[i],
           child: GestureDetector(
             onTap: () {
-              fetshItem(
-                products[i].idproduct,
-                Provider.of<Categorys>(context, listen: false).itemss,
-                Provider.of<Products>(context, listen: false).items,
-              );
-
+              print(products[i].idproduct);
               final _product = Provider.of<Products>(context, listen: false)
                   .findbyId(products[i].idproduct);
               Navigator.push(
@@ -87,17 +84,10 @@ class _PageviewBannerState extends State<PageviewBanner> {
   }
 
   void fetshItem(String? id, List<Category> list2, List<Product> list1) {
-    final n = list1;
-    final a = list2;
-    for (int k = 0; k <= 100; k++) {
-      if (id == n[k].id) {
-        debugPrint(n[k].name);
-        index = k;
-        break;
-      }
-    }
-    for (int t = 0; t < a.length; t++) {
-      if (n[index].category == a[t].name) {
+  
+    list1.firstWhere((element) => element.id==id);
+    for (int t = 0; t < list2.length; t++) {
+      if (list1[index].category == list2[t].name) {
         indexcategory = t;
         break;
       }

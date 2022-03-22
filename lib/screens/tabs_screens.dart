@@ -6,7 +6,7 @@ import 'package:mobility/screens/offline_screen.dart';
 import 'package:mobility/screens/setting/setting_screen.dart';
 
 class TabsScreens extends StatefulWidget {
-  static const roouteName = "/";
+  static const roouteName = "/tabs-screen";
   static int indexpage = 0;
   @override
   _TabsScreensState createState() => _TabsScreensState();

@@ -8,6 +8,7 @@ import 'package:mobility/screens/setting/setting_screen.dart';
 import 'package:mobility/screens/tablets/tablets_screen.dart';
 import 'package:mobility/screens/tabs_screens.dart';
 import 'package:mobility/screens/watches/watches_screen.dart';
+import 'package:mobility/splach_screen.dart';
 
 Map<String, WidgetBuilder> routes = {
   TabsScreens.roouteName: (ctx) => TabsScreens(),
@@ -19,4 +20,5 @@ Map<String, WidgetBuilder> routes = {
   GamerScreen.routename: (ctx) => GamerScreen(),
   WatchesScreen.routeName: (ctx) => WatchesScreen(),
   TabletsScreen.routeName: (ctx) => TabletsScreen(),
+  SplachScreen.roouteName:(ctx)=>const SplachScreen()
 };

@@ -3,13 +3,14 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mobility/providers/theme.dart';
 import 'package:mobility/providers/theme_changer.dart';
 import 'package:mobility/screens/setting/setting_screen.dart';
 import 'package:mobility/startpoint.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart'; 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +18,11 @@ Future<void> main() async {
   await Firebase.initializeApp();
   if (kDebugMode) {
     FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(false); //disable false
-  } else {
+        .setCrashlyticsCollectionEnabled(false); //disable false  } else {
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   }
-
-  MobileAds.instance.initialize();
+  await dotenv.load();
+  //MobileAds.instance.initialize();
   //FirebaseAnalytics analytics = FirebaseAnalytics();
   // FirebaseAnalyticsObserver(analytics: analytics);
   SharedPreferences.getInstance().then((prefs) {
