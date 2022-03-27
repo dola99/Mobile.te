@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/localization.dart';
 import 'package:mobility/screens/home/componets/flat_buttons.dart';
 import 'package:mobility/screens/home/componets/new_phone_item.dart';
 import 'package:mobility/screens/home/componets/page_view_topbanner.dart';
@@ -41,7 +42,8 @@ class _HomePageState extends State<HomePage> {
   }
 */
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    final locale = Localizations.localeOf(context);
+
     /* final AdWidget adWidget = AdWidget(ad: myBanner);
     final Container adContainer = Container(
       alignment: Alignment.center,
@@ -86,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 width: ScreenUtil().setWidth(380),
                 child: Center(
                   child: Text(
-                    "Recenty",
+                   "welcome-text".i18n([locale.toString()]),
                     style: TextStyle(
                       color: Theme.of(context).dividerColor,
                       fontFamily: 'RobotoCondensed',

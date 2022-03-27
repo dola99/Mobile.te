@@ -17,10 +17,10 @@ class FlatButtons extends StatefulWidget {
 }
 
 class _FlatButtonsState extends State<FlatButtons> {
-  late InterstitialAd? _interstitialAd;
+  /* late InterstitialAd? _interstitialAd;
   late RewardedAd? _rewardedAd;
 
-  /* void _createInterstitialAd() {
+  void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: InterstitialAd.testAdUnitId,
         request: AdRequest(),
@@ -117,14 +117,14 @@ class _FlatButtonsState extends State<FlatButtons> {
     _createRewardedAd();
     super.initState();
   }
-*/
+
   @override
   void dispose() {
     _interstitialAd!.dispose();
     _rewardedAd!.dispose();
     super.dispose();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

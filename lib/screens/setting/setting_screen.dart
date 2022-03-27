@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobility/matrialapp.dart';
 import 'package:mobility/providers/theme.dart';
 import 'package:mobility/providers/theme_changer.dart';
 import 'package:mobility/screens/setting/componets/open_apps.dart';
@@ -19,11 +20,40 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  late String? _selectedLaungag = 'en';
   var _darkTheme = false;
+  final List<DropdownMenuItem<String>> _items = const [
+    DropdownMenuItem(
+      value: 'ar',
+      child: Text('arabic'),
+    ),
+    DropdownMenuItem(
+      value: 'en',
+      child: Text('english'),
+    ),
+    DropdownMenuItem(
+      value: 'es',
+      child: Text('Espanish'),
+    ),
+    DropdownMenuItem(
+      value: 'hi',
+      child: Text('hindi'),
+    ),
+    DropdownMenuItem(
+      value: 'de',
+      child: Text('deutsh'),
+    ),
+    DropdownMenuItem(
+      value: 'fr',
+      child: Text('french'),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeChanger>(context, listen: false);
     _darkTheme = themeNotifier.getTheme() == darkTheme;
+    var locale = Localizations.localeOf(context);
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -57,13 +87,68 @@ class _SettingScreenState extends State<SettingScreen> {
               height: 40.h,
               child: RowOfSetting(
                 text: "Language:",
-                widget: Text(
-                  "Arabic",
+                widget: DropdownButton<String>(
+                  items: _items,
+                hint: Text('$_selectedLaungag',style: TextStyle(
+                    color: Theme.of(context).dividerColor,
+                    fontSize: ScreenUtil().setSp(17.0),
+                    fontFamily: 'RobotoCondensed',
+                  ),),
                   style: TextStyle(
                     color: Theme.of(context).dividerColor,
                     fontSize: ScreenUtil().setSp(17.0),
                     fontFamily: 'RobotoCondensed',
                   ),
+                  onChanged: (String? value) {
+                    if (value == 'ar') {
+                      setState(() {
+                        _selectedLaungag = 'Arabic';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                    if (value == 'en') {
+                      setState(() {
+                        _selectedLaungag = 'English';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                    if (value == 'es') {
+                      setState(() {
+                        _selectedLaungag = 'Espanish';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                    if (value == 'fr') {
+                      setState(() {
+                        _selectedLaungag = 'Frence';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                    if (value == 'hi') {
+                      setState(() {
+                        _selectedLaungag = 'Hindei';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                    if (value == 'de') {
+                      setState(() {
+                        _selectedLaungag = 'Dutsh';
+                        final myApp = context.findAncestorStateOfType<
+                            MaterialAppWithThemeState>()!;
+                        myApp.changeLocale(locale = Locale('$value'));
+                      });
+                    }
+                  },
                 ),
               ),
             ),
